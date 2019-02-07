@@ -15,6 +15,10 @@ public class GameScreen implements Screen {
     SpriteBatch batch;
     Texture texture_back;
     Sprite sprite_back;
+    Texture texture_actor;
+
+    private Actor actor;
+
 
     public GameScreen(RoboRally game){
         this.game = game;
@@ -27,6 +31,11 @@ public class GameScreen implements Screen {
         texture_back = new Texture(Gdx.files.internal("Map_overview_Risky_Exchange.png"));
         texture_back.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sprite_back = new Sprite(texture_back);
+
+
+        texture_actor = new Texture(Gdx.files.internal("red_arrow.png"));
+        actor = new Actor(200, 200, texture_actor);
+
     }
     @Override
     public void show() {
@@ -42,7 +51,13 @@ public class GameScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.draw(sprite_back, 0, 0);
+
+        //rendering actor
+        batch.draw(actor.getTexture(), actor.getX(), actor.getY(), actor.getTextureWidth(), actor.getTextureHeight());
+        actor.update();
         batch.end();
+
+
 
     }
 
