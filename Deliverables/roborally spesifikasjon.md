@@ -28,7 +28,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- Ekspress samlebånd beveger roboter som står på den 2 ruter hver fase. 
 	- Vanlig samlebånd beveger roboter som står på den 1 ruter hver fase. 
 	- Roboter som kommer over på et samlebånd fra et annet samlebånd vil bli rotert	   
-      90 grader i pilens retning når den går gjennom en sving. Roboter som gå på 		   
+      90 grader i pilens retning når den går gjennom en sving. Roboter som går på 		   
       samlebåndet selv vil ikke bli rotert
 	- Laser panel skyter laser mot nærmeste robot som er i skuddlinjen. Kun nærmeste 	   
       robot blir skadet
