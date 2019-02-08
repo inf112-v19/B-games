@@ -30,7 +30,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- Roboter som kommer over på et samlebånd fra et annet samlebånd vil bli rotert	   
       90 grader i pilens retning når den går gjennom en sving. Roboter som går på 		   
       samlebåndet selv vil ikke bli rotert
-	- Laser panel skyter laser mot nærmeste robot som er i skuddlinjen. Kun nærmeste 	   
+	- Laser panel skyter laser (1 skade) mot nærmeste robot som er i skuddlinjen. Kun nærmeste 	   
       robot blir skadet
 	- Dyttere flytter roboter som befinner på den mot ruten den vender seg mot
 	- Gir roterer roboter som befinner de 90 grader i pilens retning
@@ -54,7 +54,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
       gjenopprettingspunkt
 	- Beveger seg i henhold til programkortene som er i registerene
 	- Er i stand til å flytte på andre roboter som er i veien når den beveger seg
-	- Fyrer av laser mot nærmeste robot dersom det er en robot i skuddlinjen. Kan ikke 	   
+	- Fyrer av laser (1 skade) mot nærmeste robot dersom det er en robot i skuddlinjen. Kan ikke 	   
       se/skyte gjennom vegger og kun nærmeste robot blir skadet
 	- Tas ut av spill dersom den mister alle liv
 
