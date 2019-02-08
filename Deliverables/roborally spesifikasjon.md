@@ -60,7 +60,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 
 **Spiller:**
 
-	- Valgmulighet til å starte med 4 liv isteden for 3 dersom det er 5 eller flere spillere
+	- Valgmulighet til å starte med 4 liv istedenfor 3 dersom det er 5 eller flere spillere
 	- Oversikt over liv, skade, register, kort
 	- Mulighet til å slå av strømmen til roboten
 	- Mulighet til å velge kort som skal legges i register
