@@ -78,7 +78,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- 3 kort til spillere med robot med 6 skade, register 4 og 5 låst
 	- 2 kort til spillere med robot med 7 skade, register 3, 4 og 5 låst
 	- 1 kort til spillere med robot med 8 skade, register 2, 3, 4 og 5 låst
-	- 0 kort til spillere med robot med 8 skade, alle register låst
+	- 0 kort til spillere med robot med 9 skade, alle register låst
 	- 18 kort med roter 90 grader til høyre , prioritet 80-420
 	- 18 kort med roter 90 grader til venstre,  prioritet 70-410
 	- 6 kort med roter 180 grader, prioritet 10-60
