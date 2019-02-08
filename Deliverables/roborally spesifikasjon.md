@@ -93,12 +93,12 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 **Runde:**
 
 	- Før første runden starter blir robotene tildelt en tilfeldig start posisjon
-	- En runde starter etter at alle spillerene har valg programkort til registerene eller 	  
+	- En runde starter etter at alle spillerene har valgt programkort til registerene eller 	  
       valgt å slå av strømmen til en robot og bekreftet valget
 	- En runde består av 5 faser en for hvert kort i registerene
 	- Programkort i registerene er låst mens runden pågår
 	- Hendlesesforløpet for slutten av en runde er reparere skade, slå av strømmen på 	  
-      roboter og samle inn kort. Prioritet handlinger som ikke bestemmes av 	 	  
+      roboter og samle inn kort. Prioritet for handlinger som ikke bestemmes av 	 	  
       programkort bestemmes av startposisjon
 
 
