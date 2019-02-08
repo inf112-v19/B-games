@@ -28,12 +28,12 @@ public class GameScreen implements Screen {
          /** yDown sets where Y-axis starts. true being bottom of screen, while false is at top of screen**/
 
         batch = new SpriteBatch();
-        texture_back = new Texture(Gdx.files.internal("Map_overview_Risky_Exchange.png"));
+        texture_back = new Texture(Gdx.files.internal("assets/Map_overview_Risky_Exchange.png"));
         texture_back.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sprite_back = new Sprite(texture_back);
 
 
-        texture_actor = new Texture(Gdx.files.internal("red_arrow.png"));
+        texture_actor = new Texture(Gdx.files.internal("assets/red_arrow.png"));
         actor = new Actor(200, 200, texture_actor);
 
     }
