@@ -4,7 +4,7 @@
 passere igjennom alle flaggene på brettet i riktig rekkefølge med sin robot-karakter 
 som representerer spilleren på brettet.
 
-Spillet støtter spiller fra 1 til 8. Robotene starter med a viss mengde liv, som de mister 
+Spillet støtter spillere fra 1 til 8. Robotene starter med a viss mengde liv, som de mister 
 ved å akkumluere 10 skade eller falle ned i et hull på brettet. De er mulig å reparere 
 skade ved å slutte en runde på et reparasjonspunkt eller ved at spilleren velger å slå av 
 strømmen på sin robot. Hvor roboten vil bli gjennopprettet dersom den mister et liv 
@@ -24,7 +24,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- Startposisjoner for robotene, bestemmer prioritet for hendelser som ikke er
       omfattet av prioritet på programkort
 	- Vegger, roboter kan ikke bevege seg gjennom vegger og kan ikke fyre av laser 	 	   
-      gjennom. Er vegger runden kantene på brettene.
+      gjennom disse. Er også vegger rundt alle kantene på brettene.
 	- Ekspress samlebånd beveger roboter som står på den 2 ruter hver fase. 
 	- Vanlig samlebånd beveger roboter som står på den 1 ruter hver fase. 
 	- Roboter som kommer over på et samlebånd fra et annet samlebånd vil bli rotert	   
@@ -95,7 +95,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- Før første runden starter blir robotene tildelt en tilfeldig start posisjon
 	- En runde starter etter at alle spillerene har valg programkort til registerene eller 	  
       valgt å slå av strømmen til en robot og bekreftet valget
-	- En runde består av 5 faser en for hvert kort
+	- En runde består av 5 faser en for hvert kort i registerene
 	- Programkort i registerene er låst mens runden pågår
 	- Hendlesesforløpet for slutten av en runde er reparere skade, slå av strømmen på 	  
       roboter og samle inn kort. Prioritet handlinger som ikke bestemmes av 	 	  
