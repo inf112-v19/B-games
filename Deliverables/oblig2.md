@@ -2,7 +2,7 @@
 
 **Gruppenavn:** B-team
 
-**Gruppemedlemmer:** fyll inn....
+**Gruppemedlemmer:** Isak Steingrimsson, fyll inn
 
 **Teamlead:** Ørjan  / **Kundekontakt:** Isak
 
