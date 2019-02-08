@@ -1,4 +1,4 @@
-#Obligatorisk Oppgave 2 / B-team
+# Obligatorisk Oppgave 2 / B-team
 
 **Gruppenavn:** B-team
 
@@ -7,10 +7,10 @@
 **Teamlead:** Ørjan  / **Kundekontakt:** Isak
 
 
-#Del 1
+# Del 1
 
 
-#Del 2
+# Del 2
 
 
-#Del 3
+# Del 3
