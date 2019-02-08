@@ -44,8 +44,8 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- Blir tildelt startposisjon tilfeldig
 	- Har en retning den vender seg mot
 	- Holder orden på hvor mange liv den har
-	- Mister et liv dersom den akkumulerer 10 skade eller faller i et hull på brettet
 	- Holder orden på hvor mye skade den har
+	- Mister et liv dersom den akkumulerer 10 skade eller faller i et hull på brettet
 	- Fjerner all skade som er akkumulert dersom strøm slås av for en runde, fjerner 1 	  
    	  skade dersom den står på et reparasjonspunkt ved slutten av en runde
 	- Oppdatere gjenopprettingspunkt etterhvert som den lander på et 	  		  
