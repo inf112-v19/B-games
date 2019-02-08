@@ -86,7 +86,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- 12 kort med beveg 2 rute fremover, prioritet 670-780
 	- 6 kort med beveg 3 rute fremover, prioritet 290-840
 	- 6 kort med beveg 1 rute bakover, prioritet 430-480
- 	- Dersom et register blir låst uten at det befinner seg et  kort i det blir neste trukket 	   
+ 	- Dersom et register blir låst uten at det befinner seg et kort i det blir neste trukket 	   
       kort automatisk lagt inn i det låste registeret
 	- Samles inn ved slutten av en runde, kort i låste registre blir ikke samlet inn
 
