@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
-public class Actor {
+public class Actor implements IActor{
 
     private int xPos;
     private int yPos;
@@ -26,10 +26,12 @@ public class Actor {
         this.texture = texture;
     }
 
+    @Override
     public int getX(){
         return this.xPos;
     }
 
+    @Override
     public int getY(){
         return this.yPos;
     }
@@ -44,11 +46,18 @@ public class Actor {
         return 50;
     }
 
+    @Override
     public Texture getTexture(){
         return this.texture;
     }
 
+    @Override
+    public void move(Enum direction) {
 
+    }
+
+
+    @Override
     public int getMoveDistance(){
         return moveDistance;
     }
@@ -76,18 +85,22 @@ public class Actor {
         }
     }
 
+    @Override
     public void goNorth(){
         yPos += moveDistance;
     }
 
+    @Override
     public void goSouth(){
         yPos -= moveDistance;
     }
 
+    @Override
     public void goWest(){
         xPos -= moveDistance;
     }
 
+    @Override
     public void goEast(){
         xPos += moveDistance;
     }
