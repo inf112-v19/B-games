@@ -1,13 +1,11 @@
 package inf112.skeleton.app.gui;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Board;
-
 import java.util.ArrayList;
 
 public class GameScreen implements Screen {
@@ -15,26 +13,20 @@ public class GameScreen implements Screen {
     private RoboRally game;
     OrthographicCamera camera;
     SpriteBatch batch;
-    Texture texture_back;
-    Sprite sprite_back;
     Texture texture_actor;
-
-    private Actor actor;
     private Board board;
     private Texture tile;
-
     private ArrayList<Actor> players;
-
-
     private int tile_size = 256;
 
-    public GameScreen(RoboRally game){
+
+    public GameScreen(RoboRally game) {
         this.game = game;
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 3000, 3000* (h/w));
+        camera.setToOrtho(false, 3000, 3000 * (h / w));
         camera.zoom = 1.5f;
         /** yDown sets where Y-axis starts. true being bottom of screen, while false is at top of screen**/
         //camera.translate(5,5);
@@ -45,8 +37,7 @@ public class GameScreen implements Screen {
         //sprite_back = new Sprite(texture_back);
 
 
-
-        board = new Board(10,10);
+        board = new Board(10, 10);
         tile = new Texture(Gdx.files.internal("assets/tile.png"));
 
         players = new ArrayList<>();
@@ -71,33 +62,27 @@ public class GameScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-
-        //batch.draw(sprite_back, 0, 0);
-
         //rendering board
         for (int x = 0; x < board.getHeight(); x++) {
             for (int y = 0; y < board.getWidth(); y++) {
-                batch.draw(tile, x * tile_size, y*tile_size, tile_size, tile_size);
+                batch.draw(tile, x * tile_size, y * tile_size, tile_size, tile_size);
             }
         }
 
-        //rendering actor
+        //rendering actors
         for (Actor player : players) {
             player.update();
             player.getSprite().setPosition(player.getX() * tile_size, player.getY() * tile_size);
             player.getSprite().draw(batch);
         }
         batch.end();
-
-
-
     }
 
     @Override
     public void resize(int width, int height) {
         //TODO: FIX width adjustments zooms
         camera.viewportWidth = 3000;
-        camera.viewportHeight = 3000 * height/width;
+        camera.viewportHeight = 3000 * height / width;
         camera.update();
     }
 
