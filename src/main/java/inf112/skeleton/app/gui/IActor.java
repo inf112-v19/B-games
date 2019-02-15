@@ -26,7 +26,7 @@ public interface IActor {
      * Texture used to display actor
      * @return actor's texture
      */
-    public Texture getTexture();
+    //public Texture getTexture();
 
 
     /**

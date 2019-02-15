@@ -2,6 +2,7 @@ package inf112.skeleton.app;
 
 import static org.junit.Assert.*;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import inf112.skeleton.app.gui.Actor;
 import org.junit.Before;
@@ -13,7 +14,7 @@ public class ActorTest {
 
     @Before
     public void setup(){
-        actor = new Actor(200, 200, texture);
+        actor = new Actor(200, 200, texture, Color.GREEN);
     }
 
 

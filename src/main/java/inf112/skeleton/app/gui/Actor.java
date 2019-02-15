@@ -1,29 +1,29 @@
 package inf112.skeleton.app.gui;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
-import com.badlogic.gdx.Gdx;
+import java.util.Random;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Actor implements IActor{
 
     private int xPos;
     private int yPos;
-    private Texture texture;
+    private Sprite sprite;
+
+    public Sprite getSprite() {
+        return sprite;
+    }
+
     private enum direction {NORTH, SOUTH, EAST, WEST};
     private int moveDistance = 50;
 
-    public Actor(int x, int y, Texture texture){
+    public Actor(int x, int y, Texture texture, Color color){
         this.xPos = x;
         this.yPos = y;
-        this.texture = texture;
+        sprite = new Sprite(texture);
+        sprite.setColor(color);
     }
 
     @Override
@@ -46,10 +46,7 @@ public class Actor implements IActor{
         return 50;
     }
 
-    @Override
-    public Texture getTexture(){
-        return this.texture;
-    }
+
 
     @Override
     public void move(Enum direction) {
@@ -69,8 +66,27 @@ public class Actor implements IActor{
 
     //very inefficient movement test
     private void badMovementTest() {
-        int randInt = (int) Math.ceil(Math.random() * 10);
+        int randInt = new Random().nextInt(100);
+        switch (randInt){
+            case 0:
+                this.xPos += 1;
+                break;
+            case 1:
+                this.xPos -= 1;
+                break;
+            case 2:
+                this.yPos += 1;
+                break;
+            case 3:
+                this.yPos -= 1;
+                break;
+                default:
+                    break;
+        }
 
+
+
+        /*
         if(randInt == 1) {
             int randomDirection = (int) Math.ceil(Math.random() * 4);
             if (randomDirection == 1) {
@@ -82,7 +98,7 @@ public class Actor implements IActor{
             } else {
                 goWest();
             }
-        }
+        }*/
     }
 
     @Override
