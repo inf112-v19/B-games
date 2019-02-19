@@ -82,6 +82,7 @@ public class GameScreen implements Screen {
         for (Actor player : players) {
             player.update();
             sprite_actor.setPosition(player.getX() * tile_size, player.getY() * tile_size);
+            sprite_actor.setSize(tile_size, tile_size);
             sprite_actor.setColor(player.getColor());
             sprite_actor.draw(batch);
         }

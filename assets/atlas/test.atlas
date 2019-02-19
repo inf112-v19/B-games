@@ -1,12 +1,12 @@
 
 test.png
-size: 1024,512
+size: 256,64
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 button_down
   rotate: false
-  xy: 518, 260
+  xy: 86, 2
   size: 82, 35
   split: 9, 9, 12, 10
   orig: 82, 35
@@ -22,15 +22,15 @@ button_up
   index: -1
 robot
   rotate: false
-  xy: 2, 39
-  size: 256, 256
-  orig: 256, 256
+  xy: 170, 5
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
 tile
   rotate: false
-  xy: 260, 39
-  size: 256, 256
-  orig: 256, 256
+  xy: 204, 5
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
