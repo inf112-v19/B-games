@@ -1,0 +1,36 @@
+
+test.png
+size: 1024,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+button_down
+  rotate: false
+  xy: 518, 260
+  size: 82, 35
+  split: 9, 9, 12, 10
+  orig: 82, 35
+  offset: 0, 0
+  index: -1
+button_up
+  rotate: false
+  xy: 2, 2
+  size: 82, 35
+  split: 9, 9, 9, 13
+  orig: 82, 35
+  offset: 0, 0
+  index: -1
+robot
+  rotate: false
+  xy: 2, 39
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+tile
+  rotate: false
+  xy: 260, 39
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1

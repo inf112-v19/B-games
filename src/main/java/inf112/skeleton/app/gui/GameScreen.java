@@ -3,25 +3,33 @@ package inf112.skeleton.app.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+import inf112.skeleton.app.Actor;
 import inf112.skeleton.app.Board;
 import java.util.ArrayList;
 
 public class GameScreen implements Screen {
 
     private RoboRally game;
+
+    // Rendering
     OrthographicCamera camera;
     SpriteBatch batch;
-    Texture texture_actor;
-    private Board board;
-    private Texture tile;
-    private ArrayList<Actor> players;
+    private Sprite sprite_actor;
+    private Sprite sprite_tile;
     private int tile_size = 256;
+    TextureAtlas atlas;
 
+    // Logic
+    private Board board;
+    private ArrayList<Actor> players;
 
     public GameScreen(RoboRally game) {
         this.game = game;
+        atlas = new TextureAtlas(Gdx.files.internal("assets/atlas/test.atlas"));
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
@@ -38,14 +46,15 @@ public class GameScreen implements Screen {
 
 
         board = new Board(10, 10);
-        tile = new Texture(Gdx.files.internal("assets/tile.png"));
+        sprite_tile = atlas.createSprite("tile");
+        //sprite_tile = atlas.createSprite("conveyor_belt");
 
         players = new ArrayList<>();
-        texture_actor = new Texture(Gdx.files.internal("assets/robot.png"));
+        sprite_actor = atlas.createSprite("robot");
 
-        players.add(new Actor(5, 5, texture_actor, Color.RED));
-        players.add(new Actor(5, 5, texture_actor, Color.BLUE));
-        players.add(new Actor(5, 5, texture_actor, Color.GREEN));
+        players.add(new Actor(5, 5, Color.RED));
+        players.add(new Actor(5, 5, Color.BLUE));
+        players.add(new Actor(5, 5, Color.GREEN));
     }
 
     @Override
@@ -65,15 +74,16 @@ public class GameScreen implements Screen {
         //rendering board
         for (int x = 0; x < board.getHeight(); x++) {
             for (int y = 0; y < board.getWidth(); y++) {
-                batch.draw(tile, x * tile_size, y * tile_size, tile_size, tile_size);
+                batch.draw(sprite_tile, x * tile_size, y * tile_size, tile_size, tile_size);
             }
         }
 
         //rendering actors
         for (Actor player : players) {
             player.update();
-            player.getSprite().setPosition(player.getX() * tile_size, player.getY() * tile_size);
-            player.getSprite().draw(batch);
+            sprite_actor.setPosition(player.getX() * tile_size, player.getY() * tile_size);
+            sprite_actor.setColor(player.getColor());
+            sprite_actor.draw(batch);
         }
         batch.end();
     }

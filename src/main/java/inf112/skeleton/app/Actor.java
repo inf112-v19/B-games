@@ -1,29 +1,26 @@
-package inf112.skeleton.app.gui;
+package inf112.skeleton.app;
 
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class Actor implements IActor{
+public class Actor implements IActor {
 
     private int xPos;
     private int yPos;
-    private Sprite sprite;
+    private Color color;
 
-    public Sprite getSprite() {
-        return sprite;
+    public Color getColor() {
+        return color;
     }
 
     private enum direction {NORTH, SOUTH, EAST, WEST};
     private int moveDistance = 50;
 
-    public Actor(int x, int y, Texture texture, Color color){
+    public Actor(int x, int y, Color color){
         this.xPos = x;
         this.yPos = y;
-        sprite = new Sprite(texture);
-        sprite.setColor(color);
+        this.color = color;
     }
 
     @Override

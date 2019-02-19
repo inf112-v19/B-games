@@ -1,33 +1,24 @@
-package inf112.skeleton.app.gui;
-
-import com.badlogic.gdx.graphics.Texture;
+package inf112.skeleton.app;
 
 public interface IActor {
 
     /**
      * The actor's x-position
-     * @return actor's x-position in pixels
+     * @return actor's x-position on the board
      */
     public int getX();
 
     /**
      * The actor's y-position
-     * @return actor's y-position in pixels
+     * @return actor's y-position on the board
      */
     public int getY();
 
     /**
      * The distance the actor moves when moved
-     * @return distance in pixels
+     * @return distance
      */
     public int getMoveDistance();
-
-    /**
-     * Texture used to display actor
-     * @return actor's texture
-     */
-    //public Texture getTexture();
-
 
     /**
      * Moves the actor in given direction
