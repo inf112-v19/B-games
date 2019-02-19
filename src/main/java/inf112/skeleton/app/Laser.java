@@ -21,4 +21,9 @@ public class Laser implements ILaser {
     public boolean isHole() {
         return false;
     }
+
+    @Override
+    public Facing hasConveyor() {
+        return null;
+    }
 }
