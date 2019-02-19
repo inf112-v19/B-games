@@ -21,4 +21,11 @@ public interface ITile {
      * @return true if the tile is a hole
      */
     boolean isHole();
+
+    /**
+     * checks if there is a conveyor belt on the tile and what direction it is rolling.
+     *
+     * @return the direction of the conveyor belt if it has one, and null if there is none.
+     */
+    Facing hasConveyor();
 }

@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 public class Tile implements ITile {
     private boolean isHole;
     private boolean[] walls;
+    private Facing conveyor;
 
     public Tile(){
         this.isHole = false;
@@ -12,6 +13,12 @@ public class Tile implements ITile {
     public Tile(boolean[] walls){
         this.isHole = false;
         this.walls = walls;
+    }
+
+    public Tile(boolean[] walls, Facing conveyor){
+        this.isHole = false;
+        this.walls = walls;
+        this.conveyor = conveyor;
     }
 
     @Override
@@ -30,5 +37,10 @@ public class Tile implements ITile {
     @Override
     public boolean isHole() {
         return isHole;
+    }
+
+    @Override
+    public Facing hasConveyor() {
+        return conveyor;
     }
 }
