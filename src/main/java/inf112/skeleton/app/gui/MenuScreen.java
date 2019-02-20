@@ -77,7 +77,7 @@ public class MenuScreen implements Screen {
 
         // Root table
         Table t = new Table();
-        t.background(new TextureRegionDrawable(new Texture(Gdx.files.internal("assets/background.png"))));
+        //t.background(new TextureRegionDrawable(new Texture(Gdx.files.internal("assets/background.png"))));
 
         //t.setDebug(true);
         t.add(btn_play).width(150);
