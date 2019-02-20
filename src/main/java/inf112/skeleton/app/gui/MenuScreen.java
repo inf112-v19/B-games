@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -76,6 +77,8 @@ public class MenuScreen implements Screen {
 
         // Root table
         Table t = new Table();
+        t.background(new TextureRegionDrawable(new Texture(Gdx.files.internal("assets/background.png"))));
+
         //t.setDebug(true);
         t.add(btn_play).width(150);
         t.center();

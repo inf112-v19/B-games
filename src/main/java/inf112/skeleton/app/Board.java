@@ -1,5 +1,7 @@
 package inf112.skeleton.app;
 
+import java.util.Random;
+
 public class Board implements IBoard {
 
     private ITile[][] tiles;
@@ -17,6 +19,31 @@ public class Board implements IBoard {
     }
 
 
+    public void generateRandom(){
+        Random r = new Random();
+        for (int x = 0; x < height; x++) {
+            for (int y = 0; y < width; y++) {
+                int random = r.nextInt(10);
+                switch (random){
+                    case 0:
+                        tiles[x][y] = new Tile(new boolean[]{}, Facing.NORTH);
+                        break;
+                    case 1:
+                        tiles[x][y] = new Tile(new boolean[]{}, Facing.SOUTH);
+                        break;
+                    case 2:
+                        tiles[x][y] = new Tile(new boolean[]{}, Facing.WEST);
+                        break;
+                    case 3:
+                        tiles[x][y] = new Tile(new boolean[]{}, Facing.EAST);
+                        break;
+                        default:
+                            tiles[x][y] = new Tile();
+
+                }
+            }
+        }
+    }
 
 
     @Override

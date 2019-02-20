@@ -3,13 +3,13 @@ package inf112.skeleton.app.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+import com.badlogic.gdx.graphics.g2d.*;
 import inf112.skeleton.app.Actor;
 import inf112.skeleton.app.Board;
+import inf112.skeleton.app.Facing;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameScreen implements Screen {
 
@@ -22,6 +22,11 @@ public class GameScreen implements Screen {
     private Sprite sprite_tile;
     private int tile_size = 256;
     TextureAtlas atlas;
+
+    // Animations
+    float elapsedTime = 0;
+    float animSpeed = 1f;
+    Animation<Sprite> conveyor;
 
     // Logic
     private Board board;
@@ -46,8 +51,9 @@ public class GameScreen implements Screen {
 
 
         board = new Board(10, 10);
+        board.generateRandom();
         sprite_tile = atlas.createSprite("tile");
-        //sprite_tile = atlas.createSprite("conveyor_belt");
+        conveyor = new Animation<>(0.033f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
 
         players = new ArrayList<>();
         sprite_actor = atlas.createSprite("robot");
@@ -63,7 +69,19 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void render(float v) {
+    public void render(float deltaTime) {
+        elapsedTime += deltaTime * animSpeed;
+
+        // Animation test
+        Animation<Sprite> conveyor = new Animation<>(0.033f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
+        Animation<Sprite> conveyor2 = new Animation<>(0.033f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
+
+
+        // Get current frame of animation for the current stateTime
+        Sprite currentFrame = conveyor.getKeyFrame(elapsedTime, true);
+        currentFrame.setSize(tile_size,tile_size);
+        currentFrame.setOriginCenter();
+
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -74,7 +92,27 @@ public class GameScreen implements Screen {
         //rendering board
         for (int x = 0; x < board.getHeight(); x++) {
             for (int y = 0; y < board.getWidth(); y++) {
-                batch.draw(sprite_tile, x * tile_size, y * tile_size, tile_size, tile_size);
+                Facing facing = board.getAt(x,y).hasConveyor();
+                if(facing == null){
+                    batch.draw(sprite_tile, x * tile_size, y * tile_size, tile_size, tile_size);
+                } else {
+                    currentFrame.setPosition(x * tile_size, y * tile_size);
+                    switch (facing) {
+                        case NORTH:
+                            currentFrame.setRotation(0);
+                            break;
+                        case EAST:
+                            currentFrame.setRotation(90);
+                            break;
+                        case SOUTH:
+                            currentFrame.setRotation(180);
+                            break;
+                        case WEST:
+                            currentFrame.setRotation(270);
+                            break;
+                    }
+                    currentFrame.draw(batch);
+                }
             }
         }
 

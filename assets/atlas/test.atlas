@@ -1,12 +1,12 @@
 
 test.png
-size: 256,64
+size: 2048,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 button_down
   rotate: false
-  xy: 86, 2
+  xy: 1042, 166
   size: 82, 35
   split: 9, 9, 12, 10
   orig: 82, 35
@@ -14,22 +14,78 @@ button_down
   index: -1
 button_up
   rotate: false
-  xy: 2, 2
+  xy: 2, 36
   size: 82, 35
   split: 9, 9, 9, 13
   orig: 82, 35
   offset: 0, 0
   index: -1
+conveyor
+  rotate: false
+  xy: 2, 73
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+conveyor
+  rotate: false
+  xy: 132, 73
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5
+conveyor
+  rotate: false
+  xy: 262, 73
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 6
+conveyor
+  rotate: false
+  xy: 392, 73
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 7
+conveyor
+  rotate: false
+  xy: 522, 73
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+conveyor
+  rotate: false
+  xy: 652, 73
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+conveyor
+  rotate: false
+  xy: 782, 73
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+conveyor
+  rotate: false
+  xy: 912, 73
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
 robot
   rotate: false
-  xy: 170, 5
+  xy: 2, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 tile
   rotate: false
-  xy: 204, 5
+  xy: 86, 39
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
