@@ -4,12 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
-import inf112.skeleton.app.Actor;
-import inf112.skeleton.app.Board;
-import inf112.skeleton.app.Facing;
+import inf112.skeleton.app.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Random;
 
 public class GameScreen implements Screen {
 
@@ -31,6 +29,12 @@ public class GameScreen implements Screen {
     // Logic
     private Board board;
     private ArrayList<Actor> players;
+    private ActionResolver actionResolver;
+
+    // Test
+    private float actionInterval = 1;
+    private float timer = 0;
+    private int player = 0;
 
     public GameScreen(RoboRally game) {
         this.game = game;
@@ -57,6 +61,8 @@ public class GameScreen implements Screen {
 
         players = new ArrayList<>();
         sprite_actor = atlas.createSprite("robot");
+
+        actionResolver = new ActionResolver(board);
 
         players.add(new Actor(5, 5, Color.RED));
         players.add(new Actor(5, 5, Color.BLUE));
@@ -92,7 +98,7 @@ public class GameScreen implements Screen {
         //rendering board
         for (int x = 0; x < board.getHeight(); x++) {
             for (int y = 0; y < board.getWidth(); y++) {
-                Facing facing = board.getAt(x,y).hasConveyor();
+                Direction facing = board.getAt(x,y).hasConveyor();
                 if(facing == null){
                     batch.draw(sprite_tile, x * tile_size, y * tile_size, tile_size, tile_size);
                 } else {
@@ -116,15 +122,34 @@ public class GameScreen implements Screen {
             }
         }
 
+        // Move actors
+        timer += deltaTime;
+        if(timer > actionInterval){
+            timer -= actionInterval;
+            player++;
+            if (player >= players.size()){
+                player = 0;
+            }
+            moveRandomly(players.get(player));
+        }
+
+
         //rendering actors
         for (Actor player : players) {
-            player.update();
+            sprite_actor.setOriginCenter();
             sprite_actor.setPosition(player.getX() * tile_size, player.getY() * tile_size);
+            sprite_actor.setRotation(DirectionHelpers.rotationFromDirection(player.direction));
             sprite_actor.setSize(tile_size, tile_size);
             sprite_actor.setColor(player.getColor());
             sprite_actor.draw(batch);
         }
         batch.end();
+    }
+
+    private void moveRandomly(Actor player) {
+        Random r = new Random();
+        int random = r.nextInt(CardType.values().length);
+        actionResolver.playCard(player, CardType.values()[random]);
     }
 
     @Override

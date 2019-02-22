@@ -15,7 +15,7 @@ public interface ITile {
      * @param direction the side of the tile to check
      * @return true if there is a wall on the tile in the specified direction
      */
-    boolean hasWall(Facing direction);
+    boolean hasWall(Direction direction);
 
     /**
      * @return true if the tile is a hole
@@ -27,5 +27,7 @@ public interface ITile {
      *
      * @return the direction of the conveyor belt if it has one, and null if there is none.
      */
-    Facing hasConveyor();
+    Direction hasConveyor();
+
+    void setHole(boolean hole);
 }

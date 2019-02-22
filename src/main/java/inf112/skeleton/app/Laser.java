@@ -1,19 +1,19 @@
 package inf112.skeleton.app;
 
 public class Laser implements ILaser {
-    private Facing laserDirection;
+    private Direction laserDirection;
 
-    public Laser(Facing laserDirection){
+    public Laser(Direction laserDirection){
         this.laserDirection = laserDirection;
     }
 
     @Override
-    public Facing getLaser() {
+    public Direction getLaser() {
         return laserDirection;
     }
 
     @Override
-    public boolean hasWall(Facing direction) {
+    public boolean hasWall(Direction direction) {
         return true;
     }
 
@@ -23,7 +23,12 @@ public class Laser implements ILaser {
     }
 
     @Override
-    public Facing hasConveyor() {
+    public Direction hasConveyor() {
         return null;
+    }
+
+    @Override
+    public void setHole(boolean hole) {
+
     }
 }

@@ -3,7 +3,7 @@ package inf112.skeleton.app;
 public class Tile implements ITile {
     private boolean isHole;
     private boolean[] walls;
-    private Facing conveyor;
+    private Direction conveyor;
 
     public Tile(){
         this.isHole = false;
@@ -15,19 +15,19 @@ public class Tile implements ITile {
         this.walls = walls;
     }
 
-    public Tile(boolean[] walls, Facing conveyor){
+    public Tile(boolean[] walls, Direction conveyor){
         this.isHole = false;
         this.walls = walls;
         this.conveyor = conveyor;
     }
 
     @Override
-    public boolean hasWall(Facing direction) {
-        if (direction == Facing.NORTH){
+    public boolean hasWall(Direction direction) {
+        if (direction == Direction.NORTH){
             return walls[0];
-        } else if (direction == Facing.EAST) {
+        } else if (direction == Direction.EAST) {
             return walls[1];
-        } else if (direction == Facing.SOUTH){
+        } else if (direction == Direction.SOUTH){
             return walls[2];
         } else {
             return walls[3];
@@ -39,8 +39,10 @@ public class Tile implements ITile {
         return isHole;
     }
 
+    public void setHole(boolean hole) {isHole = hole;}
+
     @Override
-    public Facing hasConveyor() {
+    public Direction hasConveyor() {
         return conveyor;
     }
 }

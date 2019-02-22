@@ -26,16 +26,16 @@ public class Board implements IBoard {
                 int random = r.nextInt(10);
                 switch (random){
                     case 0:
-                        tiles[x][y] = new Tile(new boolean[]{}, Facing.NORTH);
+                        tiles[x][y] = new Tile(new boolean[]{false, false, false, false}, Direction.NORTH);
                         break;
                     case 1:
-                        tiles[x][y] = new Tile(new boolean[]{}, Facing.SOUTH);
+                        tiles[x][y] = new Tile(new boolean[]{false, false, false, false}, Direction.SOUTH);
                         break;
                     case 2:
-                        tiles[x][y] = new Tile(new boolean[]{}, Facing.WEST);
+                        tiles[x][y] = new Tile(new boolean[]{false, false, false, false}, Direction.WEST);
                         break;
                     case 3:
-                        tiles[x][y] = new Tile(new boolean[]{}, Facing.EAST);
+                        tiles[x][y] = new Tile(new boolean[]{false, false, false, false}, Direction.EAST);
                         break;
                         default:
                             tiles[x][y] = new Tile();
@@ -48,6 +48,9 @@ public class Board implements IBoard {
 
     @Override
     public ITile getAt(int x, int y) {
+        if(x < 0 || y < 0 || x >= width || y >= height){
+            return null;
+        }
         return tiles[x][y];
     }
 

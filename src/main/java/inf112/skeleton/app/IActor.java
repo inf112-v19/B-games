@@ -24,26 +24,6 @@ public interface IActor {
      * Moves the actor in given direction
      * @param direction
      */
-    public void move(Enum direction);
-
-    /**
-     * Call to move actor northwards
-     */
-    public void goNorth();
-
-    /**
-     * Call to move actor southwards
-     */
-    public void goSouth();
-
-    /**
-     * Call to move actor eastwards
-     */
-    public void goEast();
-
-    /**
-     * Call to move actor westwards
-     */
-    public void goWest();
+    public void move(Direction direction);
 
 }

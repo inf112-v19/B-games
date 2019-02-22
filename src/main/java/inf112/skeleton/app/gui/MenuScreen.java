@@ -52,6 +52,7 @@ public class MenuScreen implements Screen {
 
         btn_play.addListener(event -> {
                     if (event instanceof ChangeListener.ChangeEvent) {
+                        stage.dispose();
                         game.startGame();
                         event.handle();
                     }

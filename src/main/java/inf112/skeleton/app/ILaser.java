@@ -10,5 +10,5 @@ public interface ILaser extends ITile {
     /**
      * @return the direction the laser is facing
      */
-    Facing getLaser();
+    Direction getLaser();
 }
