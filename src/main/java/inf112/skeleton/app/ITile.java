@@ -29,5 +29,12 @@ public interface ITile {
      */
     Direction hasConveyor();
 
+    /**
+     * checks if there is a cogwheel on the tile and what direction it is rotating
+     *
+     * @return the direction the cogwheel rotates
+     */
+    RotationDirection hasCog();
+
     void setHole(boolean hole);
 }
