@@ -23,3 +23,36 @@ Oppmøte: Benjamin Byrkjeland (30 min. sen), Jonas Opsall, Bernhard Hjelen, Ørj
   - Klassekart skal sendes inn for fremmføring slides - gjøres av Bernhard
   - Prosjektspesifikasjon skal fullføres - gjøres av Ørjan
   - Spillerbrikke klasse skal lages - gjøres av Jonas
+  
+
+  
+**Gruppetime 12.02.2019 14:15 - 16:00**
+Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson
+ - Vurdering av spillerbrikke, grei nok for øyeblikket
+ - Bestemmt at vi skal lage grensesnitt for alle de objektene vi trenger
+ - Grensenitt for brett og brikke ble fullført (for øyeblikket)
+ - Videre diskusjoner om prensentasjon
+Til neste gang
+ - Liten reorginasering av prosjekt strukturen - Ørjan
+ - Lage flere grensenitt
+ 
+ **Møte 15.02.2019**
+ Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson, Robert
+  - Diskusjon og inspill til presentasjonen
+  
+**Gruppetime 19.02.2019 14:15 - 16:00**
+Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson
+  - Begynte arbeid på forskjellige Tiles
+  - Snakk rundt UML
+ 
+**Gruppetime 26.02.2019 14:15 - 16:00**
+Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson
+ - Gjennomgang av oppgavene til Oblig3
+ - Gjennomgang av klassene vi har jobbet med
+ - Snakk rundt UML
+  
+
+
+
+  
+  
