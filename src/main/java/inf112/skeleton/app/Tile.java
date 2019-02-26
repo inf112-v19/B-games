@@ -5,6 +5,7 @@ public class Tile implements ITile {
     private boolean[] walls;
     private Direction conveyor;
     private RotationDirection cog;
+    private Item item;
 
     public Tile(){
         this.isHole = false;
@@ -56,5 +57,9 @@ public class Tile implements ITile {
     @Override
     public RotationDirection hasCog() {
         return cog;
+    }
+
+    public Item getItem(){
+        return item;
     }
 }
