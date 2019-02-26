@@ -28,6 +28,11 @@ public class Laser implements ILaser {
     }
 
     @Override
+    public RotationDirection hasCog() {
+        return null;
+    }
+
+    @Override
     public void setHole(boolean hole) {
 
     }

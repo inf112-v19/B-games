@@ -4,6 +4,8 @@ public class Tile implements ITile {
     private boolean isHole;
     private boolean[] walls;
     private Direction conveyor;
+    private RotationDirection cog;
+    private Item item;
 
     public Tile(){
         this.isHole = false;
@@ -19,6 +21,12 @@ public class Tile implements ITile {
         this.isHole = false;
         this.walls = walls;
         this.conveyor = conveyor;
+    }
+
+    public Tile(boolean[] walls, RotationDirection cog){
+        this.isHole = false;
+        this.walls = walls;
+        this.cog = cog;
     }
 
     @Override
@@ -44,5 +52,14 @@ public class Tile implements ITile {
     @Override
     public Direction hasConveyor() {
         return conveyor;
+    }
+
+    @Override
+    public RotationDirection hasCog() {
+        return cog;
+    }
+
+    public Item getItem(){
+        return item;
     }
 }
