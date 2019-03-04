@@ -114,6 +114,10 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 
 
 # Første iterasjon:
-
 - Prosjektdokumenter/deliverables
 - Plassere en brikke på brettet
+
+# Andre iterasjon:
+- UML over prosjektet
+- Klasser implementert for kort og kortstokk
+
