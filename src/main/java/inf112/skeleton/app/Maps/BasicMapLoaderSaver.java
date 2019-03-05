@@ -45,7 +45,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
     }
 
     @Override
-    public Boolean save(IBoard map, File fileName) {
+    public Boolean save(IBoard map, String fileName) {
         try {
             int width = map.getWidth();
             int height = map.getHeight();
@@ -67,7 +67,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
             for (int i = 0; i < height; i++){
                 //loop for X coordinates
                 for (int j = 0; j <width; j++){
-                    bufferedWriter.write(map.toString());
+                    bufferedWriter.write(map.getAt(i, j).toString());
                 }
             }
 
