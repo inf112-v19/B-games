@@ -29,7 +29,7 @@ public class GameScreen implements Screen {
     // Logic
     private Board board;
     private ArrayList<Actor> players;
-    private ActionResolver actionResolver;
+    private Action action;
 
     // Test
     private float actionInterval = 1;
@@ -62,7 +62,7 @@ public class GameScreen implements Screen {
         players = new ArrayList<>();
         sprite_actor = atlas.createSprite("robot");
 
-        actionResolver = new ActionResolver(board);
+        action = new Action(board);
 
         players.add(new Actor(5, 5, Color.RED));
         players.add(new Actor(5, 5, Color.BLUE));
@@ -149,7 +149,7 @@ public class GameScreen implements Screen {
     private void moveRandomly(Actor player) {
         Random r = new Random();
         int random = r.nextInt(CardType.values().length);
-        actionResolver.playCard(player, CardType.values()[random]);
+        action.playCard(player, CardType.values()[random]);
     }
 
     @Override
