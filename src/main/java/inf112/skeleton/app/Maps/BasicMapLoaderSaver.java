@@ -1,7 +1,7 @@
 package inf112.skeleton.app.Maps;
 
-import inf112.skeleton.app.Board;
-import inf112.skeleton.app.IBoard;
+import inf112.skeleton.app.*;
+
 import java.io.*;
 
 import java.io.File;
@@ -82,7 +82,44 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
         }
     }
 
+    /*
+    Clunky way of parsing an Enum from a line from a saved map.
+    It first checks what type of enum it needs to parse by looking at the first 3 letters,
+    then it looks at an identifying letter in the Enum value.
+    If no Enum is found it returns null.
+     */
     public Enum parseEnum(String input){
+        if(input.substring(0,3).equals("con")){
+            if(input.charAt(9) == 'N'){
+                return Direction.NORTH;
+            } else if(input.charAt(9) == 'E'){
+                return Direction.EAST;
+            } else if(input.charAt(9) == 'S'){
+                return Direction.SOUTH;
+            } else if(input.charAt(9) == 'W'){
+                return Direction.WEST;
+            }
+        } else if(input.substring(0,3).equals("cog")){
+            if(input.charAt(5) == 'L'){
+                return RotationDirection.CLOCKWISE;
+            } else if(input.charAt(5) == 'O'){
+                return RotationDirection.COUNTERCLOCKWISE;
+            }
+        } else if(input.substring(0,3).equals("ite")){
+            if(input.charAt(5) == 'W'){
+                return Item.WRENCH;
+            }
+        } else if(input.substring(0,3).equals("las")){
+            if(input.charAt(15) == 'N'){
+                return Direction.NORTH;
+            } else if(input.charAt(15) == 'E'){
+                return Direction.EAST;
+            } else if(input.charAt(15) == 'S'){
+                return Direction.SOUTH;
+            } else if(input.charAt(15) == 'W'){
+                return Direction.WEST;
+            }
+        }
         return null;
     }
 

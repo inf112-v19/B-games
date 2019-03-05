@@ -40,7 +40,7 @@ public class Laser implements ILaser {
     @Override
     public String toString(){
         String returnString = "type:Laser\n";
-        returnString += "LaserDirection:" + laserDirection + "\n";
+        returnString += "laserDirection:" + laserDirection + "\n";
         return returnString;
     }
 }
