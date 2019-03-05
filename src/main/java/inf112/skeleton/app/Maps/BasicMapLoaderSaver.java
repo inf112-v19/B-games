@@ -9,10 +9,9 @@ import java.io.File;
 public class BasicMapLoaderSaver implements IMapLoaderSaver {
 
     @Override
-    public Board load(File map) {
+    public Board load(String map) {
 
         String line = null;
-
 
         try {
             FileReader fileReader = new FileReader(map);
@@ -23,6 +22,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
             int height = Integer.parseInt(bufferedReader.readLine());
             Board board = new Board(width, height);
 
+            /*
             while((line = bufferedReader.readLine()) != null) {
                 if(line == "type:Tile"){
 
@@ -32,16 +32,19 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
 
                 }
             }
+            */
 
             for(int i = 0; i < height; i++){
                 for(int j = 0; j < width; j++){
                     line = bufferedReader.readLine();
                     if(line == "type:Tile"){
-                        board.setTile(j, i, new Tile());
+                        board.setTile(j, i, new Tile(parseBoolean(bufferedReader.readLine()),
+                                parseWalls(bufferedReader.readLine()),
+                                (Direction)parseEnum(bufferedReader.readLine()),
+                                (RotationDirection)parseEnum(bufferedReader.readLine()),
+                                (Item)parseEnum(bufferedReader.readLine())));
                     } else if(line == "type:Laser"){
-
-                    } else {
-
+                        board.setTile(j, i, new Laser((Direction)parseEnum(bufferedReader.readLine())));
                     }
                 }
             }
@@ -141,8 +144,8 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
     Loops through the string until it finds a ':' and uses the next letter to decide it it should add true of false
     to the walls table.
     */
-    public Boolean[] parseWalls(String input){
-        Boolean[] walls = new Boolean[4];
+    public boolean[] parseWalls(String input){
+        boolean[] walls = new boolean[4];
         int counter = 0;
         for(int i = 10; i < input.length(); i++){
             if(input.charAt(i) == ':'){
@@ -161,7 +164,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
     For the time being the only saved bool value is isHole, and it returns false if it doesn't
     recognize that specific substring.
      */
-    public Boolean parseBoolean(String input){
+    public boolean parseBoolean(String input){
         if(input.substring(0, 6).equals("isHole")){
             if(input.charAt(7) == 't'){
                 return true;

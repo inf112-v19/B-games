@@ -18,7 +18,7 @@ public interface IMapLoaderSaver {
      * @param map the file location of the map to be loaded
      * @return a map constructed from the file
      */
-    public Board load(File map);
+    public Board load(String map);
 
     /**
      * Function to write a map to a text file with a specified location.
