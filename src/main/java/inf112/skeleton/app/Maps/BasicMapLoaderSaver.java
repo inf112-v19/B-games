@@ -47,6 +47,9 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
     @Override
     public Boolean save(IBoard map, File fileName) {
         try {
+            int width = map.getWidth();
+            int height = map.getHeight();
+
             // Assume default encoding.
             FileWriter fileWriter =
                     new FileWriter(fileName);
@@ -65,7 +68,14 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
             bufferedWriter.write(" the text to the file.");
             */
 
+            bufferedWriter.write(width + "\n" + height + "\n");
+            //loop for Y coordinates
+            for (int i = 0; i < height; i++){
+                //loop for X coordinates
+                for (int j = 0; j <width; j++){
 
+                }
+            }
 
             // Always close files.
             bufferedWriter.close();

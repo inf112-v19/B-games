@@ -23,7 +23,7 @@ public interface IMapLoaderSaver {
      * Function to write a map to a text file with a specified location
      *
      * @param map any map using the IBoard interface you want to save as a text file
-     * @param location the file location you want to save the map to
+     * @param fileName the file location you want to save the map to
      */
     public Boolean save(IBoard map, File fileName);
 }
