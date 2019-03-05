@@ -63,4 +63,15 @@ public class Board implements IBoard {
     public int getWidth() {
         return width;
     }
+
+    @Override
+    public void setTile(int x, int y, ITile tile){
+        if(x < 0 || x > width){
+            throw new IndexOutOfBoundsException();
+        }
+        if(y < 0 || y > height){
+            throw new IndexOutOfBoundsException();
+        }
+        tiles[x][y] = tile;
+    }
 }
