@@ -51,8 +51,16 @@ Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isa
  - Gjennomgang av klassene vi har jobbet med
  - Snakk rundt UML
   
+**Møte 01.03.2019 16:00 - 17:00**
+Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson, Robert Frydenlund
+ - diskutert bruk av branches, hvert gruppemedlem skal ha hver sin branch som de pusher til
+ - diskutert kommunikasjon, skal kommunisere med Robert over discord på de obligatoriske gruppetimene
+ - diskutert hvordan vi skal gå frem med koding, hovedsaklig angående Action klassen, skal forrandre Action klassen til å eksklusivt flytte brikkene. brikkene skal flyttes til å være på det logiske brettet 
+    og ikke Gamecreen
 
-
-
+**Gruppetime 05.03.2019 14:15 - 16:00**
+Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson
+ - Alle har nå sin egen branch på Git som de pusher til
+ - Diskutert strukturen til Action klassen og implementasjon av kort
   
   
