@@ -1,4 +1,7 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Maps;
+
+import inf112.skeleton.app.Board;
+import inf112.skeleton.app.IBoard;
 
 import java.io.File;
 
@@ -22,5 +25,5 @@ public interface IMapLoaderSaver {
      * @param map any map using the IBoard interface you want to save as a text file
      * @param location the file location you want to save the map to
      */
-    public void save(IBoard map, File location);
+    public Boolean save(IBoard map, File fileName);
 }
