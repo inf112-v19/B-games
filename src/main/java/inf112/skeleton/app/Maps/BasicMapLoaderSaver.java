@@ -13,6 +13,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
 
         String line = null;
 
+
         try {
             FileReader fileReader = new FileReader(map);
 
@@ -29,6 +30,19 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
 
                 } else {
 
+                }
+            }
+
+            for(int i = 0; i < height; i++){
+                for(int j = 0; j < width; j++){
+                    line = bufferedReader.readLine();
+                    if(line == "type:Tile"){
+                        board.setTile(j, i, new Tile());
+                    } else if(line == "type:Laser"){
+
+                    } else {
+
+                    }
                 }
             }
 
@@ -63,13 +77,12 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
 
             //bufferedWriter.newLine();
 
-
             bufferedWriter.write(width + "\n" + height + "\n");
             //loop for Y coordinates
             for (int i = 0; i < height; i++){
                 //loop for X coordinates
                 for (int j = 0; j <width; j++){
-                    bufferedWriter.write(map.getAt(i, j).toString());
+                    bufferedWriter.write(map.getAt(j, i).toString());
                 }
             }
 
