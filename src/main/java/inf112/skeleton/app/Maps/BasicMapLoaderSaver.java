@@ -50,34 +50,27 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
             int width = map.getWidth();
             int height = map.getHeight();
 
-            // Assume default encoding.
             FileWriter fileWriter =
                     new FileWriter(fileName);
 
-            // Always wrap FileWriter in BufferedWriter.
             BufferedWriter bufferedWriter =
                     new BufferedWriter(fileWriter);
 
             // Note that write() does not automatically
             // append a newline character.
-            /*
-            bufferedWriter.write("Hello there,");
-            bufferedWriter.write(" here is some text.");
-            bufferedWriter.newLine();
-            bufferedWriter.write("We are writing");
-            bufferedWriter.write(" the text to the file.");
-            */
+
+            //bufferedWriter.newLine();
+
 
             bufferedWriter.write(width + "\n" + height + "\n");
             //loop for Y coordinates
             for (int i = 0; i < height; i++){
                 //loop for X coordinates
                 for (int j = 0; j <width; j++){
-
+                    bufferedWriter.write(map.toString());
                 }
             }
 
-            // Always close files.
             bufferedWriter.close();
         }
         catch(IOException ex) {
