@@ -29,6 +29,14 @@ public class Tile implements ITile {
         this.cog = cog;
     }
 
+    public Tile(boolean isHole, boolean[] walls, Direction conveyor, RotationDirection cog, Item item){
+        this.isHole = isHole;
+        this.walls = walls;
+        this.conveyor = conveyor;
+        this.cog = cog;
+        this.item =item;
+    }
+
     @Override
     public boolean hasWall(Direction direction) {
         if (direction == Direction.NORTH){
