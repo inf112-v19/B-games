@@ -62,4 +62,15 @@ public class Tile implements ITile {
     public Item getItem(){
         return item;
     }
+
+    @Override
+    public String toString(){
+        String returnString = "type:Tile\n";
+        returnString += "isHole:" + isHole + "\n";
+        returnString += "walls:North:" + walls[0] + " East:" + walls[1] + " South:" + walls[2] + " West:" + walls[3] + "\n";
+        returnString += "conveyor:" + conveyor + "\n";
+        returnString += "cog:" + cog + "\n";
+        returnString += "item:" + item + "\n";
+        return returnString;
+    }
 }
