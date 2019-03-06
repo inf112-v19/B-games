@@ -17,7 +17,6 @@ public class MapLoaderSaverTest {
     public void setup(){
         board2 = new Board(10, 10);
         board2.generateRandom();
-        board1 = loaderSaver.load("C:/Users/Eier/IdeaProjects/map dump/map.txt");
     }
 
     @Test
@@ -39,10 +38,20 @@ public class MapLoaderSaverTest {
 
     @Test
     public void boardComparisonTest(){
+        board2.generateRandom();
+        loaderSaver.save(board2, "C:/Users/Eier/IdeaProjects/map dump/map.txt");
         board1 = loaderSaver.load("C:/Users/Eier/IdeaProjects/map dump/map.txt");
-        testTile1 = board1.getAt(1,1);
-        testTile2 = board1.getAt(1,1);
-        assertEquals(testTile1.hasConveyor(), testTile2.hasConveyor());
+
+        for(int i = 0; i < board1.getHeight(); i++){
+            for(int j = 0; j < board1.getWidth(); j++){
+                testTile1 = board1.getAt(j, i);
+                testTile2 = board2.getAt(j, i);
+                assertEquals(testTile1.hasConveyor(), testTile2.hasConveyor());
+                assertEquals(testTile1.hasWall(Direction.NORTH), testTile2.hasWall(Direction.NORTH));
+                assertEquals(testTile1.hasCog(), testTile2.hasCog());
+                assertEquals(testTile1.isHole(), testTile2.isHole());
+            }
+        }
     }
 
 }

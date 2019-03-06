@@ -38,13 +38,13 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
             for(int i = 0; i < height; i++){
                 for(int j = 0; j < width; j++){
                     line = bufferedReader.readLine();
-                    if(line == "type:Tile"){
+                    if(line.equals("type:Tile")){
                         board.setTile(j, i, new Tile(parseBoolean(bufferedReader.readLine()),
                                 parseWalls(bufferedReader.readLine()),
                                 (Direction)parseEnum(bufferedReader.readLine()),
                                 (RotationDirection)parseEnum(bufferedReader.readLine()),
                                 (Item)parseEnum(bufferedReader.readLine())));
-                    } else if(line == "type:Laser"){
+                    } else if(line.equals("type:Laser")){
                         board.setTile(j, i, new Laser((Direction)parseEnum(bufferedReader.readLine())));
                     }
                 }
