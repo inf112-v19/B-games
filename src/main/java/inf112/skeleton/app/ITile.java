@@ -37,4 +37,6 @@ public interface ITile {
     RotationDirection hasCog();
 
     void setHole(boolean hole);
+
+    Item getItem();
 }

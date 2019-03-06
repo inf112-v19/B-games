@@ -15,10 +15,16 @@ public interface IActor {
     public int getY();
 
     /**
-     * The distance the actor moves when moved
-     * @return distance
+     * The actor's current Lives
+     * @return number of lives
      */
-    public int getMoveDistance();
+    public int getLives();
+
+    /**
+     * The actor's current HP
+     * @return HP
+     */
+    public int getHP();
 
     /**
      * Moves the actor in given direction
