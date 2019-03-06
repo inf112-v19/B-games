@@ -4,8 +4,6 @@ import inf112.skeleton.app.*;
 
 import java.io.*;
 
-import java.io.File;
-
 public class BasicMapLoaderSaver implements IMapLoaderSaver {
 
     @Override
