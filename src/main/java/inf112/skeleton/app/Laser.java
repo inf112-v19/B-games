@@ -36,4 +36,9 @@ public class Laser implements ILaser {
     public void setHole(boolean hole) {
 
     }
+
+    @Override
+    public Item getItem() {
+        return null;
+    }
 }

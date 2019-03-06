@@ -64,9 +64,9 @@ public class GameScreen implements Screen {
 
         action = new Action(board);
 
-        players.add(new Actor(5, 5, Color.RED));
-        players.add(new Actor(5, 5, Color.BLUE));
-        players.add(new Actor(5, 5, Color.GREEN));
+        players.add(new Actor(5, 5, Color.RED, board));
+        players.add(new Actor(5, 5, Color.BLUE, board));
+        players.add(new Actor(5, 5, Color.GREEN, board));
     }
 
     @Override

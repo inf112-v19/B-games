@@ -59,6 +59,7 @@ public class Tile implements ITile {
         return cog;
     }
 
+    @Override
     public Item getItem(){
         return item;
     }
