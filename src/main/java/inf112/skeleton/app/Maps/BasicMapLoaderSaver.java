@@ -11,30 +11,41 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
     @Override
     public Board load(String map) {
 
-        String line = null;
+        String line = null; //keeps the most recent line from the map file when needed
         Board board;
 
+        /*
+        This function goes through (hopefully) every line in the text file of a saved map.
+        Every call of bufferedReader.readLine() reads a new line from the text file
+         */
         try {
             FileReader fileReader = new FileReader(map);
-
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
+            //The two first lines of the text file is the width and height of the map
             int width = Integer.parseInt(bufferedReader.readLine());
             int height = Integer.parseInt(bufferedReader.readLine());
             board = new Board(width, height);
 
             /*
-            while((line = bufferedReader.readLine()) != null) {
-                if(line == "type:Tile"){
+            After the first two lines comes the information about the tiles like this:
 
-                } else if(line == "type:Laser"){
+            ...
+            type:<type>
+            variable:<value>
+            ...
 
-                } else {
+            for example a laser might look like this:
 
-                }
-            }
-            */
+            ...
+            type:Laser
+            laserDirection:Direction.NORTH
+            ...
 
+            the function reads the line with the type and then read as many line as it expects that type
+            of tile to have with relevant information.
+            And then is reads a new type
+             */
             for(int i = 0; i < height; i++){
                 for(int j = 0; j < width; j++){
                     line = bufferedReader.readLine();
@@ -64,6 +75,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
         return board;
     }
 
+    //simple function to write a board to a text file
     @Override
     public Boolean save(IBoard map, String fileName) {
         try {
@@ -76,12 +88,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
             BufferedWriter bufferedWriter =
                     new BufferedWriter(fileWriter);
 
-            // Note that write() does not automatically
-            // append a newline character.
-
-            //bufferedWriter.newLine();
-
-            bufferedWriter.write(width + "\n" + height + "\n");
+            bufferedWriter.write(width + "\n" + height + "\n"); //the first two lines is writes are the width and height of the board
             //loop for Y coordinates
             for (int i = 0; i < height; i++){
                 //loop for X coordinates
