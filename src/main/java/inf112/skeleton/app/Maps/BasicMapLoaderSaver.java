@@ -12,6 +12,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
     public Board load(String map) {
 
         String line = null;
+        Board board;
 
         try {
             FileReader fileReader = new FileReader(map);
@@ -20,7 +21,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
 
             int width = Integer.parseInt(bufferedReader.readLine());
             int height = Integer.parseInt(bufferedReader.readLine());
-            Board board = new Board(width, height);
+            board = new Board(width, height);
 
             /*
             while((line = bufferedReader.readLine()) != null) {
@@ -60,7 +61,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
             return null;
         }
 
-        return null;
+        return board;
     }
 
     @Override

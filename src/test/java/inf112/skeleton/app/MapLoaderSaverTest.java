@@ -17,6 +17,7 @@ public class MapLoaderSaverTest {
     public void setup(){
         board2 = new Board(10, 10);
         board2.generateRandom();
+        board1 = loaderSaver.load("C:/Users/Eier/IdeaProjects/map dump/map.txt");
     }
 
     @Test
@@ -30,8 +31,10 @@ public class MapLoaderSaverTest {
     }
 
     @Test
-    public void boardDimentionsTest(){
-
+    public void boardDimensionsTest(){
+        board1 = loaderSaver.load("C:/Users/Eier/IdeaProjects/map dump/map.txt");
+        assertEquals(board1.getHeight(), 10);
+        assertEquals(board1.getWidth(), 10);
     }
 
     @Test
