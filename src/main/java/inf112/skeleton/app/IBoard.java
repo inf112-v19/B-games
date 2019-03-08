@@ -21,4 +21,13 @@ public interface IBoard {
      */
     int getWidth();
 
+    /**
+     * Function to change a tile at a specific position.
+     * Throws an out of bounds exception if X or Y coordinates are outside of the map.
+     *
+     * @param x x position of the tile
+     * @param y y position of the tile
+     * @param tile a tile that extends ITile you want to override the position with
+     */
+    void setTile(int x, int y, ITile tile);
 }
