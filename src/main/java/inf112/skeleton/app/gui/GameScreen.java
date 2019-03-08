@@ -4,6 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.*;
 
 import java.util.ArrayList;
@@ -36,9 +43,14 @@ public class GameScreen implements Screen {
     private float timer = 0;
     private int player = 0;
 
+    //Stages
+    private Stage buttonStage;
+
     public GameScreen(RoboRally game) {
         this.game = game;
         atlas = new TextureAtlas(Gdx.files.internal("assets/atlas/test.atlas"));
+
+        buttonStage = new Stage(new ScreenViewport());
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
@@ -63,10 +75,91 @@ public class GameScreen implements Screen {
         sprite_actor = atlas.createSprite("robot");
 
         action = new Action(board);
-
+        //X and Y here represent which tile they are on, not pixel location!
         players.add(new Actor(5, 5, Color.RED, board));
-        players.add(new Actor(5, 5, Color.BLUE, board));
-        players.add(new Actor(5, 5, Color.GREEN, board));
+        players.add(new Actor(5, 6, Color.BLUE, board));
+        players.add(new Actor(5, 7, Color.GREEN, board));
+
+        //Creating a ninepatch texture for button. The magic with ninepatch is that it will scale the button after how long the string is.
+        NinePatch buttonTexture = atlas.createPatch("button_up");
+        buttonTexture.setColor(Color.BLUE);
+        //Each TextButton object needs as input: an string and a TextButtonStyle object(simply styles the button).
+        TextButton.TextButtonStyle movementButtonStyle = new TextButton.TextButtonStyle();
+        movementButtonStyle.font = new BitmapFont();
+        movementButtonStyle.up = new NinePatchDrawable(buttonTexture);
+        //The ArrayList containing our buttons
+        ArrayList<TextButton> movementButtons = new ArrayList<TextButton>();
+        //An array of all cardtypes
+        CardType[] allMovementCards = CardType.values();
+        //Create as many buttons as there are cards, set their position on screen, add them to movementButton array and to stage
+        for (int i = 0; i < allMovementCards.length; i++) {
+            TextButton tb = new TextButton(allMovementCards[i].toString(), movementButtonStyle);
+            tb.setPosition(0, tb.getHeight() * i);
+            movementButtons.add(tb);
+            buttonStage.addActor(tb);
+        }
+
+        //Movement will be applied to robot at index 0(red robot)
+        Actor selectedPlayer = players.get(0);
+        //MOVE_1_FORWARD button
+        movementButtons.get(0).addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                action.playCard(selectedPlayer, CardType.MOVE_1_FORWARD);
+            }
+        });
+
+        //MOVE_2_FORWARD button
+        movementButtons.get(1).addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                action.playCard(selectedPlayer, CardType.MOVE_2_FORWARD);
+            }
+        });
+
+        //MOVE_3_FORWARD button
+        movementButtons.get(2).addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                action.playCard(selectedPlayer, CardType.MOVE_3_FORWARD);
+            }
+        });
+
+        //MOVE_1_BACKWARD button
+        movementButtons.get(3).addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                action.playCard(selectedPlayer, CardType.MOVE_1_BACKWARD);
+            }
+        });
+
+        //ROTATE_90_LEFT button
+        movementButtons.get(4).addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                action.playCard(selectedPlayer, CardType.ROTATE_90_LEFT);
+            }
+        });
+
+        //ROTATE_90_RIGHT button
+        movementButtons.get(5).addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                action.playCard(selectedPlayer, CardType.ROTATE_90_RIGHT);
+            }
+        });
+
+        //ROTATE_180 button
+        movementButtons.get(6).addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                action.playCard(selectedPlayer, CardType.ROTATE_180);
+            }
+        });
+
+        //Make input active
+        Gdx.input.setInputProcessor(buttonStage);
+
     }
 
     @Override
@@ -81,7 +174,6 @@ public class GameScreen implements Screen {
         // Animation test
         Animation<Sprite> conveyor = new Animation<>(0.033f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
         Animation<Sprite> conveyor2 = new Animation<>(0.033f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
-
 
         // Get current frame of animation for the current stateTime
         Sprite currentFrame = conveyor.getKeyFrame(elapsedTime, true);
@@ -121,7 +213,7 @@ public class GameScreen implements Screen {
                 }
             }
         }
-
+        /**
         // Move actors
         timer += deltaTime;
         if(timer > actionInterval){
@@ -132,7 +224,7 @@ public class GameScreen implements Screen {
             }
             moveRandomly(players.get(player));
         }
-
+        **/
 
         //rendering actors
         for (Actor player : players) {
@@ -144,6 +236,10 @@ public class GameScreen implements Screen {
             sprite_actor.draw(batch);
         }
         batch.end();
+
+        //Updates and draws every actor in the stage. Actors here are the buttons.
+        buttonStage.act(Gdx.graphics.getDeltaTime());
+        buttonStage.draw();
     }
 
     private void moveRandomly(Actor player) {

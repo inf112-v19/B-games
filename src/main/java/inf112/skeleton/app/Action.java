@@ -8,6 +8,7 @@ import inf112.skeleton.app.*;
 public class Action implements IAction {
 
     private int roundCounter;
+    private int phaseCounter;
     private boolean debug = true;
     Board board;
 
@@ -15,9 +16,16 @@ public class Action implements IAction {
         this.board = board;
     }
 
+    public void updatePhase() {
+        phaseCounter += 1;
+    }
+
     @Override
     public void updateRound() {
-        roundCounter = roundCounter + 1;
+        if (phaseCounter % 5 == 0 && phaseCounter != 0) {
+            roundCounter += 1;
+        }
+
     }
 
 

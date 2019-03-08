@@ -1,7 +1,7 @@
 package inf112.skeleton.app;
 
 import com.badlogic.gdx.graphics.Color;
-import com.sun.xml.internal.bind.v2.TODO;
+//import com.sun.xml.internal.bind.v2.TODO;
 
 public class Actor implements IActor {
     private int xPos;
