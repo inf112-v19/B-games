@@ -63,4 +63,10 @@ Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isa
  - Alle har nå sin egen branch på Git som de pusher til
  - Diskutert strukturen til Action klassen og implementasjon av kort
   
-  
+**Gruppetime 12.03.2019 14:15 - 16:00**
+Oppmøte: Jonas Opsahl, Ørjan Tangen, Isak Steingrimsson
+ - Fortsette å jobbe med Issues på projectboardet
+ 
+ **Gruppetime 17.03.2019 14:15 - 16:00**
+ Oppmøte: Jonas Opsahl, Ørjan Tangen, Isak Steingrimsson, Bernhard Hjelen
+  - 
