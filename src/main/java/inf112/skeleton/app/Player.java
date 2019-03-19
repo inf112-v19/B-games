@@ -1,20 +1,22 @@
 package inf112.skeleton.app;
 
+import com.badlogic.gdx.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Player { // extends Actor once Actor class is complete
+public class Player extends Actor{
+    private Board board;
     private int playerId;
-    private int robotHP; // remove once Actor class is complete
     private CardStack cardStack;
     private List<Card> cardsOnHand;
     private List<Card> cardsInRegister;
     private boolean powerDownRobot;
     private boolean confirmAction;
 
-    public Player(int playerId, CardStack cardStack, boolean confirmAction){
-       // super(); // call super once Actor class is done
+    public Player(int x, int y, Color color, Board board, int playerId, CardStack cardStack, boolean confirmAction){
+        super(x, y, color, board);
         this.playerId = playerId;
         this.cardStack = cardStack;
         cardsOnHand = new ArrayList<>();
@@ -22,6 +24,7 @@ public class Player { // extends Actor once Actor class is complete
         cardsInRegister = new ArrayList<>(5);
         initializeRegister();
         this.confirmAction = confirmAction;
+
     }
 
     public void initializeHand(){
@@ -38,10 +41,10 @@ public class Player { // extends Actor once Actor class is complete
 
     // Draw cards from CardStack based on RobotHP and add them to CardsOnHand
     public void drawCards(){
-        for (int i = 0; i< (robotHP-1); i++){ // replace robotHP with getRobotHP() once Actor is complete
+        for (int i = 0; i< (getHP()-1); i++){ // replace robotHP with getRobotHP() once Actor is complete
 
             cardsOnHand.add(i, cardStack.getCardFromStack());
-            cardsOnHand.remove((robotHP-1));
+            cardsOnHand.remove((getHP()-1));
         }
     }
 
