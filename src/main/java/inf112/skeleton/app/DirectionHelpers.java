@@ -7,11 +7,11 @@ public class DirectionHelpers {
             case NORTH:
                 return 0;
             case EAST:
-                return 90;
+                return 270;
             case SOUTH:
                 return 180;
             case WEST:
-                return 270;
+                return 90;
             default:
                 return 0;
         }
