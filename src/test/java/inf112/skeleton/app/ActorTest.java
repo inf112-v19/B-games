@@ -14,7 +14,7 @@ public class ActorTest {
     @Before
     public void setup(){
         Board board = new Board();
-        actor = new Actor(5, 5, Color.GREEN, board);
+        actor = new Actor(5, 5, Color.GREEN, board, 1);
 
     }
 

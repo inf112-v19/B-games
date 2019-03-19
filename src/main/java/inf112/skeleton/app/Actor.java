@@ -20,11 +20,12 @@ public class Actor implements IActor {
                                    // priority for actions not covered by cards
 
 
-    public Actor(int x, int y, Color color, Board board){
+    public Actor(int x, int y, Color color, Board board, int dockingAssignment){
         this.xPos = x;
         this.yPos = y;
         this.color = color;
         this.board = board;
+        this.dockingAssignment = dockingAssignment;
         robotHP = 10;
         robotLives = 3;
     }
@@ -160,14 +161,6 @@ public class Actor implements IActor {
         }
     }
 
-    public void dockingAssignment(int dock){
-        /*
-         * TODO update dockingAssignment. Will have to receive
-         *  a random integer from Action class based on number of
-         *  players. Maybe use PlayerID from Player Class. If so
-         *  have Player class set xPos and yPos?
-         */
-    }
 
     public void flagVisited(int flagNumber){
         if(flagNumber == flagsVisited+1){
