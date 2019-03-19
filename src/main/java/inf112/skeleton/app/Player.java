@@ -94,6 +94,10 @@ public class Player extends Actor{
 
     }
 
+    public List<Card> getRegister (){
+        return cardsInRegister;
+    }
+
     public void putCardsBackIntoCardStack(List<Card> cardsOnHand, List<Card> cardsInRegister){
         // TODO Collect all cards that aren't locked and
         //  put them back into card stack. Maybe be best to

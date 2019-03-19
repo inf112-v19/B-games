@@ -69,4 +69,6 @@ Oppmøte: Jonas Opsahl, Ørjan Tangen, Isak Steingrimsson
  
  **Gruppetime 17.03.2019 14:15 - 16:00**
  Oppmøte: Jonas Opsahl, Ørjan Tangen, Isak Steingrimsson, Bernhard Hjelen
-  - 
+  - Diskusjon av Action om hvordan den skal behandle runder og faser, og hvordan den skal
+  forholde seg til andre klasser
+  - Ordnet opp en  mindre feil med sprites og rotasjon (Isak)

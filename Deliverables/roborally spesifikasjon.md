@@ -101,6 +101,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- Hendlesesforløpet for slutten av en runde er reparere skade, slå av strømmen på 	  
       roboter og samle inn kort. Prioritet for handlinger som ikke bestemmes av 	 	  
       programkort bestemmes av startposisjon
+    - (ny, klarifikasjon) For register så skal det være fullt før en runde kan starte
 
 
 **Fase:**
@@ -121,3 +122,4 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 - UML over prosjektet
 - Klasser implementert for kort og kortstokk
 
+# Tredje iterasjon:
