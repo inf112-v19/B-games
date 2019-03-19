@@ -1,16 +1,11 @@
-# Obligatorisk Oppgave 2 / B-team
+# Obligatorisk Oppgave 2 / B-games
 
-**Gruppenavn:** B-team
+**Gruppenavn:** B-games
 
-**Gruppemedlemmer:** Isak Steingrimsson, fyll inn
+**Gruppemedlemmer:** Ørjan Tangen, Isak Steingrimsson, Benjamin Byrkjeland, Robert Frydenlund, 
+Jonas Opsahl, Bernhard Hjelen
 
 **Teamlead:** Ørjan  / **Kundekontakt:** Isak
 
-
-# Del 1
-
-
-# Del 2
-
-
-# Del 3
+Organisering av laget:
+     - 
