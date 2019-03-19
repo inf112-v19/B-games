@@ -36,4 +36,15 @@ public class Laser implements ILaser {
     public void setHole(boolean hole) {
 
     }
+
+    @Override
+    public Item getItem() {
+        return null;
+    }
+
+    public String toString(){
+        String returnString = "type:Laser\n";
+        returnString += "laserDirection:" + laserDirection + "\n";
+        return returnString;
+    }
 }

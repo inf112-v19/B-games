@@ -1,12 +1,9 @@
 package inf112.skeleton.app;
 
-
 import com.badlogic.gdx.graphics.Color;
-import com.sun.xml.internal.bind.v2.TODO;
+//import com.sun.xml.internal.bind.v2.TODO;
 
 public class Actor implements IActor {
-
-
     private int xPos;
     private int yPos;
     private int xPosArchivePoint;
@@ -14,18 +11,22 @@ public class Actor implements IActor {
     private Color color;
     private int robotLives;
     private int robotHP;
+    public Direction direction = Direction.NORTH;
+    private int flagsVisited = 0;
+    private Board board;
     private int dockingAssignment; //* set randomly at start of game based
                                    // on number of players, determines
                                    // starting position and
                                    // priority for actions not covered by cards
-    private int flagsVisited;
-    public Direction direction = Direction.NORTH;
-    private int moveDistance = 50;
 
-    public Actor(int x, int y, Color color){
+
+    public Actor(int x, int y, Color color, Board board){
         this.xPos = x;
         this.yPos = y;
         this.color = color;
+        this.board = board;
+        robotHP = 10;
+        robotLives = 3;
     }
 
     public Color getColor() {
@@ -42,86 +43,124 @@ public class Actor implements IActor {
         return this.yPos;
     }
 
-    public void setx(int x){
+    public void setX(int x){
         this.xPos = x;
     }
+
     public void setY(int y){
          this.yPos = y;
     }
 
-    //width of actor image
-    public int getTextureWidth(){
-        return 50;
+    @Override
+    public int getHP(){
+        return this.robotHP;
     }
 
-    //height of actor image
-    public int getTextureHeight(){
-        return 50;
+    @Override
+    public int getLives(){
+        return this.robotLives;
+    }
+
+    public int getFlagsVisited(){
+        return this.flagsVisited;
     }
 
     @Override
     public void move(Direction direction) {
+        int temporaryX = xPos;
+        int temporaryY = yPos;
         switch (direction){
             case NORTH:
-                this.yPos += 1;
+                temporaryY += 1;
                 break;
             case EAST:
-                this.xPos += 1;
+                temporaryX += 1;
                 break;
             case SOUTH:
-                this.yPos -= 1;
+                temporaryY -= 1;
                 break;
             case WEST:
-                this.xPos -= 1;
+                temporaryX -= 1;
                 break;
+        }
+        if(temporaryX<board.getWidth() && temporaryX >=0
+                && temporaryY<board.getHeight() && temporaryY>=0){ //checking if temporary position is outside the map
+            this.xPos = temporaryX;
+            this.yPos = temporaryY;
+        }
+
+    }
+
+    //Checks what type of tile actor is standing on and
+    //what items are in it and calls appropriate methods.
+    //Taking damage from laser beam is not yet implemented,
+    //unsure if this should be done in this method
+    public void tileCheck(){
+        ITile tile =  board.getAt(xPos, yPos);
+        Item item = tile.getItem();
+        if(tile.isHole()){
+            robotDestroyed();
+        }
+        if(tile.hasCog() != null){
+            rotate(tile.hasCog());
+        }
+        if(tile.hasConveyor() != null){
+            move(tile.hasConveyor());
+            System.out.println("conveyor moves " + color.toString());
+        }
+        if(item != null){
+            if(item == Item.WRENCH){
+                repairDamage();
+                updateRestorationPoint();
+            }
+            if(item == Item.FLAG){
+                updateRestorationPoint();
+            }
         }
     }
 
-    @Override
-    public int getMoveDistance(){
-        return moveDistance;
-    }
-
-    public void tileCheck(Tile tile){
-        // TODO Checks tile at xPos, yPos and calls appropriate
-        //  method
+    //rotates actor either clockwise or counterclockwise
+    public void rotate(RotationDirection rotationDirection) {
+        if(rotationDirection.equals(RotationDirection.CLOCKWISE)){
+            direction = DirectionHelpers.rotateClockwise(direction);
+        }else{
+            direction = DirectionHelpers.rotateAntiClockwise(direction);
+        }
     }
 
     public void updateRestorationPoint(){
-        /*
-        * TODO tileCheck(); Update xPosArchivePoint and yPosArchivePoint
-        *  if robot lands on a flag or wrench tile.
-        */
+        xPosArchivePoint = xPos;
+        yPosArchivePoint = yPos;
     }
 
     public void restoreRobot(){
-        /*
-        * TODO If robot loses a life from falling down a hole
-        *  or robotHP falls to 0 from receiving damage set xPos and YPos
-        *  to xPosArchivePoint and yPosArchivePoint.
-        *  robotHP starts at 8 player chooses which direction the robot will face
-        */
+        xPos = xPosArchivePoint;
+        yPos = yPosArchivePoint;
+        robotHP = 8;
+        direction = Direction.NORTH;
     }
 
     public void receiveDamage(){
-        /*
-         * TODO Decrements robotHP by 1
-         */
+        robotHP--;
+        if(robotHP<1){
+            robotDestroyed();
+        }
     }
 
     public void repairDamage(){
-        /*
-         * TODO Increments robotHP by 1
-         */
+        if(robotHP<10) robotHP++;
     }
 
     public void robotDestroyed(){
-        /*
-         * TODO Decrements robotLives by 1. Calls restoreRobot()
-         */
+        robotLives--;
+        if(robotLives > 0){
+            restoreRobot();
+        }else{
+            System.out.println("actor died"); //don't know what to do with robot when it dies yet
+        }
     }
 
-    public void dockingAssignment(Integer Dock){
+    public void dockingAssignment(int dock){
         /*
          * TODO update dockingAssignment. Will have to receive
          *  a random integer from Action class based on number of
@@ -130,11 +169,12 @@ public class Actor implements IActor {
          */
     }
 
-    public void flagVisited(Integer FlagNumber){
-        /*
-         * TODO If FlagNumber is one higher
-         *  than current FlagsVisited increment by 1. Wins the game
-         *  when FlagsVisited reaches ??
-         */
+    public void flagVisited(int flagNumber){
+        if(flagNumber == flagsVisited+1){
+            flagsVisited++;
+            if(flagsVisited == 5){ //don't know how many flags are on the map, so this number must be changed to number of flags.
+                System.out.println("player " + this + " wins!"); //not yet implemented what to do when win condition is reached.
+            }
+        }
     }
 }
