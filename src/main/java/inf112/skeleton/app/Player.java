@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Player extends Actor{
+public class Player extends Actor implements IPlayer{
     private Board board;
     private int playerId;
     private CardStack cardStack;
@@ -19,9 +19,9 @@ public class Player extends Actor{
         super(x, y, color, board);
         this.playerId = playerId;
         this.cardStack = cardStack;
-        cardsOnHand = new ArrayList<>();
+        this.cardsOnHand = new ArrayList<>();
         initializeHand();
-        cardsInRegister = new ArrayList<>(5);
+        this.cardsInRegister = new ArrayList<>();
         initializeRegister();
         this.confirmAction = confirmAction;
 
@@ -35,7 +35,7 @@ public class Player extends Actor{
 
     public void initializeRegister(){
         for (int i=0; i<5; i++ ){
-            cardsOnHand.add(null);
+            cardsInRegister.add(null);
         }
     }
 
@@ -49,9 +49,30 @@ public class Player extends Actor{
     }
 
     // Move card from CardsOnHand and put it in cardsInRegister
-    public void addCardToRegister(int indexFrom, int indexTo){
-        Card card = cardsOnHand.remove(indexFrom);
-        cardsInRegister.add(indexTo, card);
+    public void addCardToRegister(int from, int to) throws Exception {
+
+        if (cardsInRegister.get(to) == null) {
+            if (to > 0 || to <= 5) {
+                if (from <0 || from <= 9) {
+                    if (cardsOnHand.get(from) instanceof Card) {
+                        Card card = cardsOnHand.remove(from);
+                        cardsOnHand.add(null);
+                        cardsInRegister.remove(to);
+                        cardsInRegister.add(to, card);
+                        return;
+                    } else {
+                        throw new Exception("No card in your hand at that number");
+                    }
+                } else {
+                    throw new Exception("Number for hand needs to be between 1 and 9.");
+                }
+            } else {
+                throw new Exception("Number for register needs to be between 1 and 5.");
+            }
+        }
+        else{
+            throw new Exception("That register number is not empty");
+        }
     }
 
     public void addCardToHand(int indexFrom){
@@ -96,6 +117,10 @@ public class Player extends Actor{
 
     public List<Card> getRegister (){
         return cardsInRegister;
+    }
+
+    public List<Card> getCardsOnHand (){
+        return cardsOnHand;
     }
 
     public void putCardsBackIntoCardStack(List<Card> cardsOnHand, List<Card> cardsInRegister){
@@ -153,7 +178,7 @@ public class Player extends Actor{
         return counter == 5;
     }
 
-    public void playerTurn() {
+    public void playerTurn() throws Exception {
         /*
          * TODO Main method that runs between every turn.
          *  Reads input from players and waits for
