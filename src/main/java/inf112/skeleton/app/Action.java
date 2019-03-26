@@ -1,4 +1,7 @@
 package inf112.skeleton.app;
+import java.util.ArrayList;
+import java.util.List;
+
 import inf112.skeleton.app.*;
 
 /**
@@ -27,7 +30,6 @@ public class Action implements IAction {
         }
 
     }
-
 
     public boolean playCard(Actor player, CardType card){
         if(debug) {
