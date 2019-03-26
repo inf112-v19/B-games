@@ -200,13 +200,13 @@ public class GameScreen implements Screen {
                             currentFrame.setRotation(0);
                             break;
                         case EAST:
-                            currentFrame.setRotation(90);
+                            currentFrame.setRotation(270);
                             break;
                         case SOUTH:
                             currentFrame.setRotation(180);
                             break;
                         case WEST:
-                            currentFrame.setRotation(270);
+                            currentFrame.setRotation(90);
                             break;
                     }
                     currentFrame.draw(batch);

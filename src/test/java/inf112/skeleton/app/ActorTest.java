@@ -10,10 +10,11 @@ import org.junit.Test;
 public class ActorTest {
     Actor actor;
     Direction direction;
+    Board board;
 
     @Before
     public void setup(){
-        Board board = new Board();
+        this.board = new Board();
         actor = new Actor(5, 5, Color.GREEN, board, 1);
 
     }
@@ -136,5 +137,45 @@ public class ActorTest {
     public void visitingWrongFlagsDoesNotIncrementFlagsVisited(){
         actor.flagVisited(2);
         assertEquals(actor.getFlagsVisited(), 0);
+    }
+
+    @Test
+    public void northConveyorMovesActorNorth(){
+        boolean[] walls = new boolean[]{false, false, false, false};
+        Tile tile = new Tile(walls, Direction.NORTH);
+        board.setTile(5, 5, tile);
+        assertEquals(actor.getY(), 5);
+        actor.tileCheck();
+        assertEquals(actor.getY(), 6);
+    }
+
+    @Test
+    public void southConveyorMovesActorSouth(){
+        boolean[] walls = new boolean[]{false, false, false, false};
+        Tile tile = new Tile(walls, Direction.SOUTH);
+        board.setTile(5, 5, tile);
+        assertEquals(actor.getY(), 5);
+        actor.tileCheck();
+        assertEquals(actor.getY(), 4);
+    }
+
+    @Test
+    public void westConveyorMovesActorWest(){
+        boolean[] walls = new boolean[]{false, false, false, false};
+        Tile tile = new Tile(walls, Direction.WEST);
+        board.setTile(5, 5, tile);
+        assertEquals(actor.getX(), 5);
+        actor.tileCheck();
+        assertEquals(actor.getX(), 4);
+    }
+
+    @Test
+    public void eastConveyorMovesActorEast(){
+        boolean[] walls = new boolean[]{false, false, false, false};
+        Tile tile = new Tile(walls, Direction.EAST);
+        board.setTile(5, 5, tile);
+        assertEquals(actor.getX(), 5);
+        actor.tileCheck();
+        assertEquals(actor.getX(), 6);
     }
 }
