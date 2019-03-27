@@ -68,6 +68,11 @@ public class Tile implements ITile {
     }
 
     @Override
+    public void setItem(Item item){
+        this.item = item;
+    }
+
+    @Override
     public Item getItem(){
         return item;
     }

@@ -60,6 +60,7 @@ public class ActorTest {
         }
         assertEquals(actor.getX(), 0);
         assertEquals(actor.getY(), 0);
+
     }
 
     @Test
