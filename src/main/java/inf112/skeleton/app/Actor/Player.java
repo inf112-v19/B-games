@@ -19,7 +19,7 @@ public class Player extends Actor implements IPlayer {
     private boolean confirmAction;
 
     public Player(int x, int y, Color color, Board board, int playerId, CardStack cardStack, boolean confirmAction){
-        super(x, y, color, board);
+        super(x, y, color, board, 0); // TODO: docking 0
         this.playerId = playerId;
         this.cardStack = cardStack;
         this.cardsOnHand = new ArrayList<>();

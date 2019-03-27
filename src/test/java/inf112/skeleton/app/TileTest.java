@@ -1,5 +1,10 @@
 package inf112.skeleton.app;
 
+import inf112.skeleton.app.Actor.Direction;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Board.Item;
+import inf112.skeleton.app.Board.RotationDirection;
+import inf112.skeleton.app.Board.Tile;
 import org.junit.Before;
 import org.junit.Test;
 
