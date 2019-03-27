@@ -52,13 +52,13 @@ public class Player extends Actor implements IPlayer{
     public void addCardToRegister(int from, int to) throws Exception {
 
         if (cardsInRegister.get(to) == null) {
-            if (to > 0 || to <= 5) {
-                if (from <0 || from <= 9) {
+            if (to > 0 && to <= 5) {
+                if (from >= 1 && from <= 9) {
                     if (cardsOnHand.get(from) instanceof Card) {
-                        Card card = cardsOnHand.remove(from);
+                        Card card = cardsOnHand.remove(from-1);
                         cardsOnHand.add(null);
-                        cardsInRegister.remove(to);
-                        cardsInRegister.add(to, card);
+                        cardsInRegister.remove(to-1);
+                        cardsInRegister.add(to-1, card);
                         return;
                     } else {
                         throw new Exception("No card in your hand at that number");

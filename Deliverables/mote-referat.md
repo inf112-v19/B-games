@@ -72,3 +72,14 @@ Oppmøte: Jonas Opsahl, Ørjan Tangen, Isak Steingrimsson
   - Diskusjon av Action om hvordan den skal behandle runder og faser, og hvordan den skal
   forholde seg til andre klasser
   - Ordnet opp en  mindre feil med sprites og rotasjon (Isak)
+  
+**Gruppetime 26.03.2019 14:15 - 16:00**
+Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson
+- Jonas tildelt rolle som tester
+- Tilbakemelding fra forrige Oblig. Hovedpunkter var testdekning, 
+mappestruktur, ubrukte klasser og prosjektmetodikk.
+- Gjennomgang av Oblig 4.
+- Diskusjon om forhold mellom Action og Player, og Board og Tiles.
+
+
+**Møte 27.03.2019 (??)**

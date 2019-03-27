@@ -76,17 +76,29 @@ public class PlayerTest {
     }
 
     @Test
-    public void addCardToRegister() throws Exception {
+    public void addCardToRegister() {
         board = new Board();
         cardstack = new CardStack();
         player = new Player(5, 5, Color.GREEN, board, 1, cardstack, false);
         cardstack.initializeCardStack();
-        //testing for Exceptions first
+        //test for Exceptions first
         try {
             player.addCardToRegister(1, 1);
         }
         catch (Exception e){
             assertEquals("No card in your hand at that number", e.getMessage());
+        }
+        try {
+            player.addCardToRegister(0, 1);
+        }
+        catch (Exception e){
+            assertEquals("Number for hand needs to be between 1 and 9.", e.getMessage());
+        }
+        try {
+            player.addCardToRegister(10, 1);
+        }
+        catch (Exception e){
+            assertEquals("Number for hand needs to be between 1 and 9.", e.getMessage());
         }
 
 
