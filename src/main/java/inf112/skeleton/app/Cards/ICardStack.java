@@ -1,6 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Cards;
 
-import java.util.ArrayList;
+import inf112.skeleton.app.Cards.Card;
 
 /**
  * ICardStack represents the card stack that

@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Actor;
 
 /**
  * Direction the robot is facing, which will determine which

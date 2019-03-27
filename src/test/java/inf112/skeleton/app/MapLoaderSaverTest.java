@@ -2,6 +2,9 @@ package inf112.skeleton.app;
 
 import static org.junit.Assert.*;
 
+import inf112.skeleton.app.Actor.Direction;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Maps.BasicMapLoaderSaver;
 import inf112.skeleton.app.Maps.IMapLoaderSaver;
 import org.junit.Before;

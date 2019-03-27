@@ -1,9 +1,7 @@
 package inf112.skeleton.app.Maps;
 
-import inf112.skeleton.app.Board;
-import inf112.skeleton.app.IBoard;
-
-import java.io.File;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Board.IBoard;
 
 public interface IMapLoaderSaver {
     /**

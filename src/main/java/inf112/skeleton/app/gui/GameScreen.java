@@ -6,12 +6,16 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import inf112.skeleton.app.*;
+import inf112.skeleton.app.Action.Action;
+import inf112.skeleton.app.Actor.Actor;
+import inf112.skeleton.app.Actor.Direction;
+import inf112.skeleton.app.Actor.DirectionHelpers;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Cards.CardType;
 
 import java.util.ArrayList;
 import java.util.Random;

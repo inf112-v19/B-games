@@ -1,5 +1,10 @@
-package inf112.skeleton.app;
-import inf112.skeleton.app.*;
+package inf112.skeleton.app.Action;
+import inf112.skeleton.app.Actor.Actor;
+import inf112.skeleton.app.Actor.Direction;
+import inf112.skeleton.app.Actor.DirectionHelpers;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Board.ITile;
+import inf112.skeleton.app.Cards.CardType;
 
 /**
  * The big action class.

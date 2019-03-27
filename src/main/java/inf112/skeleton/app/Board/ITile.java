@@ -1,4 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Board;
+
+import inf112.skeleton.app.Actor.Direction;
 
 public interface ITile {
     /*

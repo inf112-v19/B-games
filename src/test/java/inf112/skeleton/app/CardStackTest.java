@@ -1,9 +1,11 @@
 package inf112.skeleton.app;
 
+import inf112.skeleton.app.Cards.Card;
+import inf112.skeleton.app.Cards.CardStack;
 import org.junit.Test;
 
 
-import static inf112.skeleton.app.CardType.*;
+import static inf112.skeleton.app.Cards.CardType.*;
 
 import static org.junit.Assert.*;
 

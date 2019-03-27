@@ -1,6 +1,8 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Actor;
 
-public interface IPlayer extends IActor{
+import inf112.skeleton.app.Actor.IActor;
+
+public interface IPlayer extends IActor {
 
 
     /**

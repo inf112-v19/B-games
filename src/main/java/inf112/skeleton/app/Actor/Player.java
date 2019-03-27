@@ -1,12 +1,15 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Actor;
 
 import com.badlogic.gdx.graphics.Color;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Cards.Card;
+import inf112.skeleton.app.Cards.CardStack;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Player extends Actor implements IPlayer{
+public class Player extends Actor implements IPlayer {
     private Board board;
     private int playerId;
     private CardStack cardStack;

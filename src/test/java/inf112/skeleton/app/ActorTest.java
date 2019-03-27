@@ -3,7 +3,10 @@ package inf112.skeleton.app;
 import static org.junit.Assert.*;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
+import inf112.skeleton.app.Actor.Actor;
+import inf112.skeleton.app.Actor.Direction;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Board.RotationDirection;
 import org.junit.Before;
 import org.junit.Test;
 
