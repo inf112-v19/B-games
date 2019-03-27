@@ -1,6 +1,5 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.graphics.Color;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +8,6 @@ import static org.junit.Assert.*;
 public class TileTest {
 
     Board board;
-    Direction direction;
     boolean[] walls;
 
     @Before
