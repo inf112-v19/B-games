@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Board implements IBoard {
 
-    private ITile[][] tiles;
+    public ITile[][] tiles;
     private int width;
     private int height;
 
@@ -41,7 +41,6 @@ public class Board implements IBoard {
                         break;
                         default:
                             tiles[x][y] = new Tile();
-
                 }
             }
         }

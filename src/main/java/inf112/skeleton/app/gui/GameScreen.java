@@ -80,9 +80,9 @@ public class GameScreen implements Screen {
 
         action = new Action(board);
         //X and Y here represent which tile they are on, not pixel location!
-        players.add(new Actor(5, 5, Color.RED, board));
-        players.add(new Actor(5, 6, Color.BLUE, board));
-        players.add(new Actor(5, 7, Color.GREEN, board));
+        players.add(new Actor(5, 5, Color.RED, board, 1));
+        players.add(new Actor(5, 6, Color.BLUE, board, 2));
+        players.add(new Actor(5, 7, Color.GREEN, board, 3));
 
         //Creating a ninepatch texture for button. The magic with ninepatch is that it will scale the button after how long the string is.
         NinePatch buttonTexture = atlas.createPatch("button_up");
@@ -204,13 +204,13 @@ public class GameScreen implements Screen {
                             currentFrame.setRotation(0);
                             break;
                         case EAST:
-                            currentFrame.setRotation(90);
+                            currentFrame.setRotation(270);
                             break;
                         case SOUTH:
                             currentFrame.setRotation(180);
                             break;
                         case WEST:
-                            currentFrame.setRotation(270);
+                            currentFrame.setRotation(90);
                             break;
                     }
                     currentFrame.draw(batch);

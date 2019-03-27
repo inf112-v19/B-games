@@ -35,6 +35,11 @@ public class Laser implements ILaser {
     }
 
     @Override
+    public void setItem(Item item) {
+        //can't set item on laser-tile
+    }
+
+    @Override
     public void setHole(boolean hole) {
 
     }

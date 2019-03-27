@@ -38,6 +38,8 @@ public interface ITile {
      */
     RotationDirection hasCog();
 
+    void setItem(Item item);
+
     void setHole(boolean hole);
 
     Item getItem();
