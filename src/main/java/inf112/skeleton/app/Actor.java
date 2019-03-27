@@ -21,10 +21,14 @@ public class Actor implements IActor {
 
 
     public Actor(int x, int y, Color color, Board board, int dockingAssignment){
-        this.xPos = x;
-        this.yPos = y;
         this.color = color;
         this.board = board;
+        if(x<board.getWidth() && y<board.getHeight() && x>=0 && y>=0) {
+            this.xPos = x;
+            this.yPos = y;
+        }else{
+            throw new IllegalArgumentException("cannot instantiate actor outside the board");
+        }
         this.dockingAssignment = dockingAssignment;
         robotHP = 10;
         robotLives = 3;
@@ -45,11 +49,15 @@ public class Actor implements IActor {
     }
 
     public void setX(int x){
-        this.xPos = x;
+        if(x<board.getHeight() && x>=0) {
+            this.xPos = x;
+        }
     }
 
     public void setY(int y){
-         this.yPos = y;
+        if(y<board.getHeight() && y>=0) {
+            this.yPos = y;
+        }
     }
 
     @Override
