@@ -1,4 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Actor;
+
+import inf112.skeleton.app.Actor.Direction;
 
 public class DirectionHelpers {
 

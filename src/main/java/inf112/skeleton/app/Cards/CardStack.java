@@ -1,8 +1,9 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Cards;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CardStack implements ICardStack{
+public class CardStack implements ICardStack {
 
     private ArrayList<Card> currentCardStack;
 

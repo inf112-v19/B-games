@@ -2,6 +2,9 @@ package inf112.skeleton.app;
 
 import static org.junit.Assert.*;
 
+import inf112.skeleton.app.Actor.Direction;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Maps.BasicMapLoaderSaver;
 import inf112.skeleton.app.Maps.IMapLoaderSaver;
 import org.junit.Before;
@@ -21,17 +24,17 @@ public class MapLoaderSaverTest {
 
     @Test
     public void writeTest(){
-        loaderSaver.save(board2, "C:/Users/Eier/IdeaProjects/map dump/map.txt");
+        loaderSaver.save(board2, "maps/map.txt");
     }
 
     @Test
     public void readTest(){
-        loaderSaver.load("C:/Users/Eier/IdeaProjects/map dump/map.txt");
+        loaderSaver.load("maps/map.txt");
     }
 
     @Test
     public void boardDimensionsTest(){
-        board1 = loaderSaver.load("C:/Users/Eier/IdeaProjects/map dump/map.txt");
+        board1 = loaderSaver.load("maps/map.txt");
         assertEquals(board1.getHeight(), 10);
         assertEquals(board1.getWidth(), 10);
     }
@@ -39,8 +42,8 @@ public class MapLoaderSaverTest {
     @Test
     public void boardComparisonTest(){
         board2.generateRandom();
-        loaderSaver.save(board2, "C:/Users/Eier/IdeaProjects/map dump/map.txt");
-        board1 = loaderSaver.load("C:/Users/Eier/IdeaProjects/map dump/map.txt");
+        loaderSaver.save(board2, "maps/map.txt");
+        board1 = loaderSaver.load("maps/map.txt");
 
         for(int i = 0; i < board1.getHeight(); i++){
             for(int j = 0; j < board1.getWidth(); j++){

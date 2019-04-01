@@ -1,6 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Cards;
 
-public class Card implements ICard{
+public class Card implements ICard {
 
     private CardType type;
     private int priority;

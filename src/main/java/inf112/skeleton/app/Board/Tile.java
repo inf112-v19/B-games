@@ -1,4 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Board;
+
+import inf112.skeleton.app.Actor.Direction;
 
 public class Tile implements ITile {
     private boolean isHole;
@@ -65,6 +67,11 @@ public class Tile implements ITile {
     @Override
     public RotationDirection hasCog() {
         return cog;
+    }
+
+    @Override
+    public void setItem(Item item){
+        this.item = item;
     }
 
     @Override

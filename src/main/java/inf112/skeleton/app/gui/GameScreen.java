@@ -6,12 +6,16 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import inf112.skeleton.app.*;
+import inf112.skeleton.app.Action.Action;
+import inf112.skeleton.app.Actor.Actor;
+import inf112.skeleton.app.Actor.Direction;
+import inf112.skeleton.app.Actor.DirectionHelpers;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Cards.CardType;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -76,9 +80,9 @@ public class GameScreen implements Screen {
 
         action = new Action(board);
         //X and Y here represent which tile they are on, not pixel location!
-        players.add(new Actor(5, 5, Color.RED, board));
-        players.add(new Actor(5, 6, Color.BLUE, board));
-        players.add(new Actor(5, 7, Color.GREEN, board));
+        players.add(new Actor(5, 5, Color.RED, board, 1));
+        players.add(new Actor(5, 6, Color.BLUE, board, 2));
+        players.add(new Actor(5, 7, Color.GREEN, board, 3));
 
         //Creating a ninepatch texture for button. The magic with ninepatch is that it will scale the button after how long the string is.
         NinePatch buttonTexture = atlas.createPatch("button_up");

@@ -1,4 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Board;
+
+import inf112.skeleton.app.Actor.Direction;
 
 public interface ITile {
     /*
@@ -35,6 +37,8 @@ public interface ITile {
      * @return the direction the cogwheel rotates
      */
     RotationDirection hasCog();
+
+    void setItem(Item item);
 
     void setHole(boolean hole);
 

@@ -1,27 +1,33 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Actor;
+
+import com.badlogic.gdx.graphics.Color;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Cards.Card;
+import inf112.skeleton.app.Cards.CardStack;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Player { // extends Actor once Actor class is complete
+public class Player extends Actor implements IPlayer {
+    private Board board;
     private int playerId;
-    private int robotHP; // remove once Actor class is complete
     private CardStack cardStack;
     private List<Card> cardsOnHand;
     private List<Card> cardsInRegister;
     private boolean powerDownRobot;
     private boolean confirmAction;
 
-    public Player(int playerId, CardStack cardStack, boolean confirmAction){
-       // super(); // call super once Actor class is done
+    public Player(int x, int y, Color color, Board board, int playerId, CardStack cardStack, boolean confirmAction){
+        super(x, y, color, board, 0); // TODO: docking 0
         this.playerId = playerId;
         this.cardStack = cardStack;
-        cardsOnHand = new ArrayList<>();
+        this.cardsOnHand = new ArrayList<>();
         initializeHand();
-        cardsInRegister = new ArrayList<>(5);
+        this.cardsInRegister = new ArrayList<>();
         initializeRegister();
         this.confirmAction = confirmAction;
+
     }
 
     public void initializeHand(){
@@ -32,23 +38,43 @@ public class Player { // extends Actor once Actor class is complete
 
     public void initializeRegister(){
         for (int i=0; i<5; i++ ){
-            cardsOnHand.add(null);
+            cardsInRegister.add(null);
         }
     }
 
     // Draw cards from CardStack based on RobotHP and add them to CardsOnHand
     public void drawCards(){
-        for (int i = 0; i< (robotHP-1); i++){ // replace robotHP with getRobotHP() once Actor is complete
+        for (int i = 0; i< (getHP()-1); i++){ // replace robotHP with getRobotHP() once Actor is complete
 
             cardsOnHand.add(i, cardStack.getCardFromStack());
-            cardsOnHand.remove((robotHP-1));
+            cardsOnHand.remove((getHP()-1));
         }
     }
 
     // Move card from CardsOnHand and put it in cardsInRegister
-    public void addCardToRegister(int indexFrom, int indexTo){
-        Card card = cardsOnHand.remove(indexFrom);
-        cardsInRegister.add(indexTo, card);
+    public void addCardToRegister(int from, int to) throws Exception {
+        if (to > 0 && to <= 5) {
+            if (cardsInRegister.get(to) == null) {
+                if (from >= 1 && from <= 9) {
+                    if (cardsOnHand.get(from) instanceof Card) {
+                        Card card = cardsOnHand.remove(from-1);
+                        cardsOnHand.add(null);
+                        cardsInRegister.remove(to-1);
+                        cardsInRegister.add(to-1, card);
+                        return;
+                    } else {
+                        throw new Exception("No card in your hand at that number");
+                    }
+                } else {
+                    throw new Exception("Number for hand needs to be between 1 and 9.");
+                }
+            } else{
+                throw new Exception("That register number is not empty");
+            }
+        }
+        else {
+            throw new Exception("Number for register needs to be between 1 and 5.");
+        }
     }
 
     public void addCardToHand(int indexFrom){
@@ -89,6 +115,14 @@ public class Player { // extends Actor once Actor class is complete
             cardsInRegister.get(0).setLocked();
         }
 
+    }
+
+    public List<Card> getRegister (){
+        return cardsInRegister;
+    }
+
+    public List<Card> getCardsOnHand (){
+        return cardsOnHand;
     }
 
     public void putCardsBackIntoCardStack(List<Card> cardsOnHand, List<Card> cardsInRegister){
@@ -146,7 +180,7 @@ public class Player { // extends Actor once Actor class is complete
         return counter == 5;
     }
 
-    public void playerTurn() {
+    public void playerTurn() throws Exception {
         /*
          * TODO Main method that runs between every turn.
          *  Reads input from players and waits for

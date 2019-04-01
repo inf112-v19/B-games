@@ -1,6 +1,10 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Actor;
 
 import com.badlogic.gdx.graphics.Color;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Board.ITile;
+import inf112.skeleton.app.Board.Item;
+import inf112.skeleton.app.Board.RotationDirection;
 //import com.sun.xml.internal.bind.v2.TODO;
 
 public class Actor implements IActor {
@@ -21,11 +25,16 @@ public class Actor implements IActor {
                                    // priority for actions not covered by cards
 
 
-    public Actor(int x, int y, Color color, Board board){
-        this.xPos = x;
-        this.yPos = y;
+    public Actor(int x, int y, Color color, Board board, int dockingAssignment){
         this.color = color;
         this.board = board;
+        if(x<board.getWidth() && y<board.getHeight() && x>=0 && y>=0) {
+            this.xPos = x;
+            this.yPos = y;
+        }else{
+            throw new IllegalArgumentException("cannot instantiate actor outside the board");
+        }
+        this.dockingAssignment = dockingAssignment;
         robotHP = 10;
         robotLives = 3;
     }
@@ -45,11 +54,15 @@ public class Actor implements IActor {
     }
 
     public void setX(int x){
-        this.xPos = x;
+        if(x<board.getHeight() && x>=0) {
+            this.xPos = x;
+        }
     }
 
     public void setY(int y){
-         this.yPos = y;
+        if(y<board.getHeight() && y>=0) {
+            this.yPos = y;
+        }
     }
 
     @Override
@@ -174,14 +187,6 @@ public class Actor implements IActor {
         }
     }
 
-    public void dockingAssignment(int dock){
-        /*
-         * TODO update dockingAssignment. Will have to receive
-         *  a random integer from Action class based on number of
-         *  players. Maybe use PlayerID from Player Class. If so
-         *  have Player class set xPos and yPos?
-         */
-    }
 
     public void flagVisited(int flagNumber){
         if(flagNumber == flagsVisited+1){

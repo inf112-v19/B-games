@@ -1,5 +1,10 @@
-package inf112.skeleton.app;
-import inf112.skeleton.app.*;
+package inf112.skeleton.app.Action;
+import inf112.skeleton.app.Actor.Actor;
+import inf112.skeleton.app.Actor.Direction;
+import inf112.skeleton.app.Actor.DirectionHelpers;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Board.ITile;
+import inf112.skeleton.app.Cards.CardType;
 
 /**
  * The big action class.
@@ -16,19 +21,20 @@ public class Action implements IAction {
         this.board = board;
     }
 
+    @Override
     public void updatePhase() {
-        phaseCounter += 1;
+        phaseCounter ++;
+        if (phaseCounter % 5 == 0 && phaseCounter != 0) {
+            updateRound();
+        }
     }
 
     @Override
     public void updateRound() {
-        if (phaseCounter % 5 == 0 && phaseCounter != 0) {
-            roundCounter += 1;
-        }
-
+        roundCounter++;
     }
 
-
+    @Override
     public boolean playCard(Actor player, CardType card){
         if(debug) {
             System.out.println(String.format("%s - %s", player.getColor(), card.name()));
@@ -57,15 +63,28 @@ public class Action implements IAction {
         return true;
     }
 
-    private void moveForward(Actor player){
+    @Override
+    public int getPhase(){
+        return phaseCounter;
+    }
+
+    @Override
+    public int getRound(){
+        return roundCounter;
+    }
+
+    @Override
+    public void moveForward(Actor player){
         move(player, player.direction);
     }
 
-    private void moveBackwards(Actor player){
+    @Override
+    public void moveBackwards(Actor player){
         move(player, DirectionHelpers.reverse(player.direction));
     }
 
-    private void move(Actor player, Direction direction){
+    @Override
+    public void move(Actor player, Direction direction){
         ITile current = board.getAt(player.getX(), player.getY());
         if(current == null) return; // TEMPORARY
         if (current.hasWall(direction)){
@@ -74,11 +93,13 @@ public class Action implements IAction {
         player.move(direction);
     }
 
-    private void rotateClockwise(Actor player){
+    @Override
+    public void rotateClockwise(Actor player){
         player.direction = DirectionHelpers.rotateClockwise(player.direction);
     }
 
-    private void rotateAntiClockwise(Actor player) {
+    @Override
+    public void rotateAntiClockwise(Actor player) {
         player.direction = DirectionHelpers.rotateAntiClockwise(player.direction);
     }
 }

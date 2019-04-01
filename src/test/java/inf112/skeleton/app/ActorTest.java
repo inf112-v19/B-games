@@ -3,18 +3,23 @@ package inf112.skeleton.app;
 import static org.junit.Assert.*;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
+import inf112.skeleton.app.Actor.Actor;
+import inf112.skeleton.app.Actor.Direction;
+import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Board.RotationDirection;
+import inf112.skeleton.app.Board.Tile;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ActorTest {
     Actor actor;
     Direction direction;
+    Board board;
 
     @Before
     public void setup(){
-        Board board = new Board();
-        actor = new Actor(5, 5, Color.GREEN, board);
+        this.board = new Board();
+        actor = new Actor(5, 5, Color.GREEN, board, 1);
 
     }
 
@@ -59,6 +64,7 @@ public class ActorTest {
         }
         assertEquals(actor.getX(), 0);
         assertEquals(actor.getY(), 0);
+
     }
 
     @Test
@@ -136,5 +142,45 @@ public class ActorTest {
     public void visitingWrongFlagsDoesNotIncrementFlagsVisited(){
         actor.flagVisited(2);
         assertEquals(actor.getFlagsVisited(), 0);
+    }
+
+    @Test
+    public void northConveyorMovesActorNorth(){
+        boolean[] walls = new boolean[]{false, false, false, false};
+        Tile tile = new Tile(walls, Direction.NORTH);
+        board.setTile(5, 5, tile);
+        assertEquals(actor.getY(), 5);
+        actor.tileCheck();
+        assertEquals(actor.getY(), 6);
+    }
+
+    @Test
+    public void southConveyorMovesActorSouth(){
+        boolean[] walls = new boolean[]{false, false, false, false};
+        Tile tile = new Tile(walls, Direction.SOUTH);
+        board.setTile(5, 5, tile);
+        assertEquals(actor.getY(), 5);
+        actor.tileCheck();
+        assertEquals(actor.getY(), 4);
+    }
+
+    @Test
+    public void westConveyorMovesActorWest(){
+        boolean[] walls = new boolean[]{false, false, false, false};
+        Tile tile = new Tile(walls, Direction.WEST);
+        board.setTile(5, 5, tile);
+        assertEquals(actor.getX(), 5);
+        actor.tileCheck();
+        assertEquals(actor.getX(), 4);
+    }
+
+    @Test
+    public void eastConveyorMovesActorEast(){
+        boolean[] walls = new boolean[]{false, false, false, false};
+        Tile tile = new Tile(walls, Direction.EAST);
+        board.setTile(5, 5, tile);
+        assertEquals(actor.getX(), 5);
+        actor.tileCheck();
+        assertEquals(actor.getX(), 6);
     }
 }

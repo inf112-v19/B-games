@@ -1,7 +1,10 @@
 package inf112.skeleton.app;
 
-import static inf112.skeleton.app.CardType.*;
+import static inf112.skeleton.app.Cards.CardType.*;
 import static org.junit.Assert.*;
+
+import inf112.skeleton.app.Cards.Card;
+import inf112.skeleton.app.Cards.CardType;
 import org.junit.Test;
 
 public class CardTest {

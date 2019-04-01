@@ -1,4 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Board;
+
+import inf112.skeleton.app.Actor.Direction;
 
 public class Laser implements ILaser {
     private Direction laserDirection;
@@ -30,6 +32,11 @@ public class Laser implements ILaser {
     @Override
     public RotationDirection hasCog() {
         return null;
+    }
+
+    @Override
+    public void setItem(Item item) {
+        //can't set item on laser-tile
     }
 
     @Override

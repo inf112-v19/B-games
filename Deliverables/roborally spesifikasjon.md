@@ -38,6 +38,9 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
       runde. Oppdaterer også gjenopprettingspunkt
 	- Flagg blir registert av robotene dersom de befinner seg på de i riktig rekkefølge. 	   
       Oppdaterer også gjenopprettingspunkt
+    - (ny) Hull, roboter mister ett liv dersom de faller i et hull på brettet
+    - (ny) Spiller(e) (player 1?) skal ha mulighet til å plassere flagg selv på brettet
+    - (ny) Flere brett skal kunne settes sammen til et større brett
 
 **Robot:**
 	
@@ -56,7 +59,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- Er i stand til å flytte på andre roboter som er i veien når den beveger seg
 	- Fyrer av laser (1 skade) mot nærmeste robot dersom det er en robot i skuddlinjen. Kan ikke 	   
       se/skyte gjennom vegger og kun nærmeste robot blir skadet
-	- Tas ut av spill dersom den mister alle liv
+	- Tas ut av spill dersom den mister alle liv 
 
 **Spiller:**
 
@@ -66,6 +69,8 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- Mulighet til å velge kort som skal legges i register
 	- Mulighet til å bekrefte valget av kort i register eller å slå av strømmen til sin robot
 	- (oversikt over hvilke flagg roboten har vært igjennom i riktig rekkefølge så langt)
+	- (ny) Multiplayer over LAN eller Internet 
+	- (ny) Mulighet til å spille mot AI styrte roboter, evt roboter som er random med tanke på handlinger
 
 **Programkort:**
 
@@ -91,6 +96,29 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
       kort automatisk lagt inn i det låste registeret
 	- Samles inn ved slutten av en runde, kort i låste registre blir ikke samlet inn
 
+**(Ny) Options kort:**
+    
+    - Trekker ett optionskort dersom du står på et reperasjonspunkt ved slutten av en runde 
+    - Settes i spill automatisk fra det blir trukket og er synlig til andre spillere
+    - Gir en bonus til robotene
+    - Prioritet på optionskort bestemmes utifra docking assignment
+    - Kan ofre et optionskort til å blokkere 1 skade, valget må taes da skaden blir påført
+    - En robot som blir ødelagt enten ved å miste all HP eller å falle i et hull mister sitt optionskort
+    - Optionskort som er blitt brukt og blitt enten ofret eller mistet legges ikke tilbake til i kortstokk
+    Optionskort:
+    - Superior Archive: "When reentering play after being destroyed, your robot does not recieve the normal
+    2 damage tokens"
+    - Reverse Gear: "Whenever you execute a Back Up, you may move your robot back 2 spaces instead of 1.
+    Priority is that of the Back Up"
+    - Pressor Beam: "Whenever you could fire your main laser at a robot, you may instead fire the Pressor
+    Beam. This moves the target robot 1 space away from your robot."
+    - Crab Legs: "When programming your registers, you may put a Move 1 card in the
+    same register as a Rotate Left or Rotate Right card. If you do, during that register
+    your robot will move 1 space to the left or right, respectively, without rotating. Priority
+    is that of the Move 1."
+    - 
+    
+
 **Runde:**
 
 	- Før første runden starter blir robotene tildelt en tilfeldig start posisjon
@@ -101,6 +129,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- Hendlesesforløpet for slutten av en runde er reparere skade, slå av strømmen på 	  
       roboter og samle inn kort. Prioritet for handlinger som ikke bestemmes av 	 	  
       programkort bestemmes av startposisjon
+    - (klarifikasjon) For register så skal det være fullt før en runde kan starte
 
 
 **Fase:**
@@ -121,3 +150,7 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 - UML over prosjektet
 - Klasser implementert for kort og kortstokk
 
+# Tredje iterasjon:
+- Oppdatert dokumentasjon (kode og prosjekt)
+- Rydde opp i mappestruktur
+- Fjerne klasser som ikke er i bruk
