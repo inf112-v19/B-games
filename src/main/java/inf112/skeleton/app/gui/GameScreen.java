@@ -200,13 +200,13 @@ public class GameScreen implements Screen {
                             currentFrame.setRotation(0);
                             break;
                         case EAST:
-                            currentFrame.setRotation(90);
+                            currentFrame.setRotation(270);
                             break;
                         case SOUTH:
                             currentFrame.setRotation(180);
                             break;
                         case WEST:
-                            currentFrame.setRotation(270);
+                            currentFrame.setRotation(90);
                             break;
                     }
                     currentFrame.draw(batch);
@@ -230,10 +230,12 @@ public class GameScreen implements Screen {
         for (Actor player : players) {
             sprite_actor.setOriginCenter();
             sprite_actor.setPosition(player.getX() * tile_size, player.getY() * tile_size);
+            System.out.println(player.getX()*tile_size);
             sprite_actor.setRotation(DirectionHelpers.rotationFromDirection(player.direction));
             sprite_actor.setSize(tile_size, tile_size);
             sprite_actor.setColor(player.getColor());
             sprite_actor.draw(batch);
+            player.tileCheck();
         }
         batch.end();
 
@@ -254,6 +256,8 @@ public class GameScreen implements Screen {
         camera.viewportWidth = 3000;
         camera.viewportHeight = 3000 * height / width;
         camera.update();
+        //Resizing the button click area when resizing whole game
+        buttonStage.getViewport().update(width, height, true);
     }
 
     @Override

@@ -12,6 +12,7 @@ public class Actor implements IActor {
     private int robotLives;
     private int robotHP;
     public Direction direction = Direction.NORTH;
+    private int onConveyorCount;
     private int flagsVisited = 0;
     private Board board;
     private int dockingAssignment; //* set randomly at start of game based
@@ -98,6 +99,7 @@ public class Actor implements IActor {
     public void tileCheck(){
         ITile tile =  board.getAt(xPos, yPos);
         Item item = tile.getItem();
+
         if(tile.isHole()){
             robotDestroyed();
         }
@@ -105,8 +107,20 @@ public class Actor implements IActor {
             rotate(tile.hasCog());
         }
         if(tile.hasConveyor() != null){
+            onConveyorCount += 1;
             move(tile.hasConveyor());
-            System.out.println("conveyor moves " + color.toString());
+            if (tile.hasConveyor() != null) {
+                onConveyorCount += 1;
+            } else {
+                onConveyorCount = 0;
+            }
+
+            if (onConveyorCount >= 2) {
+                direction = tile.hasConveyor();
+                //System.out.println(tile.hasConveyor());
+                onConveyorCount = 0;
+            }
+            //System.out.println("conveyor moves " + color.toString());
         }
         if(item != null){
             if(item == Item.WRENCH){
