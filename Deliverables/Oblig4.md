@@ -33,6 +33,8 @@ board på github (feks Trello) må legge ved link til deres løsning.
     - De som ikke har kodet så mye får jobbe med Action og Board så får mulighet til å sette
     seg in alle klassene som andre har kodet. De som har kodet mye kan prøve seg mer på
     det grafiske etterhvert.
+    - Bør merge branch til master så ofte man har en stabil branch. Selv om man  
+    ikke er 100% ferdig slik at det ikke blir for mye krøll
     - Gruppedynamikken har vært god, men det har ikke vært så mye aktivitet på
     discord siden møte som gjaldt forrige oblig.
     

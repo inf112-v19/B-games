@@ -82,4 +82,9 @@ mappestruktur, ubrukte klasser og prosjektmetodikk.
 - Diskusjon om forhold mellom Action og Player, og Board og Tiles.
 
 
-**Møte 27.03.2019 (??)**
+**Møte 27.03.2019 (16:00)**
+Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson, Robert Frydenlund
+- Gjennomgang av Oblig 4
+- Lengre gjennomgang av kode og spørsmål om hvordan klassene fungerer og hvordan
+de oppfører seg
+- Dersom noe skal legges til neste iterasjon så legger man til en beskjed på discord

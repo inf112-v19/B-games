@@ -92,6 +92,7 @@ public class PlayerTest {
         catch (Exception e){
             assertEquals("No card in your hand at that number", e.getMessage());
         }
+        player.drawCards();
         try {
             player.addCardToRegister(0, 1);
         }
@@ -104,7 +105,25 @@ public class PlayerTest {
         catch (Exception e){
             assertEquals("Number for hand needs to be between 1 and 9.", e.getMessage());
         }
+        try {
+            player.addCardToRegister(1, 0);
+        }
+        catch (Exception e){
+            assertEquals("Number for register needs to be between 1 and 5.", e.getMessage());
+        }
 
-
+        try {
+            player.addCardToRegister(1, 6);
+        } catch (Exception e) {
+            assertEquals("Number for register needs to be between 1 and 5.", e.getMessage());
+        }
+        try {
+            Card cardInHand = player.getCardsOnHand().get(1);
+            player.addCardToRegister(1, 1);
+            player.addCardToRegister(1, 1);
+        } catch (Exception e) {
+            assertEquals("That register number is not empty", e.getMessage());
+        }
+        Card card = player.getRegister().get(1);
     }
 }

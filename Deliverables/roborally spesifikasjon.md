@@ -110,8 +110,13 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
     2 damage tokens"
     - Reverse Gear: "Whenever you execute a Back Up, you may move your robot back 2 spaces instead of 1.
     Priority is that of the Back Up"
-    - Pressor Beam: ""Whenever you could fire your main laser at a robot, you may instead fire the Pressor
-    Beam. This moves the target robot 1 space away from your robot.
+    - Pressor Beam: "Whenever you could fire your main laser at a robot, you may instead fire the Pressor
+    Beam. This moves the target robot 1 space away from your robot."
+    - Crab Legs: "When programming your registers, you may put a Move 1 card in the
+    same register as a Rotate Left or Rotate Right card. If you do, during that register
+    your robot will move 1 space to the left or right, respectively, without rotating. Priority
+    is that of the Move 1."
+    - 
     
 
 **Runde:**

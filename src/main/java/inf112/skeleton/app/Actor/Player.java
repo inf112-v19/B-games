@@ -53,9 +53,8 @@ public class Player extends Actor implements IPlayer {
 
     // Move card from CardsOnHand and put it in cardsInRegister
     public void addCardToRegister(int from, int to) throws Exception {
-
-        if (cardsInRegister.get(to) == null) {
-            if (to > 0 && to <= 5) {
+        if (to > 0 && to <= 5) {
+            if (cardsInRegister.get(to) == null) {
                 if (from >= 1 && from <= 9) {
                     if (cardsOnHand.get(from) instanceof Card) {
                         Card card = cardsOnHand.remove(from-1);
@@ -69,12 +68,12 @@ public class Player extends Actor implements IPlayer {
                 } else {
                     throw new Exception("Number for hand needs to be between 1 and 9.");
                 }
-            } else {
-                throw new Exception("Number for register needs to be between 1 and 5.");
+            } else{
+                throw new Exception("That register number is not empty");
             }
         }
-        else{
-            throw new Exception("That register number is not empty");
+        else {
+            throw new Exception("Number for register needs to be between 1 and 5.");
         }
     }
 
