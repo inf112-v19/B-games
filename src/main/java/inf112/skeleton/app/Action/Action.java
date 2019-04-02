@@ -19,6 +19,7 @@ public class Action implements IAction {
     private int roundCounter;
     private ArrayList<Player> players;
     private int phaseCounter;
+    private ArrayList<Player> players;
     private boolean debug = true;
     Board board;
 
@@ -38,6 +39,24 @@ public class Action implements IAction {
     public void updateRound() {
         roundCounter++;
     }
+    public void cardResolver() {
+        int lowestPriority = 0;
+        int indexToBePlayed = 0;
+        ArrayList<Card> CardsToBePlayed = new ArrayList<Card>();                                    //Temporary cardlist.
+        for(int i = 0; i <= players.size(); i++) {
+            CardsToBePlayed.add(players.get(i).getRegister().get(phaseCounter));                    //Fetches a card from each player to be played this phase.
+        }
+        for(int i = 0; i <= CardsToBePlayed.size(); i++) {
+            for (int j = 0; j <= CardsToBePlayed.size(); j++) {
+                if (CardsToBePlayed.get(j).getPriority() < lowestPriority) {
+                    lowestPriority = CardsToBePlayed.get(j).getPriority();
+                    indexToBePlayed = i;
+                }
+            }
+            playCard(players.get(indexToBePlayed), CardsToBePlayed.get(indexToBePlayed).getType());
+        }
+    }
+
 
     public void cardResolver() {
         int lowestPriority = 0;
