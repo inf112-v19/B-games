@@ -38,9 +38,41 @@ public interface ITile {
      */
     RotationDirection hasCog();
 
+    /**
+     * adds an item or switches the current item in the tile
+     *
+     * @param item the item you want to add to the tile
+     */
     void setItem(Item item);
 
+    /**
+     * returns one of the 2-4 tiles a tile is linked to, specified by direction.
+     *
+     * @param direction
+     * @return The linked tile in the specified direction
+     */
+    ITile getLinked(Direction direction);
+
+    /**
+     * sets a tiles linked tile in a specified direction.
+     *
+     * @param direction
+     * @param tile the tile to link
+     */
+    void setLinked(Direction direction, ITile tile);
+
+    /**
+     * turns the tile into a hole
+     *
+     * @param hole
+     */
+    //TODO should return true if successful and false on failure, ex. laser shouldn't be turned into a hole.
     void setHole(boolean hole);
 
+    /**
+     * the items are stored as different enum values. this function returns an item enum or null.
+     *
+     * @return the item currently on the tile, or null if empty.
+     */
     Item getItem();
 }
