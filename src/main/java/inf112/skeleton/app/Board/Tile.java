@@ -88,12 +88,16 @@ public class Tile implements ITile {
         switch (direction){
             case NORTH:
                 linkedNorth = tile;
+                break;
             case EAST:
                 linkedEast = tile;
+                break;
             case SOUTH:
                 linkedSouth = tile;
+                break;
             case WEST:
                 linkedWest = tile;
+                break;
         }
     }
 
