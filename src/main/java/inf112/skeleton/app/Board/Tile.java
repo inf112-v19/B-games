@@ -8,6 +8,10 @@ public class Tile implements ITile {
     private Direction conveyor;
     private RotationDirection cog;
     private Item item;
+    private ITile linkedNorth;
+    private ITile linkedEast;
+    private ITile linkedSouth;
+    private ITile linkedWest;
 
     public Tile(){
         this.isHole = false;
@@ -77,6 +81,35 @@ public class Tile implements ITile {
     @Override
     public Item getItem(){
         return item;
+    }
+
+    @Override
+    public void setLinked(Direction direction, ITile tile) {
+        switch (direction){
+            case NORTH:
+                linkedNorth = tile;
+            case EAST:
+                linkedEast = tile;
+            case SOUTH:
+                linkedSouth = tile;
+            case WEST:
+                linkedWest = tile;
+        }
+    }
+
+    @Override
+    public ITile getLinked(Direction direction) {
+        switch (direction) {
+            case NORTH:
+                return linkedNorth;
+            case EAST:
+                return linkedEast;
+            case SOUTH:
+                return linkedSouth;
+            case WEST:
+                return linkedWest;
+        }
+        return null;
     }
 
     @Override
