@@ -24,4 +24,19 @@ public interface IPlayer extends IActor {
      * Add a card from card in hand to the register
      */
     void addCardToRegister(int indexFrom, int indexTo) throws Exception;
+
+    /**
+     * Take a card from register and add it to first available index in hand
+     */
+    void addCardToHand(int indexFrom)throws Exception;
+
+    /**
+     * Put all cards that aren't locked back into cardstack.
+     */
+    void putCardsBackIntoCardStack();
+
+    /**
+     * Lock cards in register numbers based on robotHP.
+     */
+    void lockCardsInRegisters();
 }
