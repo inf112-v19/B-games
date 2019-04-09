@@ -7,9 +7,13 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Cards.CardType;
@@ -51,6 +55,7 @@ public class GameUI {
             movementButtons.add(tb);
             buttonStage.addActor(tb);
         }
+
 
         //Movement will be applied to robot at index 0(red robot)
         Actor selectedPlayer = players.get(0);
@@ -112,10 +117,38 @@ public class GameUI {
 
         //Make input active
         Gdx.input.setInputProcessor(buttonStage);
+    }
+
+    public void loadUI2() {
+        buttonStage = new Stage(new ScreenViewport());
+        Table mCards = new Table();
+        //Putting table size to match that of the screen.
+        mCards.setFillParent(true);
+        mCards.setDebug(true);
+        Skin skin = new Skin(Gdx.files.internal("assets/atlas/uiskin.json"));
+        //mCards.setWidth(buttonStage.getWidth());
+        mCards.align(Align.bottom + 20);
+
+        //mCards.setPosition(500, 500);
+        TextButton b = new TextButton("Hallo", skin);
+        TextButton c = new TextButton("Boooooooooo", skin);
+        mCards.add(b);
+        mCards.row();
+        mCards.add(c);
+
+
+        buttonStage.addActor(mCards);
 
     }
 
     public void renderUI() {
+        //Updates and draws every actor in the stage. Actors here are the buttons.
+        buttonStage.act(Gdx.graphics.getDeltaTime());
+        buttonStage.draw();
+
+    }
+
+    public void renderUI2() {
         //Updates and draws every actor in the stage. Actors here are the buttons.
         buttonStage.act(Gdx.graphics.getDeltaTime());
         buttonStage.draw();

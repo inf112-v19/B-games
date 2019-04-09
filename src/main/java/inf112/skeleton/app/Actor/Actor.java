@@ -119,21 +119,20 @@ public class Actor implements IActor {
         if(tile.hasCog() != null){
             rotate(tile.hasCog());
         }
-        if(tile.hasConveyor() != null){
-            onConveyorCount += 1;
-            move(tile.hasConveyor());
+        if(tile.hasConveyor() != null) {
+
             if (tile.hasConveyor() != null) {
                 onConveyorCount += 1;
             } else {
                 onConveyorCount = 0;
             }
-
+            move(tile.hasConveyor());
+            //If robot has gone on 2 or more conveyors in a row, then change its direction to last conveyorbelt.
             if (onConveyorCount >= 2) {
                 direction = tile.hasConveyor();
-                //System.out.println(tile.hasConveyor());
                 onConveyorCount = 0;
             }
-            //System.out.println("conveyor moves " + color.toString());
+
         }
         if(item != null){
             if(item == Item.WRENCH){

@@ -38,7 +38,7 @@ public class Action implements IAction {
     public void updateRound() {
         roundCounter++;
     }
-    
+
     public void cardResolver() {
         int lowestPriority = 0;
         int indexToBePlayed = 0;

@@ -175,9 +175,8 @@ public class GameScreen implements Screen {
         camera.viewportWidth = 3000;
         camera.viewportHeight = 3000 * height / width;
         camera.update();
-        //Resizing the button click area when resizing whole game
-        //buttonStage.getViewport().update(width, height, true);
-        UI.resizeUI(width, height);
+
+        //UI.resizeUI(width, height);
     }
 
     @Override
