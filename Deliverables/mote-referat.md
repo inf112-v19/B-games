@@ -88,3 +88,13 @@ Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isa
 - Lengre gjennomgang av kode og spørsmål om hvordan klassene fungerer og hvordan
 de oppfører seg
 - Dersom noe skal legges til neste iterasjon så legger man til en beskjed på discord
+
+**Gruppetime 02.04.2019 14:15 - 16:00**
+Oppmøte: Bernhard Hjelen, Isak Steingrimsson
+- Ny klasse er laget: GameUI. Adskiller UI kode fra GameScreen.
+- Fikk melding om at klassediagram skulle være med i oblig, Bernhard fiksa det.
+
+**Gruppetime 09.04.2019 14:15 - 16:00**
+Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Ørjan Tangen
+- Arbeid videre med prosjektet
+- Boardet er invertert Ben tar det opp med Robert
