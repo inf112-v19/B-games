@@ -20,7 +20,7 @@ public class Board implements IBoard {
         tiles = new ITile[width][height];
     }
 
-
+    //TODO this function mixes up X and Y, needs to be fixed if we are to keep it.
     public void generateRandom(){
         Random r = new Random();
         for (int x = 0; x < height; x++) {
