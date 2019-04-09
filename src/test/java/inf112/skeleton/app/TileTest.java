@@ -1,10 +1,7 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.Actor.Direction;
-import inf112.skeleton.app.Board.Board;
-import inf112.skeleton.app.Board.Item;
-import inf112.skeleton.app.Board.RotationDirection;
-import inf112.skeleton.app.Board.Tile;
+import inf112.skeleton.app.Board.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -84,5 +81,17 @@ public class TileTest {
         assertEquals(tile.getItem(), null);
         tile.setItem(Item.WRENCH);
         assertEquals(tile.getItem(), Item.WRENCH);
+    }
+
+    @Test
+    public void linkedTest(){
+        ITile tile1 = new Tile();
+        ITile tile2 = new Tile();
+        tile1.setLinked(Direction.EAST, tile2);
+        tile2.setLinked(Direction.WEST, tile1);
+        assertEquals(tile1, tile1.getLinked(Direction.EAST).getLinked(Direction.WEST));
+        assertEquals(tile2, tile2.getLinked(Direction.WEST).getLinked(Direction.EAST));
+        assertEquals(tile1, tile2.getLinked(Direction.WEST));
+        assertEquals(tile2, tile1.getLinked(Direction.EAST));
     }
 }
