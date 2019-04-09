@@ -24,6 +24,11 @@ public class Board implements IBoard {
         this.height = height;
         tiles = new ITile[width][height];
         for (int x = 0; x < width; x++){
+            for (int y = 0; y < height; y++){
+                tiles[x][y] = new Tile();
+            }
+        }
+        for (int x = 0; x < width; x++){
             for (int y = 0; y < width; y++){
                 tiles[x][y].setLinked(Direction.NORTH, tiles[x][y+1]);
                 tiles[x][y].setLinked(Direction.EAST, tiles[x+1][y]);
