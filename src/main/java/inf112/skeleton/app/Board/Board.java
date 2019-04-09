@@ -5,6 +5,11 @@ import inf112.skeleton.app.Actor.Direction;
 import java.util.Random;
 
 public class Board implements IBoard {
+    /*
+    This board keeps width x height amount of objects that implement ITile.
+    Functions that use coordinates should assume that x=0 y=0 is the south-west corner tile.
+    TODO make sure this works properly in map generation and graphics.
+     */
 
     public ITile[][] tiles;
     private int width;
@@ -18,6 +23,14 @@ public class Board implements IBoard {
         this.width = width;
         this.height = height;
         tiles = new ITile[width][height];
+        for (int x = 0; x < width; x++){
+            for (int y = 0; y < width; y++){
+                tiles[x][y].setLinked(Direction.NORTH, tiles[x][y+1]);
+                tiles[x][y].setLinked(Direction.EAST, tiles[x+1][y]);
+                tiles[x][y].setLinked(Direction.SOUTH, tiles[x][y-1]);
+                tiles[x][y].setLinked(Direction.WEST, tiles[x-1][y]);
+            }
+        }
     }
 
     //TODO this function mixes up X and Y, needs to be fixed if we are to keep it.
@@ -73,6 +86,18 @@ public class Board implements IBoard {
         if(y < 0 || y > height){
             throw new IndexOutOfBoundsException();
         }
+
+        //copying all the previous tile's links to the new one
+        tile.setLinked(Direction.NORTH, tiles[x][y].getLinked(Direction.NORTH));
+        tile.setLinked(Direction.EAST, tiles[x][y].getLinked(Direction.EAST));
+        tile.setLinked(Direction.SOUTH, tiles[x][y].getLinked(Direction.SOUTH));
+        tile.setLinked(Direction.WEST, tiles[x][y].getLinked(Direction.WEST));
+        //linking the new tile to all it's linked tiles
+        tile.getLinked(Direction.NORTH).setLinked(Direction.SOUTH, tile);
+        tile.getLinked(Direction.EAST).setLinked(Direction.WEST, tile);
+        tile.getLinked(Direction.SOUTH).setLinked(Direction.NORTH, tile);
+        tile.getLinked(Direction.WEST).setLinked(Direction.EAST, tile);
+
         tiles[x][y] = tile;
     }
 }
