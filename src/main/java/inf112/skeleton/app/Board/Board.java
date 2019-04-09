@@ -29,11 +29,25 @@ public class Board implements IBoard {
             }
         }
         for (int x = 0; x < width; x++){
-            for (int y = 0; y < width; y++){
-                tiles[x][y].setLinked(Direction.NORTH, tiles[x][y+1]);
+            for (int y = 0; y < height; y++){
+                if (x > 0){
+                    tiles[x][y].setLinked(Direction.WEST, tiles[x-1][y]);
+                    //tiles[x-1][y].setLinked(Direction.EAST, tiles[x][y]);
+                } if (x < width-1){
+                    tiles[x][y].setLinked(Direction.EAST, tiles[x+1][y]);
+                    //tiles[x+1][y].setLinked(Direction.WEST, tiles[x][y]);
+                } if (y > 0){
+                    tiles[x][y].setLinked(Direction.SOUTH, tiles[x][y-1]);
+                    //tiles[x][y-1].setLinked(Direction.NORTH, tiles[x][y]);
+                } if (y < height-1){
+                    tiles[x][y].setLinked(Direction.NORTH, tiles[x][y+1]);
+                    //tiles[x][y+1].setLinked(Direction.SOUTH, tiles[x][y]);
+                }
+                /*
+                tiles[x][y].setLinked(Direction.WEST, tiles[x-1][y]);
                 tiles[x][y].setLinked(Direction.EAST, tiles[x+1][y]);
                 tiles[x][y].setLinked(Direction.SOUTH, tiles[x][y-1]);
-                tiles[x][y].setLinked(Direction.WEST, tiles[x-1][y]);
+                tiles[x][y].setLinked(Direction.NORTH, tiles[x][y+1]);*/
             }
         }
     }
