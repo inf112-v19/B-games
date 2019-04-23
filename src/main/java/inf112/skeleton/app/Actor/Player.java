@@ -44,20 +44,23 @@ public class Player extends Actor implements IPlayer {
 
     // Draw cards from CardStack based on RobotHP and add them to CardsOnHand
     public void drawCards(){
-        ArrayList registersToBeLocked = (ArrayList) lockedRegistersNumbers();
+        ArrayList<Integer> registersToBeLocked = lockedRegistersNumbers();
 
-        for (int i = 0; i< (getHP()-1); i++)
-            if (registersToBeLocked.isEmpty()) {
-                cardsOnHand.add(i, cardStack.getCardFromStack());
-                cardsOnHand.remove((getHP() - 1));
-            } else {
-                Card card = cardStack.getCardFromStack();
-                int number = (Integer) registersToBeLocked.get(0);
-                cardsInRegister.add(number, card);
+        for (int i = 0; i< (getHP()-1); i++) {
+            cardsOnHand.add(i, cardStack.getCardFromStack());
+            cardsOnHand.remove((getHP() - 1));
+            if (!registersToBeLocked.isEmpty()) {
+                int number = registersToBeLocked.get(0);
+                try {
+                    addCardToRegister(0, number);
+                }
+                catch (Exception e){
+                    System.out.print("something happened.");
+                }
                 registersToBeLocked.remove(0);
-                
             }
-        lockCardsInRegisters();
+            lockCardsInRegisters();
+        }
     }
 
     // Move card from CardsOnHand and put it in cardsInRegister
@@ -112,7 +115,7 @@ public class Player extends Actor implements IPlayer {
 
     public void lockCardsInRegisters(){
 
-        List registersToBeLocked = lockedRegistersNumbers();
+        ArrayList<Integer>  registersToBeLocked = lockedRegistersNumbers();
 
         if (registersToBeLocked.isEmpty()){
             for (int i = 0; i < cardsInRegister.size(); i++){
@@ -123,8 +126,9 @@ public class Player extends Actor implements IPlayer {
         }
         else{
             for (int i = 0; i < registersToBeLocked.size(); i++){
-                if (cardsInRegister.get((Integer) registersToBeLocked.get(0)) instanceof Card){
-                    cardsInRegister.get((Integer) registersToBeLocked.get(0)).setLocked();
+                int number = registersToBeLocked.get(0);
+                if (cardsInRegister.get(number) instanceof Card){
+                    cardsInRegister.get(number).setLocked();
                     registersToBeLocked.remove(0);
                 }
             }
@@ -197,16 +201,16 @@ public class Player extends Actor implements IPlayer {
         return counter == 5;
     }
 
-    private List lockedRegistersNumbers(){
-        ArrayList lockedRegisterNumbers = new ArrayList();
+    public ArrayList<Integer> lockedRegistersNumbers(){
+        ArrayList<Integer> lockedRegisterNumbers = new ArrayList<>();
         if (getHP() == 5){
             lockedRegisterNumbers.add(4);
         }
-        if (getHP() == 4){
+        else if (getHP() == 4){
             lockedRegisterNumbers.add(4);
             lockedRegisterNumbers.add(3);
         }
-        if (getHP() == 3){
+        else if (getHP() == 3){
             lockedRegisterNumbers.add(4);
             lockedRegisterNumbers.add(3);
             lockedRegisterNumbers.add(2);
@@ -217,7 +221,7 @@ public class Player extends Actor implements IPlayer {
             lockedRegisterNumbers.add(2);
             lockedRegisterNumbers.add(1);
         }
-        if (getHP() == 1){
+        else if (getHP() == 1){
             lockedRegisterNumbers.add(4);
             lockedRegisterNumbers.add(3);
             lockedRegisterNumbers.add(2);
