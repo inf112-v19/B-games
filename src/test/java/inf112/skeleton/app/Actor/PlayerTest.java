@@ -272,18 +272,17 @@ public class PlayerTest {
 
 
         //case 1: Draw cards at full robotHP, no cards in registers
-        drawCards();
+        player.drawCards();
+        player.lockCardsInRegisters();
         for (int i = 0; i < player.getRegister().size(); i++){
             assertEquals(player.getRegister().get(i), null);
         }
-        player.putCardsBackIntoCardStack();
-
-        //case 2: Draw cards at 5 robotHP, card added to register number 4 and locked
+        //case 2: Draw cards at 5 robotHP, card added to register number 5 and is locked
         for (int i = 0; i < 5; i++){
             player.receiveDamage();
         }
-        System.out.print(player.getHP());
-        drawCards();
+        player.lockCardsInRegisters();
+
         //first 4 are empty
         for (int i = 0; i < player.getRegister().size()-1; i++){
             assertEquals(player.getRegister().get(i), null);
@@ -291,7 +290,56 @@ public class PlayerTest {
         //card in register 5 and is locked
         Card testCard = new Card(MOVE_1_FORWARD, 490, true);
         assertEquals(testCard.getClass(), player.getRegister().get(4).getClass());
+        assertFalse(player.getRegister().get(4).getUnlockedStatus());
 
+        //case 3: Draw cards at 4 robotHP, card added to register numbers 4, 5 and are locked
+        player.receiveDamage();
+        player.lockCardsInRegisters();
+
+        assertFalse(player.getRegister().get(4).getUnlockedStatus());
+        assertFalse(player.getRegister().get(3).getUnlockedStatus());
+        assertEquals(null, player.getRegister().get(2));
+        assertEquals(null, player.getRegister().get(1));
+        assertEquals(null, player.getRegister().get(0));
+
+        //case 4: Draw cards at 3 robotHP, card added to register numbers 3, 4, 5 and are locked
+        player.receiveDamage();
+        player.lockCardsInRegisters();
+
+        assertFalse(player.getRegister().get(4).getUnlockedStatus());
+        assertFalse(player.getRegister().get(3).getUnlockedStatus());
+        assertFalse(player.getRegister().get(2).getUnlockedStatus());
+        assertEquals(null, player.getRegister().get(1));
+        assertEquals(null, player.getRegister().get(0));
+
+        //case 5: Draw cards at 2 robotHP, card added to register number 2, 3, 4 and are locked
+        player.receiveDamage();
+        player.lockCardsInRegisters();
+        assertFalse(player.getRegister().get(4).getUnlockedStatus());
+        assertFalse(player.getRegister().get(3).getUnlockedStatus());
+        assertFalse(player.getRegister().get(2).getUnlockedStatus());
+        assertFalse(player.getRegister().get(1).getUnlockedStatus());
+        assertEquals(null, player.getRegister().get(0));
+
+        //case 6: Draw cards at 1 robotHP, card added to register number 1, 2, 3, 4 and are locked
+        player.receiveDamage();
+        player.lockCardsInRegisters();
+        assertFalse(player.getRegister().get(4).getUnlockedStatus());
+        assertFalse(player.getRegister().get(3).getUnlockedStatus());
+        assertFalse(player.getRegister().get(2).getUnlockedStatus());
+        assertFalse(player.getRegister().get(1).getUnlockedStatus());
+        assertFalse(player.getRegister().get(0).getUnlockedStatus());
+
+        //case 7; Robot restores HP, all registers unlocked
+        player.robotPowerDown();
+        player.lockCardsInRegisters();
+        assertTrue(player.getRegister().get(4).getUnlockedStatus());
+        assertTrue(player.getRegister().get(3).getUnlockedStatus());
+        assertTrue(player.getRegister().get(2).getUnlockedStatus());
+        assertTrue(player.getRegister().get(1).getUnlockedStatus());
+        assertTrue(player.getRegister().get(0).getUnlockedStatus());
     }
+
+
 
 }

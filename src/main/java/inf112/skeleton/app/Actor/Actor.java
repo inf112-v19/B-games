@@ -186,6 +186,10 @@ public class Actor implements IActor {
         }
     }
 
+    public void robotPowerDown(){
+        robotHP = 10;
+    }
+
 
     public void flagVisited(int flagNumber){
         if(flagNumber == flagsVisited+1){
