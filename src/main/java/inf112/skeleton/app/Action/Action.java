@@ -42,18 +42,19 @@ public class Action implements IAction {
         int lowestPriority;
         int indexToBePlayed = 0;
         ArrayList<Card> CardsToBePlayed = new ArrayList<Card>();                                    //Temporary cardlist.
+        ArrayList<Card> CardsPlayed = new ArrayList<Card>();
         for(int i = 0; i < players.size(); i++) {
             CardsToBePlayed.add(players.get(i).getCardsOnHand().get(getPhase()));                    //Fetches a card from each player to be played this phase.
-
         }
         for(int i = 0; i < CardsToBePlayed.size(); i++) {
-            lowestPriority = CardsToBePlayed.get(i).getPriority();
+            lowestPriority = 2000;
             for (int j = 0; j < CardsToBePlayed.size(); j++) {
-                if (CardsToBePlayed.get(j).getPriority() < lowestPriority) {
+                if (CardsToBePlayed.get(j).getPriority() < lowestPriority && !(CardsPlayed.contains(CardsToBePlayed.get(j)))) {
                     lowestPriority = CardsToBePlayed.get(j).getPriority();
                     indexToBePlayed = j;
                 }
             }
+            CardsPlayed.add(CardsToBePlayed.get(indexToBePlayed));
             playCard(players.get(indexToBePlayed), CardsToBePlayed.get(indexToBePlayed).getType());
         }
     }
