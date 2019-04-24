@@ -19,6 +19,8 @@ public class MapPointer {
      * To edit the board use the setTile(ITile tile) function to place a tile where the pointer is pointing,
      * and the move(Direction direction) function to change what tile the pointer is pointing to.
      *
+     * When initialized the pointer points to the tile in x = 0 and y = 0.
+     *
      * @param board the board the pointer should point to.
      */
     public MapPointer(IBoard board){
