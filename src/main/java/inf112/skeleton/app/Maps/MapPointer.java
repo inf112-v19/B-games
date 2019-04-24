@@ -30,8 +30,6 @@ public class MapPointer {
      * moves the pointer on the board.
      * prints error message if it can't move in the specified direction.
      *
-     * NOTE: this does not affect the board in any way.
-     *
      * @param direction the direction to move the pointer
      */
     public void move(Direction direction){
@@ -65,8 +63,6 @@ public class MapPointer {
 
     /**
      * overrides the tile on the board in the pointer's current position.
-     *
-     * NOTE: this overrides a tile on the linked board and not just in the pointer.
      *
      * @param tile the tile you want to place on the board
      */
