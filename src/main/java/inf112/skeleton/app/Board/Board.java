@@ -32,22 +32,13 @@ public class Board implements IBoard {
             for (int y = 0; y < height; y++){
                 if (x > 0){
                     tiles[x][y].setLinked(Direction.WEST, tiles[x-1][y]);
-                    //tiles[x-1][y].setLinked(Direction.EAST, tiles[x][y]);
                 } if (x < width-1){
                     tiles[x][y].setLinked(Direction.EAST, tiles[x+1][y]);
-                    //tiles[x+1][y].setLinked(Direction.WEST, tiles[x][y]);
                 } if (y > 0){
                     tiles[x][y].setLinked(Direction.SOUTH, tiles[x][y-1]);
-                    //tiles[x][y-1].setLinked(Direction.NORTH, tiles[x][y]);
                 } if (y < height-1){
                     tiles[x][y].setLinked(Direction.NORTH, tiles[x][y+1]);
-                    //tiles[x][y+1].setLinked(Direction.SOUTH, tiles[x][y]);
                 }
-                /*
-                tiles[x][y].setLinked(Direction.WEST, tiles[x-1][y]);
-                tiles[x][y].setLinked(Direction.EAST, tiles[x+1][y]);
-                tiles[x][y].setLinked(Direction.SOUTH, tiles[x][y-1]);
-                tiles[x][y].setLinked(Direction.NORTH, tiles[x][y+1]);*/
             }
         }
     }
@@ -106,16 +97,19 @@ public class Board implements IBoard {
             throw new IndexOutOfBoundsException();
         }
 
-        //copying all the previous tile's links to the new one
-        tile.setLinked(Direction.NORTH, tiles[x][y].getLinked(Direction.NORTH));
-        tile.setLinked(Direction.EAST, tiles[x][y].getLinked(Direction.EAST));
-        tile.setLinked(Direction.SOUTH, tiles[x][y].getLinked(Direction.SOUTH));
-        tile.setLinked(Direction.WEST, tiles[x][y].getLinked(Direction.WEST));
-        //linking the new tile to all it's linked tiles
-        tile.getLinked(Direction.NORTH).setLinked(Direction.SOUTH, tile);
-        tile.getLinked(Direction.EAST).setLinked(Direction.WEST, tile);
-        tile.getLinked(Direction.SOUTH).setLinked(Direction.NORTH, tile);
-        tile.getLinked(Direction.WEST).setLinked(Direction.EAST, tile);
+        if (x > 0){
+            tile.setLinked(Direction.WEST, tiles[x][y].getLinked(Direction.WEST));
+            tile.getLinked(Direction.WEST).setLinked(Direction.EAST, tile);
+        } if (x < width-1){
+            tile.setLinked(Direction.EAST, tiles[x][y].getLinked(Direction.EAST));
+            tile.getLinked(Direction.EAST).setLinked(Direction.WEST, tile);
+        } if (y > 0){
+            tile.setLinked(Direction.SOUTH, tiles[x][y].getLinked(Direction.SOUTH));
+            tile.getLinked(Direction.SOUTH).setLinked(Direction.NORTH, tile);
+        } if (y < height-1){
+            tile.setLinked(Direction.NORTH, tiles[x][y].getLinked(Direction.NORTH));
+            tile.getLinked(Direction.NORTH).setLinked(Direction.SOUTH, tile);
+        }
 
         tiles[x][y] = tile;
     }
