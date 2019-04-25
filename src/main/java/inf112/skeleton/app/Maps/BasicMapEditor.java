@@ -14,6 +14,8 @@ public class BasicMapEditor {
         String input;
         IBoard map = new Board();
         boolean quit = false;
+        int x;
+        int y;
         while(!quit){
              System.out.print(
                      "Basic map editor for B-Games roborally\n\n" +
@@ -27,7 +29,11 @@ public class BasicMapEditor {
              input = in.next();
              switch (input.charAt(0)){
                  case 'c':
-                    map = new Board();
+                     System.out.print("what length?");
+                     x = Integer.parseInt(in.next());
+                     System.out.print("what height?");
+                     y = Integer.parseInt(in.next());
+                     map = new Board(x, y);
                     break;
                  case 'l':
                      System.out.print("write the name of the file you want to load");
@@ -38,13 +44,14 @@ public class BasicMapEditor {
                      save(map, in.next());
                      break;
                  case 'e':
-                     map = edit(map);
+                     map = edit(map, in);
                      break;
                  case 'q':
                      quit = true;
                      break;
              }
         }
+        in.close();
     }
 
     private static IBoard create(){
@@ -59,8 +66,9 @@ public class BasicMapEditor {
 
     }
 
-    private static IBoard edit(IBoard map){
+    private static IBoard edit(IBoard map, Scanner in){
         boolean edit = true;
+        MapPointer pointer = new MapPointer(map);
         while (edit){
 
         }
