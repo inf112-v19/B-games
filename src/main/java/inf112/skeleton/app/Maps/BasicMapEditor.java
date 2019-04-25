@@ -41,12 +41,21 @@ public class BasicMapEditor {
                      break;
                  case 'l':
                      System.out.print("write the name of the file you want to load\n");
-                     map = load(in.next());
+                     map =loaderSaver.load("maps/" + in.next() + ".txt");
+                     if(map == null){
+                         System.out.println("load unsuccessful");
+                     }  else {
+                         System.out.println("load successful");
+                     }
                      break;
                  case 's':
                      System.out.print("write the name you want to save the file as\n");
                      //System.out.print("successful save:" + loaderSaver.save(map, "maps/" + in.next() + ".txt"));
-                     System.out.print("successful save:" + loaderSaver.save(map, "maps/map.txt") + "\n");
+                     if(loaderSaver.save(map, "maps/" + in.next() + ".txt")){
+                         System.out.println("save successful");
+                     }  else {
+                         System.out.println("save unsuccessful");
+                     }
                      break;
                  case 'e':
                      map = edit(map, in);
