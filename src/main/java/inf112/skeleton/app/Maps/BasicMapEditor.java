@@ -50,7 +50,6 @@ public class BasicMapEditor {
                      break;
                  case 's':
                      System.out.print("write the name you want to save the file as\n");
-                     //System.out.print("successful save:" + loaderSaver.save(map, "maps/" + in.next() + ".txt"));
                      if(loaderSaver.save(map, "maps/" + in.next() + ".txt")){
                          System.out.println("save successful");
                      }  else {
@@ -68,21 +67,10 @@ public class BasicMapEditor {
         in.close();
     }
 
-    private static IBoard create(){
-        return new Board();
-    }
-
-    private static IBoard load(String filename){
-        return null;
-    }
-
-    private static void save(IBoard map, String filename){
-
-    }
-
     private static IBoard edit(IBoard map, Scanner in){
         boolean edit = true;
         MapPointer pointer = new MapPointer(map);
+        //map editing loop
         while (edit){
             for(int y = map.getHeight()-1; y >= 0; y--){
                 for(int x = 0; x < map.getWidth(); x++){
