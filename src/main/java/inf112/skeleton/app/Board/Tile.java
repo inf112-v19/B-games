@@ -88,15 +88,19 @@ public class Tile implements ITile {
         switch (direction){
             case NORTH:
                 walls[0] = true;
+                linkedNorth.setWall(Direction.SOUTH);
                 break;
             case EAST:
                 walls[1] = true;
+                linkedEast.setWall(Direction.WEST);
                 break;
             case SOUTH:
                 walls[2] = true;
+                linkedSouth.setWall(Direction.NORTH);
                 break;
             case WEST:
                 walls[3] = true;
+                linkedWest.setWall(Direction.EAST);
                 break;
         }
     }
