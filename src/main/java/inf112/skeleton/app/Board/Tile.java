@@ -84,6 +84,24 @@ public class Tile implements ITile {
     }
 
     @Override
+    public void setWall(Direction direction) {
+        switch (direction){
+            case NORTH:
+                walls[0] = true;
+                break;
+            case EAST:
+                walls[1] = true;
+                break;
+            case SOUTH:
+                walls[2] = true;
+                break;
+            case WEST:
+                walls[3] = true;
+                break;
+        }
+    }
+
+    @Override
     public void setLinked(Direction direction, ITile tile) {
         switch (direction){
             case NORTH:

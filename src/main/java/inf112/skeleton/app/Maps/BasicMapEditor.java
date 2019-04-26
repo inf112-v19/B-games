@@ -77,7 +77,7 @@ public class BasicMapEditor {
                     if(pointer.getX() == x && pointer.getY() == y){
                         System.out.print("[X]");
                     } else {
-                        System.out.print("[ ]");continue;
+                        System.out.print("[ ]");
                     }
                 }
                 System.out.print("\n");

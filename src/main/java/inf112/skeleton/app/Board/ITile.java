@@ -75,4 +75,11 @@ public interface ITile {
      * @return the item currently on the tile, or null if empty.
      */
     Item getItem();
+
+    /**
+     * sets the tile to have a wall in the specified direction.
+     *
+     * @param direction
+     */
+    void setWall(Direction direction);
 }

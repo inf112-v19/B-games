@@ -82,6 +82,11 @@ public class Laser implements ILaser {
         return null;
     }
 
+    @Override
+    public void setWall(Direction direction) {
+        //does nothing whoooo!
+    }
+
     public String toString(){
         String returnString = "type:Laser\n";
         returnString += "laserDirection:" + laserDirection + "\n";
