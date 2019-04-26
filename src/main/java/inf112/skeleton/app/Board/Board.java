@@ -112,5 +112,18 @@ public class Board implements IBoard {
         }
 
         tiles[x][y] = tile;
+
+        if(tile.getLinked(Direction.NORTH).hasWall(Direction.SOUTH)){
+            tile.setWall(Direction.NORTH);
+        }
+        if(tile.getLinked(Direction.EAST).hasWall(Direction.WEST)){
+            tile.setWall(Direction.EAST);
+        }
+        if(tile.getLinked(Direction.SOUTH).hasWall(Direction.NORTH)){
+            tile.setWall(Direction.SOUTH);
+        }
+        if(tile.getLinked(Direction.WEST).hasWall(Direction.EAST)){
+            tile.setWall(Direction.WEST);
+        }
     }
 }
