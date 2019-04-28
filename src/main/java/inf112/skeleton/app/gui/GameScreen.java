@@ -77,9 +77,9 @@ public class GameScreen implements Screen {
         players.add(new Actor(5, 7, Color.GREEN, board, 3));
 
         //Initiating new UI object(singleton) and passing in necessary objects.
-        UI = new GameUI(atlas, players, action);
+        UI = new GameUI(atlas, players, action, board);
         //Loading in UI elements
-        UI.loadUI();
+        UI.loadUI2();
 
     }
 
@@ -160,7 +160,7 @@ public class GameScreen implements Screen {
         batch.end();
 
         //Rendering of the user interface
-        UI.renderUI();
+        UI.renderUI2();
     }
 
     private void moveRandomly(Actor player) {

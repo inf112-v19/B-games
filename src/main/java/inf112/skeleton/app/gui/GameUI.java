@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.Actor.Actor;
+import inf112.skeleton.app.Board.Board;
 import inf112.skeleton.app.Cards.CardType;
 import inf112.skeleton.app.Action.Action;
 import java.util.ArrayList;
@@ -27,11 +28,13 @@ public class GameUI {
     private TextureAtlas atlas;
     private ArrayList<Actor> players;
     private Action action;
+    private Board board;
 
-    public GameUI(TextureAtlas atlas, ArrayList<Actor> players, Action action) {
+    public GameUI(TextureAtlas atlas, ArrayList<Actor> players, Action action, Board board) {
         this.atlas = atlas;
         this.players = players;
         this.action = action;
+        this.board = board;
     }
 
     public void loadUI() {
@@ -121,23 +124,36 @@ public class GameUI {
 
     public void loadUI2() {
         buttonStage = new Stage(new ScreenViewport());
-        Table mCards = new Table();
-        //Putting table size to match that of the screen.
-        mCards.setFillParent(true);
-        mCards.setDebug(true);
         Skin skin = new Skin(Gdx.files.internal("assets/atlas/uiskin.json"));
-        //mCards.setWidth(buttonStage.getWidth());
-        mCards.align(Align.bottom + 20);
+        //rootTable is the table where all other tables/ui goes into. rootTable size is the same as the gamescreen.
+        Table rootTable = new Table();
+        Table cardsTable = new Table();
+        Table cardsOptions = new Table();
+        //Putting table size to match that of the screen.
+        rootTable.setFillParent(true);
+        rootTable.setDebug(true);
 
-        //mCards.setPosition(500, 500);
-        TextButton b = new TextButton("Hallo", skin);
-        TextButton c = new TextButton("Boooooooooo", skin);
-        mCards.add(b);
-        mCards.row();
-        mCards.add(c);
+        for (int i = 0; i < 2; i++) {
+            TextButton tb = new TextButton("MOVE_1_FORWARD", skin);
+            cardsOptions.add(tb).width(100).height(30);
+        }
 
+        for (int i = 0; i < 9; i++) {
+            TextButton tb = new TextButton("Register " + i, skin);
+            cardsTable.add(tb).height(100).width(75);
+        }
 
-        buttonStage.addActor(mCards);
+        /*  rootTable.center() here will change the position of the objects inside of rootTable, but not rootTable itself.
+            cardsTable.left() will then put the textbuttons to the left of the size of cardsTable logical table. Right now
+            it does nothing since the size of cardsTable is the same as the button inside it.
+        */
+
+        //rootTable.;
+        rootTable.add(cardsOptions).expandX().left();
+        rootTable.row();
+        rootTable.add(cardsTable).expandY().bottom();
+
+        buttonStage.addActor(rootTable);
 
     }
 
@@ -159,6 +175,10 @@ public class GameUI {
         //Resizing the button click area when resizing whole game
         buttonStage.getViewport().update(width, height, true);
 
+    }
+
+    public void dispose() {
+        buttonStage.dispose();
     }
 
 
