@@ -22,14 +22,13 @@ public class ActionTest {
     Actor actor;
     Player player1;
     Player player2;
+    Player player3;
     CardStack cardStack;
-    CardStack player1hand;
-    CardStack player2hand;
 
     @Before
     public void setup(){
         board = new Board();
-        cardStack = new CardStack();
+        cardStack = new CardStack(); //Only putting MOVE_1_FORWARD into player1, and MOVE_1_BACKWARD into player2, and ROTATE_90_LEFT into player3 for testing.
         cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 500, true)); //1
         cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 610, true)); //2
         cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 520, true)); //3
@@ -48,9 +47,19 @@ public class ActionTest {
         cardStack.addCardToStack(new Card(CardType.MOVE_1_BACKWARD, 650, true)); //7
         cardStack.addCardToStack(new Card(CardType.MOVE_1_BACKWARD, 560, true)); //8
         cardStack.addCardToStack(new Card(CardType.MOVE_1_BACKWARD, 570, true)); //9
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 290, true)); //1
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 200, true)); //2
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 710, true)); //3
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 730, true)); //4
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 780, true)); //5
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 740, true)); //6
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 750, true)); //7
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 760, true)); //8
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 770, true)); //9
         actor = new Actor(5, 5, Color.GREEN, board, 1);
         player1 = new Player(5,5,Color.GREEN,board,1, cardStack, false);
         player2 = new Player(4,5,Color.RED,board,2, cardStack,false);
+        player3 = new Player(3,5,Color.BLUE,board,3, cardStack,false);
         action = new Action(board);
     }
 
@@ -102,58 +111,55 @@ public class ActionTest {
     }
 
     @Test
-    public void cardHandleTest(){
-        assertEquals(0, action.getPhase());
-        assertEquals(18, cardStack.size());
-        assertEquals(10,player1.getHP());
-        assertEquals(10, player2.getHP());
-
-
+    public void cardHandleTestTwoPlayers(){
         ArrayList<Player> players = new ArrayList<Player>();
         player1.drawCards();
         assertEquals(5,player1.getRegister().size());
-        assertEquals(9, cardStack.size());
+        assertEquals(18, cardStack.size());
         player2.drawCards();
         assertEquals(5,player2.getRegister().size());
-        assertEquals(0, cardStack.size());
-
+        assertEquals(9, cardStack.size());
         players.add(player1);
         players.add(player2);
-        // player1hand = new CardStack();
-        // player2hand = new CardStack();
-
 
         board.generateRandom();
-
-        assertEquals(player1.getY(), 5);
-        assertEquals(player1.getX(), 5);
-        assertEquals(player2.getY(), 5);
-        assertEquals(player2.getX(), 4);
-      /*  player1hand.addCardToStack(cardStack.getCardFromStack());
-        player2hand.addCardToStack(cardStack.getCardFromStack());
-        player1hand.addCardToStack(cardStack.getCardFromStack());
-        player2hand.addCardToStack(cardStack.getCardFromStack());
-        player2hand.addCardToStack(cardStack.getCardFromStack());
-        player1hand.addCardToStack(cardStack.getCardFromStack());
-        player2hand.addCardToStack(cardStack.getCardFromStack());
-        player1hand.addCardToStack(cardStack.getCardFromStack());
-        player2hand.addCardToStack(cardStack.getCardFromStack());
-        player1hand.addCardToStack(cardStack.getCardFromStack()); */
-
-
-
-        action.cardResolver(players); //Forward først
+        assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() < player2.getCardsOnHand().get(action.getPhase()).getPriority());
+        action.cardResolver(players); //Expected Forward then Backward
         action.updatePhase();
-        assertEquals(1, action.getPhase());
-        action.cardResolver(players); //Backward først
+        assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() > player2.getCardsOnHand().get(action.getPhase()).getPriority());
+        action.cardResolver(players); //Expected Backward then Forward
         action.updatePhase();
-        assertEquals(2, action.getPhase());
-        action.cardResolver(players);
+        assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() > player2.getCardsOnHand().get(action.getPhase()).getPriority());
+        action.cardResolver(players); //Expected Backward then Forward
         action.updatePhase();
-        assertEquals(3, action.getPhase());
-        action.cardResolver(players);
+        assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() < player2.getCardsOnHand().get(action.getPhase()).getPriority());
+        action.cardResolver(players); //Expected Forward then Backward
         action.updatePhase();
-        assertEquals(4, action.getPhase());
+    }
+    @Test
+    public void cardHandleTestThreePlayers(){
+        ArrayList<Player> players = new ArrayList<Player>();
+        player1.drawCards();
+        assertEquals(5,player1.getRegister().size());
+        assertEquals(18, cardStack.size());
+        player2.drawCards();
+        assertEquals(5,player2.getRegister().size());
+        assertEquals(9, cardStack.size());
+        player3.drawCards();
+        assertEquals(5,player3.getRegister().size());
+        assertEquals(0, cardStack.size());
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        board.generateRandom();
+        action.cardResolver(players); //Expected RotateLeft, Forward then Backward
+        action.updatePhase();
+        action.cardResolver(players); //Expected RotateLeft, Backward then Forward
+        action.updatePhase();
+        action.cardResolver(players); //Expected Backward, Forward then RotateLeft
+        action.updatePhase();
+        action.cardResolver(players); //Expected Forward, Backward then RotateLeft
+        action.updatePhase();
     }
 }
 
