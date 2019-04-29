@@ -5,7 +5,6 @@ import inf112.skeleton.app.Board.Board;
 import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Board.Item;
 import inf112.skeleton.app.Board.RotationDirection;
-//import com.sun.xml.internal.bind.v2.TODO;
 
 public class Actor implements IActor {
     private int xPos;
