@@ -115,7 +115,7 @@ public class Player extends Actor implements IPlayer {
 
     public void lockCardsInRegisters(){
 
-        ArrayList<Integer>  registersToBeLocked = lockedRegistersNumbers();
+        ArrayList<Integer> registersToBeLocked = lockedRegistersNumbers();
 
         if (registersToBeLocked.isEmpty()){
             for (int i = 0; i < cardsInRegister.size(); i++){
@@ -126,10 +126,18 @@ public class Player extends Actor implements IPlayer {
         }
         else{
             for (int i = 0; i < registersToBeLocked.size(); i++){
-                int number = registersToBeLocked.get(0);
+                int number = registersToBeLocked.get(i);
                 if (cardsInRegister.get(number) instanceof Card){
                     cardsInRegister.get(number).setLocked();
-                    registersToBeLocked.remove(0);
+                }
+                else{
+                    try {
+                        addCardToRegister(0, number);
+                        cardsInRegister.get(number).setLocked();
+                    }
+                    catch(Exception e){
+                        System.out.println("No card in hand.");
+                    }
                 }
             }
         }
@@ -160,23 +168,14 @@ public class Player extends Actor implements IPlayer {
         }
     }
 
-    public void powerDown(){
-        /*
-         * TODO Robot remain inactive for 1 turn, restores all HP
-         *  at end of turn (after repair but before cards are collected)
-         */
-        powerDownRobot = true;
+    public void setPowerDown(boolean bool){
+        powerDownRobot = bool;
     }
 
     public void ConfirmAction(){
-        /*
-         * TODO check if a valid action has been performed and set
-         *  confirmAction to true
-         */
+
         if (powerDownRobot){
-            /*
-             * TODO tell robot to powerdown
-             */
+            robotPowerDown();
             confirmAction = true;
         }
         else if(FiveCardsInRegister()){
@@ -276,7 +275,7 @@ public class Player extends Actor implements IPlayer {
                 addCardToHand(index);
             }
             else if(choice == 3){
-                powerDown();
+                setPowerDown(true);
             }
             else if(choice == 4){
                 ConfirmAction();
