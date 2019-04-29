@@ -2,18 +2,14 @@ package inf112.skeleton.app.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Board.Board;
@@ -26,9 +22,13 @@ public class GameUI {
 
     private Stage buttonStage;
     private TextureAtlas atlas;
+    private TextureAtlas uiAtlas;
+    private SpriteBatch uiBatch;
     private ArrayList<Actor> players;
     private Action action;
     private Board board;
+    private Sprite ss;
+    private Array<Sprite> mCardsSprites;
 
     public GameUI(TextureAtlas atlas, ArrayList<Actor> players, Action action, Board board) {
         this.atlas = atlas;
@@ -124,24 +124,42 @@ public class GameUI {
 
     public void loadUI2() {
         buttonStage = new Stage(new ScreenViewport());
-        Skin skin = new Skin(Gdx.files.internal("assets/atlas/uiskin.json"));
+
+        //-------Søndag begin
+        uiAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/Movement-Cards.atlas"));
+        ss = uiAtlas.createSprite("m1b");
+
+        mCardsSprites = uiAtlas.createSprites();
+        uiBatch = new SpriteBatch();
+
+        Image jj = new Image();
+        Skin skin = new Skin(Gdx.files.internal("assets/UI/uiskin.json"));
+        Skin skin2 = new Skin(uiAtlas);
+
+        //-------Søndag end
+
         //rootTable is the table where all other tables/ui goes into. rootTable size is the same as the gamescreen.
         Table rootTable = new Table();
         Table cardsTable = new Table();
         Table cardsOptions = new Table();
+
+        //ImageTextButton tt = new ImageTextButton("wowow", skin2);
+
         //Putting table size to match that of the screen.
         rootTable.setFillParent(true);
         rootTable.setDebug(true);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 8; i++) {
             TextButton tb = new TextButton("MOVE_1_FORWARD", skin);
-            cardsOptions.add(tb).width(100).height(30);
+            cardsOptions.add(tb).width(150).height(30).row();
         }
 
         for (int i = 0; i < 9; i++) {
             TextButton tb = new TextButton("Register " + i, skin);
             cardsTable.add(tb).height(100).width(75);
         }
+
+
 
         /*  rootTable.center() here will change the position of the objects inside of rootTable, but not rootTable itself.
             cardsTable.left() will then put the textbuttons to the left of the size of cardsTable logical table. Right now
@@ -154,6 +172,7 @@ public class GameUI {
         rootTable.add(cardsTable).expandY().bottom();
 
         buttonStage.addActor(rootTable);
+
 
     }
 
@@ -168,6 +187,17 @@ public class GameUI {
         //Updates and draws every actor in the stage. Actors here are the buttons.
         buttonStage.act(Gdx.graphics.getDeltaTime());
         buttonStage.draw();
+
+        uiBatch.begin();
+        for (int i = 0; i < mCardsSprites.size; i++) {
+            uiBatch.draw(mCardsSprites.get(i), 180*i, 50);
+        }
+
+        uiBatch.end();
+
+        //mCardsSprites.get(2).draw(uiBatch);
+
+
 
     }
 
