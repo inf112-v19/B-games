@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class Action implements IAction {
 
     private int roundCounter;
-    private ArrayList<Player> players;
     private int phaseCounter;
     private boolean debug = true;
     Board board;
@@ -39,20 +38,23 @@ public class Action implements IAction {
         roundCounter++;
     }
 
-    public void cardResolver() {
-        int lowestPriority = 0;
+    public void cardResolver(ArrayList<Player> players) {
+        int lowestPriority;
         int indexToBePlayed = 0;
         ArrayList<Card> CardsToBePlayed = new ArrayList<Card>();                                    //Temporary cardlist.
-        for(int i = 0; i <= players.size(); i++) {
-            CardsToBePlayed.add(players.get(i).getRegister().get(phaseCounter));                    //Fetches a card from each player to be played this phase.
+        ArrayList<Card> CardsPlayed = new ArrayList<Card>();
+        for(int i = 0; i < players.size(); i++) {
+            CardsToBePlayed.add(players.get(i).getCardsOnHand().get(getPhase()));                    //Fetches a card from each player to be played this phase.
         }
-        for(int i = 0; i <= CardsToBePlayed.size(); i++) {
-            for (int j = 0; j <= CardsToBePlayed.size(); j++) {
-                if (CardsToBePlayed.get(j).getPriority() < lowestPriority) {
+        for(int i = 0; i < CardsToBePlayed.size(); i++) {
+            lowestPriority = 2000;
+            for (int j = 0; j < CardsToBePlayed.size(); j++) {
+                if (CardsToBePlayed.get(j).getPriority() < lowestPriority && !(CardsPlayed.contains(CardsToBePlayed.get(j)))) {
                     lowestPriority = CardsToBePlayed.get(j).getPriority();
-                    indexToBePlayed = i;
+                    indexToBePlayed = j;
                 }
             }
+            CardsPlayed.add(CardsToBePlayed.get(indexToBePlayed));
             playCard(players.get(indexToBePlayed), CardsToBePlayed.get(indexToBePlayed).getType());
         }
     }
@@ -127,4 +129,5 @@ public class Action implements IAction {
         player.direction = DirectionHelpers.rotateAntiClockwise(player.direction);
     }
 }
+
 
