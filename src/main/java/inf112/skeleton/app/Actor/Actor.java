@@ -5,7 +5,6 @@ import inf112.skeleton.app.Board.Board;
 import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Board.Item;
 import inf112.skeleton.app.Board.RotationDirection;
-//import com.sun.xml.internal.bind.v2.TODO;
 
 public class Actor implements IActor {
     private int xPos;
@@ -16,6 +15,7 @@ public class Actor implements IActor {
     private int robotLives;
     private int robotHP;
     public Direction direction = Direction.NORTH;
+    private int onConveyorCount;
     private int flagsVisited = 0;
     private Board board;
     private int dockingAssignment; //* set randomly at start of game based
@@ -111,15 +111,27 @@ public class Actor implements IActor {
     public void tileCheck(){
         ITile tile =  board.getAt(xPos, yPos);
         Item item = tile.getItem();
+
         if(tile.isHole()){
             robotDestroyed();
         }
         if(tile.hasCog() != null){
             rotate(tile.hasCog());
         }
-        if(tile.hasConveyor() != null){
+        if(tile.hasConveyor() != null) {
+
+            if (tile.hasConveyor() != null) {
+                onConveyorCount += 1;
+            } else {
+                onConveyorCount = 0;
+            }
             move(tile.hasConveyor());
-            System.out.println("conveyor moves " + color.toString());
+            //If robot has gone on 2 or more conveyors in a row, then change its direction to last conveyorbelt.
+            if (onConveyorCount >= 2) {
+                direction = tile.hasConveyor();
+                onConveyorCount = 0;
+            }
+
         }
         if(item != null){
             if(item == Item.WRENCH){
@@ -171,6 +183,10 @@ public class Actor implements IActor {
         }else{
             System.out.println("actor died"); //don't know what to do with robot when it dies yet
         }
+    }
+
+    public void robotPowerDown(){
+        robotHP = 10;
     }
 
 

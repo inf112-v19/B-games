@@ -5,6 +5,11 @@ import inf112.skeleton.app.Actor.Direction;
 import java.util.Random;
 
 public class Board implements IBoard {
+    /*
+    This board keeps width x height amount of objects that implement ITile.
+    Functions that use coordinates should assume that x=0 y=0 is the south-west corner tile.
+    TODO make sure this works properly in map generation and graphics.
+     */
 
     public ITile[][] tiles;
     private int width;
@@ -18,14 +23,41 @@ public class Board implements IBoard {
         this.width = width;
         this.height = height;
         tiles = new ITile[width][height];
+        for (int x = 0; x < width; x++){
+            for (int y = 0; y < height; y++){
+                tiles[x][y] = new Tile();
+            }
+        }
+        for (int x = 0; x < width; x++){
+            for (int y = 0; y < height; y++){
+                if (x > 0){
+                    tiles[x][y].setLinked(Direction.WEST, tiles[x-1][y]);
+                    //tiles[x-1][y].setLinked(Direction.EAST, tiles[x][y]);
+                } if (x < width-1){
+                    tiles[x][y].setLinked(Direction.EAST, tiles[x+1][y]);
+                    //tiles[x+1][y].setLinked(Direction.WEST, tiles[x][y]);
+                } if (y > 0){
+                    tiles[x][y].setLinked(Direction.SOUTH, tiles[x][y-1]);
+                    //tiles[x][y-1].setLinked(Direction.NORTH, tiles[x][y]);
+                } if (y < height-1){
+                    tiles[x][y].setLinked(Direction.NORTH, tiles[x][y+1]);
+                    //tiles[x][y+1].setLinked(Direction.SOUTH, tiles[x][y]);
+                }
+                /*
+                tiles[x][y].setLinked(Direction.WEST, tiles[x-1][y]);
+                tiles[x][y].setLinked(Direction.EAST, tiles[x+1][y]);
+                tiles[x][y].setLinked(Direction.SOUTH, tiles[x][y-1]);
+                tiles[x][y].setLinked(Direction.NORTH, tiles[x][y+1]);*/
+            }
+        }
     }
 
-
+    //TODO this function mixes up X and Y, needs to be fixed if we are to keep it.
     public void generateRandom(){
         Random r = new Random();
         for (int x = 0; x < height; x++) {
             for (int y = 0; y < width; y++) {
-                int random = r.nextInt(10);
+                int random = r.nextInt(14);
                 switch (random){
                     case 0:
                         tiles[x][y] = new Tile(new boolean[]{false, false, false, false}, Direction.NORTH);
@@ -39,8 +71,25 @@ public class Board implements IBoard {
                     case 3:
                         tiles[x][y] = new Tile(new boolean[]{false, false, false, false}, Direction.EAST);
                         break;
+                    case 4:
+                        tiles[x][y] = new Laser(Direction.NORTH);
+                        break;
+                    case 5:
+                        tiles[x][y] = new Laser(Direction.WEST);
+                        break;
+                    case 6:
+                        tiles[x][y] = new Laser(Direction.EAST);
+                        break;
+                    case 7:
+                        tiles[x][y] = new Laser(Direction.SOUTH);
+                        break;
+                    case 8:
+                        tiles[x][y] = new Tile();
+                        tiles[x][y].setHole(true);
+                        break;
                         default:
-                            tiles[x][y] = new Tile();
+                            int wallChance = 8; // 1 / wallchance
+                            tiles[x][y] = new Tile(new boolean[]{r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0});
                 }
             }
         }
@@ -73,6 +122,18 @@ public class Board implements IBoard {
         if(y < 0 || y > height){
             throw new IndexOutOfBoundsException();
         }
+
+        //copying all the previous tile's links to the new one
+        tile.setLinked(Direction.NORTH, tiles[x][y].getLinked(Direction.NORTH));
+        tile.setLinked(Direction.EAST, tiles[x][y].getLinked(Direction.EAST));
+        tile.setLinked(Direction.SOUTH, tiles[x][y].getLinked(Direction.SOUTH));
+        tile.setLinked(Direction.WEST, tiles[x][y].getLinked(Direction.WEST));
+        //linking the new tile to all it's linked tiles
+        tile.getLinked(Direction.NORTH).setLinked(Direction.SOUTH, tile);
+        tile.getLinked(Direction.EAST).setLinked(Direction.WEST, tile);
+        tile.getLinked(Direction.SOUTH).setLinked(Direction.NORTH, tile);
+        tile.getLinked(Direction.WEST).setLinked(Direction.EAST, tile);
+
         tiles[x][y] = tile;
     }
 }

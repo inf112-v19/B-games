@@ -28,3 +28,4 @@ hs_err_pid*
 
 src/test/java/inf112/skeleton/app/BenTest.java
 mvn-app.iml
+mvn-app.kotlin_module

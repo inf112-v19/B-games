@@ -4,17 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.Action.Action;
 import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Actor.Direction;
 import inf112.skeleton.app.Actor.DirectionHelpers;
 import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Board.ITile;
+import inf112.skeleton.app.Board.Laser;
 import inf112.skeleton.app.Cards.CardType;
 
 import java.util.ArrayList;
@@ -29,6 +25,16 @@ public class GameScreen implements Screen {
     SpriteBatch batch;
     private Sprite sprite_actor;
     private Sprite sprite_tile;
+    private Sprite sprite_laser;
+    private Sprite sprite_hole;
+    private Sprite sprite_hole_edge;
+    private Sprite sprite_wall;
+
+    private Sprite sprite_body;
+    private Sprite sprite_wheels;
+    private Sprite sprite_eye;
+
+
     private int tile_size = 256;
     TextureAtlas atlas;
 
@@ -46,15 +52,14 @@ public class GameScreen implements Screen {
     private float actionInterval = 1;
     private float timer = 0;
     private int player = 0;
+    Sprite sprite_beam;
 
-    //Stages
-    private Stage buttonStage;
+    //UI
+    private GameUI UI;
 
     public GameScreen(RoboRally game) {
         this.game = game;
-        atlas = new TextureAtlas(Gdx.files.internal("assets/atlas/test.atlas"));
-
-        buttonStage = new Stage(new ScreenViewport());
+        atlas = Assets.getTextureAtlas();
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
@@ -73,7 +78,20 @@ public class GameScreen implements Screen {
         board = new Board(10, 10);
         board.generateRandom();
         sprite_tile = atlas.createSprite("tile");
-        conveyor = new Animation<>(0.033f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
+        sprite_laser = atlas.createSprite("laser");
+        sprite_beam = atlas.createSprite("laserbeam");
+        sprite_hole = atlas.createSprite("hole");
+        sprite_hole_edge = atlas.createSprite("hole_edge");
+        sprite_wall = atlas.createSprite("wall");
+
+        sprite_body = atlas.createSprite("body");
+        sprite_eye = atlas.createSprite("eye");
+        sprite_wheels = atlas.createSprite("wheels");
+
+
+        conveyor = new Animation<>(1f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
+
+
 
         players = new ArrayList<>();
         sprite_actor = atlas.createSprite("robot");
@@ -84,85 +102,10 @@ public class GameScreen implements Screen {
         players.add(new Actor(5, 6, Color.BLUE, board, 2));
         players.add(new Actor(5, 7, Color.GREEN, board, 3));
 
-        //Creating a ninepatch texture for button. The magic with ninepatch is that it will scale the button after how long the string is.
-        NinePatch buttonTexture = atlas.createPatch("button_up");
-        buttonTexture.setColor(Color.BLUE);
-        //Each TextButton object needs as input: an string and a TextButtonStyle object(simply styles the button).
-        TextButton.TextButtonStyle movementButtonStyle = new TextButton.TextButtonStyle();
-        movementButtonStyle.font = new BitmapFont();
-        movementButtonStyle.up = new NinePatchDrawable(buttonTexture);
-        //The ArrayList containing our buttons
-        ArrayList<TextButton> movementButtons = new ArrayList<TextButton>();
-        //An array of all cardtypes
-        CardType[] allMovementCards = CardType.values();
-        //Create as many buttons as there are cards, set their position on screen, add them to movementButton array and to stage
-        for (int i = 0; i < allMovementCards.length; i++) {
-            TextButton tb = new TextButton(allMovementCards[i].toString(), movementButtonStyle);
-            tb.setPosition(0, tb.getHeight() * i);
-            movementButtons.add(tb);
-            buttonStage.addActor(tb);
-        }
-
-        //Movement will be applied to robot at index 0(red robot)
-        Actor selectedPlayer = players.get(0);
-        //MOVE_1_FORWARD button
-        movementButtons.get(0).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.MOVE_1_FORWARD);
-            }
-        });
-
-        //MOVE_2_FORWARD button
-        movementButtons.get(1).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.MOVE_2_FORWARD);
-            }
-        });
-
-        //MOVE_3_FORWARD button
-        movementButtons.get(2).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.MOVE_3_FORWARD);
-            }
-        });
-
-        //MOVE_1_BACKWARD button
-        movementButtons.get(3).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.MOVE_1_BACKWARD);
-            }
-        });
-
-        //ROTATE_90_LEFT button
-        movementButtons.get(4).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.ROTATE_90_LEFT);
-            }
-        });
-
-        //ROTATE_90_RIGHT button
-        movementButtons.get(5).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.ROTATE_90_RIGHT);
-            }
-        });
-
-        //ROTATE_180 button
-        movementButtons.get(6).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.ROTATE_180);
-            }
-        });
-
-        //Make input active
-        Gdx.input.setInputProcessor(buttonStage);
+        //Initiating new UI object(singleton) and passing in necessary objects.
+        UI = new GameUI(atlas, players, action, board);
+        //Loading in UI elements
+        UI.loadUI();
 
     }
 
@@ -176,12 +119,12 @@ public class GameScreen implements Screen {
         elapsedTime += deltaTime * animSpeed;
 
         // Animation test
-        Animation<Sprite> conveyor = new Animation<>(0.033f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
-        Animation<Sprite> conveyor2 = new Animation<>(0.033f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
+        Animation<Sprite> conveyor = new Animation<>(0.1f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
+        Animation<Sprite> conveyor2 = new Animation<>(0.1f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
 
         // Get current frame of animation for the current stateTime
         Sprite currentFrame = conveyor.getKeyFrame(elapsedTime, true);
-        currentFrame.setSize(tile_size,tile_size);
+        currentFrame.setSize(tile_size, tile_size);
         currentFrame.setOriginCenter();
 
         Gdx.gl.glClearColor(0, 0, 0, 0);
@@ -191,60 +134,144 @@ public class GameScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
+        sprite_tile.setSize(tile_size, tile_size);
+        sprite_laser.setSize(tile_size, tile_size);
+        sprite_beam.setSize(tile_size,tile_size);
+        sprite_hole.setSize(tile_size,tile_size);
+        sprite_wall.setSize(tile_size,tile_size);
+        sprite_wall.setOriginCenter();
+        sprite_hole_edge.setSize(tile_size,tile_size);
+        sprite_hole_edge.setColor(Color.GOLD);
+        sprite_laser.setOriginCenter();
+        sprite_beam.setOriginCenter();
+
+
         //rendering board
         for (int x = 0; x < board.getHeight(); x++) {
             for (int y = 0; y < board.getWidth(); y++) {
-                Direction facing = board.getAt(x,y).hasConveyor();
-                if(facing == null){
-                    batch.draw(sprite_tile, x * tile_size, y * tile_size, tile_size, tile_size);
-                } else {
+                ITile tile = board.getAt(x, y);
+                Direction conveyorFacing = tile.hasConveyor();
+
+
+                // Conveyor
+                if (conveyorFacing != null) {
+                    currentFrame.setRotation(DirectionHelpers.rotationFromDirection(conveyorFacing));
                     currentFrame.setPosition(x * tile_size, y * tile_size);
-                    switch (facing) {
-                        case NORTH:
-                            currentFrame.setRotation(0);
-                            break;
-                        case EAST:
-                            currentFrame.setRotation(270);
-                            break;
-                        case SOUTH:
-                            currentFrame.setRotation(180);
-                            break;
-                        case WEST:
-                            currentFrame.setRotation(90);
-                            break;
-                    }
                     currentFrame.draw(batch);
+                    continue;
+                }
+
+
+
+                sprite_tile.setPosition(x * tile_size, y * tile_size);
+                sprite_tile.draw(batch);
+                if(tile.isHole()){
+                    sprite_hole.setPosition(x * tile_size, y * tile_size);
+                    sprite_hole.draw(batch);
+                    sprite_hole_edge.setPosition(x * tile_size, y * tile_size);
+                    sprite_hole_edge.draw(batch);
+                }
+
+                if (Laser.class.isInstance(tile)) {
+                    Direction direction = ((Laser)tile).getLaser();
+                    sprite_laser.setColor(Color.RED);
+                    sprite_laser.setPosition(x * tile_size, y * tile_size);
+                    sprite_laser.setRotation(DirectionHelpers.rotationFromDirection(direction));
+                    sprite_laser.draw(batch);
+                }
+
+                // Walls
+                if(tile.hasWall(Direction.NORTH)){
+                    sprite_wall.setRotation(DirectionHelpers.rotationFromDirection(Direction.NORTH));
+                    sprite_wall.setPosition(x * tile_size, y * tile_size);
+                    sprite_wall.draw(batch);
+                }
+                if(tile.hasWall(Direction.SOUTH)){
+                    sprite_wall.setRotation(DirectionHelpers.rotationFromDirection(Direction.SOUTH));
+                    sprite_wall.setPosition(x * tile_size, y * tile_size);
+                    sprite_wall.draw(batch);
+                }
+                if(tile.hasWall(Direction.EAST)){
+                    sprite_wall.setRotation(DirectionHelpers.rotationFromDirection(Direction.EAST));
+                    sprite_wall.setPosition(x * tile_size, y * tile_size);
+                    sprite_wall.draw(batch);
+                }
+                if(tile.hasWall(Direction.WEST)){
+                    sprite_wall.setRotation(DirectionHelpers.rotationFromDirection(Direction.WEST));
+                    sprite_wall.setPosition(x * tile_size, y * tile_size);
+                    sprite_wall.draw(batch);
+                }
+
+            }
+        }
+
+/*
+        // TODO Laser fire test, move this to event
+        for (int x = 0; x < board.getHeight(); x++) {
+            for (int y = 0; y < board.getWidth(); y++) {
+                ITile tile = board.getAt(x, y);
+                if (Laser.class.isInstance(tile)) {
+                    Direction direction = ((Laser)tile).getLaser();
+
+                    sprite_beam.setPosition(x * tile_size, y * tile_size);
+                    sprite_beam.setRotation(DirectionHelpers.rotationFromDirection(direction));
+                    sprite_beam.draw(batch);
                 }
             }
         }
+*/
+
+
+
+
         /**
-        // Move actors
-        timer += deltaTime;
-        if(timer > actionInterval){
-            timer -= actionInterval;
-            player++;
-            if (player >= players.size()){
-                player = 0;
-            }
-            moveRandomly(players.get(player));
-        }
-        **/
+         // Move actors
+         timer += deltaTime;
+         if(timer > actionInterval){
+         timer -= actionInterval;
+         player++;
+         if (player >= players.size()){
+         player = 0;
+         }
+         moveRandomly(players.get(player));
+         }
+         **/
 
         //rendering actors
         for (Actor player : players) {
+            /*
             sprite_actor.setOriginCenter();
             sprite_actor.setPosition(player.getX() * tile_size, player.getY() * tile_size);
             sprite_actor.setRotation(DirectionHelpers.rotationFromDirection(player.direction));
             sprite_actor.setSize(tile_size, tile_size);
             sprite_actor.setColor(player.getColor());
-            sprite_actor.draw(batch);
+            sprite_actor.draw(batch);*/
+            sprite_wheels.setOriginCenter();
+            sprite_wheels.setPosition(player.getX() * tile_size, player.getY() * tile_size);
+            sprite_wheels.setRotation(DirectionHelpers.rotationFromDirection(player.direction));
+            sprite_wheels.setColor(Color.GRAY);
+            sprite_wheels.setSize(tile_size, tile_size);
+            sprite_wheels.draw(batch);
+            sprite_body.setOriginCenter();
+            sprite_body.setPosition(player.getX() * tile_size, player.getY() * tile_size);
+            sprite_body.setRotation(DirectionHelpers.rotationFromDirection(player.direction));
+            sprite_body.setSize(tile_size, tile_size);
+            sprite_body.setColor(player.getColor());
+            sprite_body.draw(batch);
+            sprite_eye.setOriginCenter();
+            sprite_eye.setPosition(player.getX() * tile_size, player.getY() * tile_size);
+            sprite_eye.setRotation(DirectionHelpers.rotationFromDirection(player.direction));
+            sprite_eye.setSize(tile_size, tile_size);
+            sprite_eye.draw(batch);
+            player.tileCheck();
         }
         batch.end();
 
-        //Updates and draws every actor in the stage. Actors here are the buttons.
-        buttonStage.act(Gdx.graphics.getDeltaTime());
-        buttonStage.draw();
+        //Rendering of the user interface
+        UI.renderUI();
     }
+
+
 
     private void moveRandomly(Actor player) {
         Random r = new Random();
@@ -258,6 +285,8 @@ public class GameScreen implements Screen {
         camera.viewportWidth = 3000;
         camera.viewportHeight = 3000 * height / width;
         camera.update();
+
+        //UI.resizeUI(width, height);
     }
 
     @Override
