@@ -84,6 +84,35 @@ public class Tile implements ITile {
     }
 
     @Override
+    public void setWall(Direction direction, boolean wall) {
+        switch (direction){
+            case NORTH:
+                walls[0] = wall;
+                if(wall != linkedNorth.hasWall(Direction.SOUTH)) {
+                    linkedNorth.setWall(Direction.SOUTH, wall);
+                }
+                break;
+            case EAST:
+                walls[1] = wall;
+                if(wall != linkedEast.hasWall(Direction.WEST)) {
+                    linkedEast.setWall(Direction.WEST, wall);
+                }
+                break;
+            case SOUTH:
+                walls[2] = wall;
+                if(wall != linkedSouth.hasWall(Direction.NORTH)) {
+                    linkedSouth.setWall(Direction.NORTH, wall);
+                }
+                break;
+            case WEST:
+                walls[3] = wall;
+                if(wall != linkedWest.hasWall(Direction.EAST))
+                linkedWest.setWall(Direction.EAST, wall);
+                break;
+        }
+    }
+
+    @Override
     public void setLinked(Direction direction, ITile tile) {
         switch (direction){
             case NORTH:

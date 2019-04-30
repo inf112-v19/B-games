@@ -32,31 +32,21 @@ public class Board implements IBoard {
             for (int y = 0; y < height; y++){
                 if (x > 0){
                     tiles[x][y].setLinked(Direction.WEST, tiles[x-1][y]);
-                    //tiles[x-1][y].setLinked(Direction.EAST, tiles[x][y]);
                 } if (x < width-1){
                     tiles[x][y].setLinked(Direction.EAST, tiles[x+1][y]);
-                    //tiles[x+1][y].setLinked(Direction.WEST, tiles[x][y]);
                 } if (y > 0){
                     tiles[x][y].setLinked(Direction.SOUTH, tiles[x][y-1]);
-                    //tiles[x][y-1].setLinked(Direction.NORTH, tiles[x][y]);
                 } if (y < height-1){
                     tiles[x][y].setLinked(Direction.NORTH, tiles[x][y+1]);
-                    //tiles[x][y+1].setLinked(Direction.SOUTH, tiles[x][y]);
                 }
-                /*
-                tiles[x][y].setLinked(Direction.WEST, tiles[x-1][y]);
-                tiles[x][y].setLinked(Direction.EAST, tiles[x+1][y]);
-                tiles[x][y].setLinked(Direction.SOUTH, tiles[x][y-1]);
-                tiles[x][y].setLinked(Direction.NORTH, tiles[x][y+1]);*/
             }
         }
     }
 
-    //TODO this function mixes up X and Y, needs to be fixed if we are to keep it.
     public void generateRandom(){
         Random r = new Random();
-        for (int x = 0; x < height; x++) {
-            for (int y = 0; y < width; y++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
                 int random = r.nextInt(14);
                 switch (random){
                     case 0:
@@ -123,17 +113,25 @@ public class Board implements IBoard {
             throw new IndexOutOfBoundsException();
         }
 
-        //copying all the previous tile's links to the new one
-        tile.setLinked(Direction.NORTH, tiles[x][y].getLinked(Direction.NORTH));
-        tile.setLinked(Direction.EAST, tiles[x][y].getLinked(Direction.EAST));
-        tile.setLinked(Direction.SOUTH, tiles[x][y].getLinked(Direction.SOUTH));
-        tile.setLinked(Direction.WEST, tiles[x][y].getLinked(Direction.WEST));
-        //linking the new tile to all it's linked tiles
-        tile.getLinked(Direction.NORTH).setLinked(Direction.SOUTH, tile);
-        tile.getLinked(Direction.EAST).setLinked(Direction.WEST, tile);
-        tile.getLinked(Direction.SOUTH).setLinked(Direction.NORTH, tile);
-        tile.getLinked(Direction.WEST).setLinked(Direction.EAST, tile);
+        if (x > 0){
+            tile.setLinked(Direction.WEST, tiles[x][y].getLinked(Direction.WEST));
+            tile.getLinked(Direction.WEST).setLinked(Direction.EAST, tile);
+            tile.setWall(Direction.WEST, tile.getLinked(Direction.WEST).hasWall(Direction.EAST));
+        } if (x < width-1){
+            tile.setLinked(Direction.EAST, tiles[x][y].getLinked(Direction.EAST));
+            tile.getLinked(Direction.EAST).setLinked(Direction.WEST, tile);
+            tile.setWall(Direction.EAST, tile.getLinked(Direction.EAST).hasWall(Direction.WEST));
+        } if (y > 0){
+            tile.setLinked(Direction.SOUTH, tiles[x][y].getLinked(Direction.SOUTH));
+            tile.getLinked(Direction.SOUTH).setLinked(Direction.NORTH, tile);
+            tile.setWall(Direction.SOUTH, tile.getLinked(Direction.SOUTH).hasWall(Direction.NORTH));
+        } if (y < height-1){
+            tile.setLinked(Direction.NORTH, tiles[x][y].getLinked(Direction.NORTH));
+            tile.getLinked(Direction.NORTH).setLinked(Direction.SOUTH, tile);
+            tile.setWall(Direction.NORTH, tile.getLinked(Direction.NORTH).hasWall(Direction.SOUTH));
+        }
 
         tiles[x][y] = tile;
+
     }
 }

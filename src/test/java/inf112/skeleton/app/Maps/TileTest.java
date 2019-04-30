@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Maps;
 
 import inf112.skeleton.app.Actor.Direction;
 import inf112.skeleton.app.Board.*;
