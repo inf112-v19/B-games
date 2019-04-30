@@ -7,6 +7,7 @@ import inf112.skeleton.app.Board.Board;
 import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Maps.BasicMapLoaderSaver;
 import inf112.skeleton.app.Maps.IMapLoaderSaver;
+import inf112.skeleton.app.Prototyping;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,8 +19,7 @@ public class MapLoaderSaverTest {
     private ITile testTile2;
     @Before
     public void setup(){
-        board2 = new Board(10, 10);
-        board2.generateRandom();
+        board2 = Prototyping.generateRandomBoard(10, 10);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class MapLoaderSaverTest {
 
     @Test
     public void boardComparisonTest(){
-        board2.generateRandom();
+        board2 = Prototyping.generateRandomBoard(10, 10);
         loaderSaver.save(board2, "maps/map.txt");
         board1 = loaderSaver.load("maps/map.txt");
 

@@ -92,7 +92,7 @@ public class ActionTest {
 
     @Test
     public void moveForwardMovesPlayerOneTile(){
-        board.generateRandom();
+        board = Prototyping.generateRandomBoard();
         assertEquals(actor.getX(), 5);
         assertEquals(actor.getY(), 5);
         action.moveForward(actor);
@@ -102,7 +102,7 @@ public class ActionTest {
 
     @Test
     public void moveBackwardsMovesPlayerOneTileBackward(){
-        board.generateRandom();
+        board = Prototyping.generateRandomBoard();
         assertEquals(actor.getY(), 5);
         assertEquals(actor.getX(), 5);
         action.moveBackwards(actor);
@@ -122,7 +122,7 @@ public class ActionTest {
         players.add(player1);
         players.add(player2);
 
-        board.generateRandom();
+        board = Prototyping.generateRandomBoard();
         assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() < player2.getCardsOnHand().get(action.getPhase()).getPriority());
         action.cardResolver(players);
         System.out.print("Expected: 00ff00ff MOVE_1_FORWARD" + "\n");
@@ -159,7 +159,7 @@ public class ActionTest {
         players.add(player1);
         players.add(player2);
         players.add(player3);
-        board.generateRandom();
+        board = Prototyping.generateRandomBoard();
         action.cardResolver(players); //Expected RotateLeft, Forward then Backward
         System.out.print("Expected: 0000ffff ROTATE_90_LEFT" + "\n");
         System.out.print("Expected: 00ff00ff MOVE_1_FORWARD" + "\n");
