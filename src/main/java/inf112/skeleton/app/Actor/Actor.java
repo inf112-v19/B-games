@@ -18,10 +18,8 @@ public class Actor implements IActor {
     private int onConveyorCount;
     private int flagsVisited = 0;
     private Board board;
-    private int dockingAssignment; //* set randomly at start of game based
-                                   // on number of players, determines
-                                   // starting position and
-                                   // priority for actions not covered by cards
+    private int dockingAssignment;
+    private boolean isDead = false;
 
 
     public Actor(int x, int y, Color color, Board board, int dockingAssignment){
@@ -104,42 +102,43 @@ public class Actor implements IActor {
 
     }
 
-    //Checks what type of tile actor is standing on and
-    //what items are in it and calls appropriate methods.
-    //Taking damage from laser beam is not yet implemented,
-    //unsure if this should be done in this method
+    /*Checks what type of tile actor is standing on and
+    what items are in it and calls appropriate methods.
+    Taking damage from laser beam is not yet implemented*/
     public void tileCheck(){
-        ITile tile =  board.getAt(xPos, yPos);
-        Item item = tile.getItem();
+        if(!isDead) {
+            ITile tile = board.getAt(xPos, yPos);
+            Item item = tile.getItem();
 
-        if(tile.isHole()){
-            robotDestroyed();
-        }
-        if(tile.hasCog() != null){
-            rotate(tile.hasCog());
-        }
-        if(tile.hasConveyor() != null) {
-
+            if (tile.isHole()) {
+                robotDestroyed();
+            }
+            if (tile.hasCog() != null) {
+                rotate(tile.hasCog());
+            }
             if (tile.hasConveyor() != null) {
-                onConveyorCount += 1;
-            } else {
-                onConveyorCount = 0;
-            }
-            move(tile.hasConveyor());
-            //If robot has gone on 2 or more conveyors in a row, then change its direction to last conveyorbelt.
-            if (onConveyorCount >= 2) {
-                direction = tile.hasConveyor();
-                onConveyorCount = 0;
-            }
 
-        }
-        if(item != null){
-            if(item == Item.WRENCH){
-                repairDamage();
-                updateRestorationPoint();
+                if (tile.hasConveyor() != null) {
+                    onConveyorCount += 1;
+                } else {
+                    onConveyorCount = 0;
+                }
+                move(tile.hasConveyor());
+                //If robot has gone on 2 or more conveyors in a row, then change its direction to last conveyorbelt.
+                if (onConveyorCount >= 2) {
+                    direction = tile.hasConveyor();
+                    onConveyorCount = 0;
+                }
+
             }
-            if(item == Item.FLAG){
-                updateRestorationPoint();
+            if (item != null) {
+                if (item == Item.WRENCH) {
+                    repairDamage();
+                    updateRestorationPoint();
+                }
+                if (item == Item.FLAG) {
+                    updateRestorationPoint();
+                }
             }
         }
     }
@@ -181,7 +180,10 @@ public class Actor implements IActor {
         if(robotLives > 0){
             restoreRobot();
         }else{
-            System.out.println("actor died"); //don't know what to do with robot when it dies yet
+            this.xPos = 11;
+            this.yPos = 11;
+            System.out.println(this.color + "actor died"); //don't know what to do with robot when it dies yet
+            this.isDead = true;
         }
     }
 

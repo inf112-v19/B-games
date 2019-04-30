@@ -6,14 +6,11 @@ import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Actor.Direction;
 import inf112.skeleton.app.Actor.Player;
 import inf112.skeleton.app.Board.Board;
-<<<<<<< HEAD
 import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Board.Tile;
 import inf112.skeleton.app.Cards.Card;
-=======
 import inf112.skeleton.app.Cards.Card;
 import inf112.skeleton.app.Cards.CardStack;
->>>>>>> 62069a3d10232bb81931f0327b7fa13b5994a037
 import inf112.skeleton.app.Cards.CardType;
 import org.junit.Before;
 import org.junit.Test;
@@ -189,28 +186,5 @@ public class ActionTest {
         assertEquals(actor.direction, Direction.NORTH);
         action.playCard(actor, CardType.ROTATE_90_RIGHT);
         assertEquals(actor.direction, Direction.EAST);
-    }
-}
-        player1.drawCards();
-        assertEquals(5,player1.getRegister().size());
-        assertEquals(18, cardStack.size());
-        player2.drawCards();
-        assertEquals(5,player2.getRegister().size());
-        assertEquals(9, cardStack.size());
-        player3.drawCards();
-        assertEquals(5,player3.getRegister().size());
-        assertEquals(0, cardStack.size());
-        players.add(player1);
-        players.add(player2);
-        players.add(player3);
-        board.generateRandom();
-        action.cardResolver(players); //Expected RotateLeft, Forward then Backward
-        action.updatePhase();
-        action.cardResolver(players); //Expected RotateLeft, Backward then Forward
-        action.updatePhase();
-        action.cardResolver(players); //Expected Backward, Forward then RotateLeft
-        action.updatePhase();
-        action.cardResolver(players); //Expected Forward, Backward then RotateLeft
-        action.updatePhase();
     }
 }
