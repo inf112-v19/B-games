@@ -5,7 +5,6 @@ import inf112.skeleton.app.Board.Board;
 import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Board.Item;
 import inf112.skeleton.app.Board.RotationDirection;
-//import com.sun.xml.internal.bind.v2.TODO;
 
 public class Actor implements IActor {
     private int xPos;
@@ -184,6 +183,10 @@ public class Actor implements IActor {
         }else{
             System.out.println("actor died"); //don't know what to do with robot when it dies yet
         }
+    }
+
+    public void robotPowerDown(){
+        robotHP = 10;
     }
 
 

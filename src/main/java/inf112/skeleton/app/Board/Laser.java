@@ -20,7 +20,10 @@ public class Laser implements ILaser {
 
     @Override
     public boolean hasWall(Direction direction) {
-        return true;
+        if(direction == laserDirection){
+            return true;
+        }
+        return false;
     }
 
     @Override

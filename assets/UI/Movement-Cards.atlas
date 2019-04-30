@@ -1,0 +1,55 @@
+
+Movement-Cards.png
+size: 2048,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+m1b
+  rotate: false
+  xy: 914, 2
+  size: 150, 200
+  orig: 150, 200
+  offset: 0, 0
+  index: -1
+m1f
+  rotate: false
+  xy: 154, 2
+  size: 150, 200
+  orig: 150, 200
+  offset: 0, 0
+  index: -1
+m2f
+  rotate: false
+  xy: 610, 2
+  size: 150, 200
+  orig: 150, 200
+  offset: 0, 0
+  index: -1
+m3f
+  rotate: false
+  xy: 2, 2
+  size: 150, 200
+  orig: 150, 200
+  offset: 0, 0
+  index: -1
+r180
+  rotate: false
+  xy: 762, 2
+  size: 150, 200
+  orig: 150, 200
+  offset: 0, 0
+  index: -1
+r90l
+  rotate: false
+  xy: 306, 2
+  size: 150, 200
+  orig: 150, 200
+  offset: 0, 0
+  index: -1
+r90r
+  rotate: false
+  xy: 458, 2
+  size: 150, 200
+  orig: 150, 200
+  offset: 0, 0
+  index: -1
