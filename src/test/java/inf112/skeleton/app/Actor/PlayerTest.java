@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import static inf112.skeleton.app.Cards.CardType.*;
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class PlayerTest {
     private Player player;
@@ -22,7 +23,7 @@ public class PlayerTest {
     public void initializeHand() {
         board = new Board();
         cardstack = new CardStack();
-        player = new Player(5, 5, Color.GREEN, board, 1, cardstack, false);
+        player = new Player(5, 5, Color.GREEN, board, 1, 1, cardstack, false);
 
         //assert size of hand equals 9
         assertTrue(player.getCardsOnHand().size() == 9);
@@ -36,7 +37,7 @@ public class PlayerTest {
     public void initializeRegister() {
         board = new Board();
         cardstack = new CardStack();
-        player = new Player(5, 5, Color.GREEN, board, 1, cardstack, false);
+        player = new Player(5, 5, Color.GREEN, board, 1, 1, cardstack, false);
 
         //assert size of register equals 5
         assertTrue(player.getRegister().size() == 5);
@@ -51,7 +52,7 @@ public class PlayerTest {
     public void drawCards() {
         board = new Board();
         cardstack = new CardStack();
-        player = new Player(5, 5, Color.GREEN, board, 1, cardstack, false);
+        player = new Player(5, 5, Color.GREEN, board, 1, 1, cardstack, false);
         cardstack.initializeCardStack();
 
         //case 1: Player draws 9 cards at full HP
@@ -63,7 +64,7 @@ public class PlayerTest {
         }
 
         //case 2: Player draws cards after receiving 1 point of damage
-        player = new Player(6, 6, Color.RED, board, 2, cardstack, false);
+        player = new Player(6, 6, Color.RED, board, 2, 1,  cardstack, false);
 
         player.receiveDamage();
         player.drawCards();
@@ -77,7 +78,7 @@ public class PlayerTest {
         assertTrue(player.getCardsOnHand().get(lastCard) == null);
 
         //case 3: Player(tries to) draw cards after receiving enough damage to not get any cards
-        player = new Player(7, 7, Color.RED, board, 3, cardstack, false);
+        player = new Player(7, 7, Color.RED, board, 3,1,  cardstack, false);
         //receive 9 points of damage
         for (int i = 0; i < player.getCardsOnHand().size(); i++) {
             player.receiveDamage();
@@ -93,43 +94,43 @@ public class PlayerTest {
     public void addCardToRegister() {
         board = new Board();
         cardstack = new CardStack();
-        player = new Player(5, 5, Color.GREEN, board, 1, cardstack, false);
+        player = new Player(5, 5, Color.GREEN, board, 1,1,  cardstack, false);
         cardstack.initializeCardStack();
         //case 1: No cards to add to register
         try {
-            player.addCardToRegister(1, 1);
+            player.addCardToRegister(1, 1, true);
         } catch (Exception e) {
             assertEquals("No card in your hand at that number", e.getMessage());
         }
         player.drawCards();
         //case 2: Try to add cards outside index for hand
         try {
-            player.addCardToRegister(-1, 1);
+            player.addCardToRegister(-1, 1,true);
         } catch (Exception e) {
             assertEquals("Number for hand needs to be between 1 and 9.", e.getMessage());
         }
         try {
-            player.addCardToRegister(10, 1);
+            player.addCardToRegister(10, 1, true);
         } catch (Exception e) {
             assertEquals("Number for hand needs to be between 1 and 9.", e.getMessage());
         }
         //case 2: Try to add cards outside index for register
         try {
-            player.addCardToRegister(1, -1);
+            player.addCardToRegister(1, -1, true);
         } catch (Exception e) {
             assertEquals("Number for register needs to be between 1 and 5.", e.getMessage());
         }
 
         try {
-            player.addCardToRegister(1, 6);
+            player.addCardToRegister(1, 6, true);
         } catch (Exception e) {
             assertEquals("Number for register needs to be between 1 and 5.", e.getMessage());
         }
 
         //case 3: Try to add cards to an already full register slot
         try {
-            player.addCardToRegister(1, 1);
-            player.addCardToRegister(1, 1);
+            player.addCardToRegister(1, 1, true);
+            player.addCardToRegister(1, 1, true);
         } catch (Exception e) {
             assertEquals("That register number is not empty", e.getMessage());
         }
@@ -137,7 +138,7 @@ public class PlayerTest {
         // case 4: Assert card from hand does get added to register
         Card cardInHand = player.getCardsOnHand().get(1);
         try {
-            player.addCardToRegister(1, 2);
+            player.addCardToRegister(1, 2, true);
         } catch (Exception e) {
         }
         Card cardInRegister = player.getRegister().get(2);
@@ -148,7 +149,7 @@ public class PlayerTest {
     public void addCardToHand() {
         board = new Board();
         cardstack = new CardStack();
-        player = new Player(5, 5, Color.GREEN, board, 1, cardstack, false);
+        player = new Player(5, 5, Color.GREEN, board, 1, 1, cardstack, false);
         cardstack.initializeCardStack();
         player.drawCards();
 
@@ -173,7 +174,7 @@ public class PlayerTest {
 
         //case 3: Card in register is locked
         try {
-            player.addCardToRegister(1, 1);
+            player.addCardToRegister(1, 1, true);
         } catch (Exception e) {
         }
         player.getRegister().get(1).setLocked();
@@ -198,7 +199,7 @@ public class PlayerTest {
     public void lockedRegistersNumbers() {
         board = new Board();
         cardstack = new CardStack();
-        player = new Player(5, 5, Color.GREEN, board, 1, cardstack, false);
+        player = new Player(5, 5, Color.GREEN, board, 1,1,  cardstack, false);
 
         // case 1: at full HP should return empty list
         ArrayList<Integer> testList = player.lockedRegistersNumbers();
@@ -267,7 +268,7 @@ public class PlayerTest {
     public void lockCardsInRegisters() {
         board = new Board();
         cardstack = new CardStack();
-        player = new Player(5, 5, Color.GREEN, board, 1, cardstack, false);
+        player = new Player(5, 5, Color.GREEN, board, 1,1, cardstack, false);
         cardstack.initializeCardStack();
 
 
@@ -341,5 +342,112 @@ public class PlayerTest {
     }
 
 
+    @Test
+    public void putCardsBackIntoCardStackTest() {
+        board = new Board();
+        cardstack = new CardStack();
+        player = new Player(5, 5, Color.GREEN, board, 1,1, cardstack, false);
+        cardstack.initializeCardStack();
 
+        assertEquals(84 , cardstack.size());
+
+        //case 1: Draw 9 cards and put all back into stack
+        player.drawCards();
+        assertEquals(75 , cardstack.size());
+        player.putCardsBackIntoCardStack();
+        assertEquals(84 , cardstack.size());
+
+        for (int i = 0; i < player.getCardsOnHand().size(); i++){
+            assertTrue(player.getCardsOnHand().get(i)== null);
+        }
+        for (int i = 0; i < cardstack.size(); i++){
+            Card card = cardstack.getCardFromStack();
+            assertTrue(card instanceof Card);
+            cardstack.addCardToStack(card);
+        }
+
+        //case 2: Locked cards in register don't get put back into stack, 1 locked card
+        player.drawCards();
+        for (int i = 0; i < 5; i++){
+            player.receiveDamage();
+        }
+        player.lockCardsInRegisters();
+        player.putCardsBackIntoCardStack();
+        assertEquals(83 , cardstack.size());
+
+        //case 3: Locked cards in register don't get put back into stack, 5 locked card
+        player.drawCards();
+        for (int i = 0; i < 4; i++){
+            player.receiveDamage();
+        }
+        player.lockCardsInRegisters();
+        player.putCardsBackIntoCardStack();
+        assertEquals(79 , cardstack.size());
+    }
+
+    @Test
+    public void fiveCardsInRegister() {
+        board = new Board();
+        cardstack = new CardStack();
+        player = new Player(5, 5, Color.GREEN, board, 1,1, cardstack, false);
+        cardstack.initializeCardStack();
+        player.drawCards();
+
+        //case 1: No cards in registers
+        assertFalse(player.fiveCardsInRegister());
+
+        //case 2: 4 cards in register
+        try {
+            player.addCardToRegister(0, 0, true);
+            player.addCardToRegister(0, 1, true);
+            player.addCardToRegister(0, 2, true);
+            player.addCardToRegister(0, 3, true);
+        }
+        catch(Exception e){
+            e.getMessage();
+        }
+        assertFalse(player.fiveCardsInRegister());
+
+        //case 2: 5 cards in register
+        try {
+            player.addCardToRegister(0, 4, true);
+        }
+        catch(Exception e){
+            e.getMessage();
+        }
+
+        assertTrue(player.fiveCardsInRegister());
+    }
+
+    @Test
+    public void confirmActionTest() {
+        board = new Board();
+        cardstack = new CardStack();
+        player = new Player(5, 5, Color.GREEN, board, 1,1, cardstack, false);
+        cardstack.initializeCardStack();
+
+        //case 1: No action
+        assertFalse(player.getConfirmAction());
+
+        //case 2: Player sets to powerdown
+        player.setPowerDown(true);
+        player.confirmAction();
+        assertTrue(player.getConfirmAction());
+
+        //case 3: 5 cards in registers sets to true
+        player.setConfirmAction(false);
+        player.drawCards();
+        try {
+            player.addCardToRegister(0, 0, true);
+            player.addCardToRegister(0, 1, true);
+            player.addCardToRegister(0, 2, true);
+            player.addCardToRegister(0, 3, true);
+            player.addCardToRegister(0, 4, true);
+        }
+        catch(Exception e){
+            e.getMessage();
+        }
+        player.confirmAction();
+        assertTrue(player.getConfirmAction());
+    }
 }
