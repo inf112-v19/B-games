@@ -6,11 +6,14 @@ import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Actor.Direction;
 import inf112.skeleton.app.Actor.Player;
 import inf112.skeleton.app.Board.Board;
+<<<<<<< HEAD
 import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Board.Tile;
 import inf112.skeleton.app.Cards.Card;
+=======
 import inf112.skeleton.app.Cards.Card;
 import inf112.skeleton.app.Cards.CardStack;
+>>>>>>> 62069a3d10232bb81931f0327b7fa13b5994a037
 import inf112.skeleton.app.Cards.CardType;
 import org.junit.Before;
 import org.junit.Test;
@@ -188,34 +191,6 @@ public class ActionTest {
         assertEquals(actor.direction, Direction.EAST);
     }
 }
-    public void cardHandleTestTwoPlayers(){
-        ArrayList<Player> players = new ArrayList<Player>();
-        player1.drawCards();
-        assertEquals(5,player1.getRegister().size());
-        assertEquals(18, cardStack.size());
-        player2.drawCards();
-        assertEquals(5,player2.getRegister().size());
-        assertEquals(9, cardStack.size());
-        players.add(player1);
-        players.add(player2);
-
-        board.generateRandom();
-        assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() < player2.getCardsOnHand().get(action.getPhase()).getPriority());
-        action.cardResolver(players); //Expected Forward then Backward
-        action.updatePhase();
-        assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() > player2.getCardsOnHand().get(action.getPhase()).getPriority());
-        action.cardResolver(players); //Expected Backward then Forward
-        action.updatePhase();
-        assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() > player2.getCardsOnHand().get(action.getPhase()).getPriority());
-        action.cardResolver(players); //Expected Backward then Forward
-        action.updatePhase();
-        assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() < player2.getCardsOnHand().get(action.getPhase()).getPriority());
-        action.cardResolver(players); //Expected Forward then Backward
-        action.updatePhase();
-    }
-    @Test
-    public void cardHandleTestThreePlayers(){
-        ArrayList<Player> players = new ArrayList<Player>();
         player1.drawCards();
         assertEquals(5,player1.getRegister().size());
         assertEquals(18, cardStack.size());
