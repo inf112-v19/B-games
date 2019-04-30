@@ -77,9 +77,10 @@ public interface ITile {
     Item getItem();
 
     /**
-     * sets the tile to have a wall in the specified direction.
+     * sets the tile to have a wall or not in the specified direction.
      *
      * @param direction
+     * @param wall use true to create a wall, and false to remove a wall.
      */
-    void setWall(Direction direction);
+    void setWall(Direction direction, boolean wall);
 }

@@ -43,11 +43,10 @@ public class Board implements IBoard {
         }
     }
 
-    //TODO this function mixes up X and Y, needs to be fixed if we are to keep it.
     public void generateRandom(){
         Random r = new Random();
-        for (int x = 0; x < height; x++) {
-            for (int y = 0; y < width; y++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
                 int random = r.nextInt(10);
                 switch (random){
                     case 0:
@@ -100,30 +99,22 @@ public class Board implements IBoard {
         if (x > 0){
             tile.setLinked(Direction.WEST, tiles[x][y].getLinked(Direction.WEST));
             tile.getLinked(Direction.WEST).setLinked(Direction.EAST, tile);
+            tile.setWall(Direction.WEST, tile.getLinked(Direction.WEST).hasWall(Direction.EAST));
         } if (x < width-1){
             tile.setLinked(Direction.EAST, tiles[x][y].getLinked(Direction.EAST));
             tile.getLinked(Direction.EAST).setLinked(Direction.WEST, tile);
+            tile.setWall(Direction.EAST, tile.getLinked(Direction.EAST).hasWall(Direction.WEST));
         } if (y > 0){
             tile.setLinked(Direction.SOUTH, tiles[x][y].getLinked(Direction.SOUTH));
             tile.getLinked(Direction.SOUTH).setLinked(Direction.NORTH, tile);
+            tile.setWall(Direction.SOUTH, tile.getLinked(Direction.SOUTH).hasWall(Direction.NORTH));
         } if (y < height-1){
             tile.setLinked(Direction.NORTH, tiles[x][y].getLinked(Direction.NORTH));
             tile.getLinked(Direction.NORTH).setLinked(Direction.SOUTH, tile);
+            tile.setWall(Direction.NORTH, tile.getLinked(Direction.NORTH).hasWall(Direction.SOUTH));
         }
 
         tiles[x][y] = tile;
 
-        if(tile.getLinked(Direction.NORTH).hasWall(Direction.SOUTH)){
-            tile.setWall(Direction.NORTH);
-        }
-        if(tile.getLinked(Direction.EAST).hasWall(Direction.WEST)){
-            tile.setWall(Direction.EAST);
-        }
-        if(tile.getLinked(Direction.SOUTH).hasWall(Direction.NORTH)){
-            tile.setWall(Direction.SOUTH);
-        }
-        if(tile.getLinked(Direction.WEST).hasWall(Direction.EAST)){
-            tile.setWall(Direction.WEST);
-        }
     }
 }

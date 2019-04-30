@@ -83,8 +83,8 @@ public class Laser implements ILaser {
     }
 
     @Override
-    public void setWall(Direction direction) {
-        //does nothing whoooo!
+    public void setWall(Direction direction, boolean wall) {
+        //Nothing, whooo
     }
 
     public String toString(){

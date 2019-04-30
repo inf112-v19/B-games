@@ -10,7 +10,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
     @Override
     public Board load(String map) {
 
-        String line = null; //keeps the most recent line from the map file when needed
+        String line; //keeps the most recent line from the map file when needed
         Board board;
 
         /*
