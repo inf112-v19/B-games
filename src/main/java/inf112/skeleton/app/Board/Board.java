@@ -57,7 +57,7 @@ public class Board implements IBoard {
         Random r = new Random();
         for (int x = 0; x < height; x++) {
             for (int y = 0; y < width; y++) {
-                int random = r.nextInt(10);
+                int random = r.nextInt(14);
                 switch (random){
                     case 0:
                         tiles[x][y] = new Tile(new boolean[]{false, false, false, false}, Direction.NORTH);
@@ -71,8 +71,25 @@ public class Board implements IBoard {
                     case 3:
                         tiles[x][y] = new Tile(new boolean[]{false, false, false, false}, Direction.EAST);
                         break;
+                    case 4:
+                        tiles[x][y] = new Laser(Direction.NORTH);
+                        break;
+                    case 5:
+                        tiles[x][y] = new Laser(Direction.WEST);
+                        break;
+                    case 6:
+                        tiles[x][y] = new Laser(Direction.EAST);
+                        break;
+                    case 7:
+                        tiles[x][y] = new Laser(Direction.SOUTH);
+                        break;
+                    case 8:
+                        tiles[x][y] = new Tile();
+                        tiles[x][y].setHole(true);
+                        break;
                         default:
-                            tiles[x][y] = new Tile();
+                            int wallChance = 8; // 1 / wallchance
+                            tiles[x][y] = new Tile(new boolean[]{r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0});
                 }
             }
         }
