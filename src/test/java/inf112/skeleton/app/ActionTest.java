@@ -124,16 +124,24 @@ public class ActionTest {
 
         board.generateRandom();
         assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() < player2.getCardsOnHand().get(action.getPhase()).getPriority());
-        action.cardResolver(players); //Expected Forward then Backward
+        action.cardResolver(players);
+        System.out.print("Expected: 00ff00ff MOVE_1_FORWARD" + "\n");
+        System.out.print("Expected: ff0000ff MOVE_1_BACKWARD" + "\n");
         action.updatePhase();
         assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() > player2.getCardsOnHand().get(action.getPhase()).getPriority());
-        action.cardResolver(players); //Expected Backward then Forward
+        action.cardResolver(players);
+        System.out.print("Expected ff0000ff MOVE_1_BACKWARD" + "\n");
+        System.out.print("Expected 00ff00ff MOVE_1_FORWARD" + "\n");
         action.updatePhase();
         assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() > player2.getCardsOnHand().get(action.getPhase()).getPriority());
-        action.cardResolver(players); //Expected Backward then Forward
+        action.cardResolver(players);
+        System.out.print("Expected ff0000ff MOVE_1_BACKWARD" + "\n");
+        System.out.print("Expected 00ff00ff MOVE_1_FORWARD" + "\n");
         action.updatePhase();
         assert(player1.getCardsOnHand().get(action.getPhase()).getPriority() < player2.getCardsOnHand().get(action.getPhase()).getPriority());
-        action.cardResolver(players); //Expected Forward then Backward
+        action.cardResolver(players);
+        System.out.print("Expected 00ff00ff MOVE_1_FORWARD" + "\n");
+        System.out.print("Expected ff0000ff MOVE_1_BACKWARD" + "\n");
         action.updatePhase();
     }
     @Test
@@ -153,12 +161,24 @@ public class ActionTest {
         players.add(player3);
         board.generateRandom();
         action.cardResolver(players); //Expected RotateLeft, Forward then Backward
+        System.out.print("Expected: 0000ffff ROTATE_90_LEFT" + "\n");
+        System.out.print("Expected: 00ff00ff MOVE_1_FORWARD" + "\n");
+        System.out.print("Expected: ff0000ff MOVE_1_BACKWARD" + "\n");
         action.updatePhase();
         action.cardResolver(players); //Expected RotateLeft, Backward then Forward
+        System.out.print("Expected: 0000ffff ROTATE_90_LEFT" + "\n");
+        System.out.print("Expected: ff0000ff MOVE_1_BACKWARD" + "\n");
+        System.out.print("Expected: 00ff00ff MOVE_1_FORWARD" + "\n");
         action.updatePhase();
         action.cardResolver(players); //Expected Backward, Forward then RotateLeft
+        System.out.print("Expected: ff0000ff MOVE_1_BACKWARD" + "\n");
+        System.out.print("Expected: 00ff00ff MOVE_1_FORWARD" + "\n");
+        System.out.print("Expected: 0000ffff ROTATE_90_LEFT" + "\n");
         action.updatePhase();
         action.cardResolver(players); //Expected Forward, Backward then RotateLeft
+        System.out.print("Expected: 00ff00ff MOVE_1_FORWARD" + "\n");
+        System.out.print("Expected: ff0000ff MOVE_1_BACKWARD" + "\n");
+        System.out.print("Expected: 0000ffff ROTATE_90_LEFT" + "\n");
         action.updatePhase();
     }
 }
