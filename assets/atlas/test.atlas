@@ -1,19 +1,19 @@
 
 test.png
-size: 2048,256
+size: 1024,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 body
   rotate: false
-  xy: 86, 73
+  xy: 652, 429
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button_down
   rotate: false
-  xy: 1432, 200
+  xy: 522, 296
   size: 82, 35
   split: 9, 9, 12, 10
   orig: 82, 35
@@ -21,7 +21,7 @@ button_down
   index: -1
 button_up
   rotate: false
-  xy: 2, 70
+  xy: 2, 36
   size: 82, 35
   split: 9, 9, 9, 13
   orig: 82, 35
@@ -29,112 +29,119 @@ button_up
   index: -1
 conveyor
   rotate: false
-  xy: 2, 107
+  xy: 2, 333
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 4
 conveyor
   rotate: false
-  xy: 132, 107
+  xy: 2, 203
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 5
 conveyor
   rotate: false
-  xy: 262, 107
+  xy: 132, 333
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 6
 conveyor
   rotate: false
-  xy: 392, 107
+  xy: 2, 73
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 7
 conveyor
   rotate: false
-  xy: 912, 107
+  xy: 262, 73
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 0
 conveyor
   rotate: false
-  xy: 1042, 107
+  xy: 392, 203
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
 conveyor
   rotate: false
-  xy: 1172, 107
+  xy: 522, 333
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
 conveyor
   rotate: false
-  xy: 1302, 107
+  xy: 392, 73
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 3
 eye
   rotate: false
-  xy: 1516, 203
+  xy: 86, 39
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 hole
   rotate: false
-  xy: 652, 107
+  xy: 262, 203
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 hole_edge
   rotate: false
-  xy: 522, 107
+  xy: 132, 73
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 laser
   rotate: false
-  xy: 2, 36
-  size: 32, 32
-  orig: 32, 32
+  xy: 262, 333
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
 laserbeam
   rotate: false
-  xy: 36, 36
+  xy: 606, 299
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 robot
   rotate: false
-  xy: 1432, 166
+  xy: 2, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 tile
   rotate: false
-  xy: 782, 107
+  xy: 392, 333
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+wall
+  rotate: false
+  xy: 132, 203
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 wheels
   rotate: false
-  xy: 2, 2
+  xy: 522, 262
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

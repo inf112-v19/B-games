@@ -88,7 +88,8 @@ public class Board implements IBoard {
                         tiles[x][y].setHole(true);
                         break;
                         default:
-                            tiles[x][y] = new Tile();
+                            int wallChance = 8; // 1 / wallchance
+                            tiles[x][y] = new Tile(new boolean[]{r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0});
                 }
             }
         }

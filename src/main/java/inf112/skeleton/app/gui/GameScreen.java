@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import inf112.skeleton.app.Action.Action;
 import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Actor.Direction;
@@ -29,6 +28,7 @@ public class GameScreen implements Screen {
     private Sprite sprite_laser;
     private Sprite sprite_hole;
     private Sprite sprite_hole_edge;
+    private Sprite sprite_wall;
 
     private Sprite sprite_body;
     private Sprite sprite_wheels;
@@ -82,6 +82,7 @@ public class GameScreen implements Screen {
         sprite_beam = atlas.createSprite("laserbeam");
         sprite_hole = atlas.createSprite("hole");
         sprite_hole_edge = atlas.createSprite("hole_edge");
+        sprite_wall = atlas.createSprite("wall");
 
         sprite_body = atlas.createSprite("body");
         sprite_eye = atlas.createSprite("eye");
@@ -137,6 +138,8 @@ public class GameScreen implements Screen {
         sprite_laser.setSize(tile_size, tile_size);
         sprite_beam.setSize(tile_size,tile_size);
         sprite_hole.setSize(tile_size,tile_size);
+        sprite_wall.setSize(tile_size,tile_size);
+        sprite_wall.setOriginCenter();
         sprite_hole_edge.setSize(tile_size,tile_size);
         sprite_hole_edge.setColor(Color.GOLD);
         sprite_laser.setOriginCenter();
@@ -148,6 +151,8 @@ public class GameScreen implements Screen {
             for (int y = 0; y < board.getWidth(); y++) {
                 ITile tile = board.getAt(x, y);
                 Direction conveyorFacing = tile.hasConveyor();
+
+
                 // Conveyor
                 if (conveyorFacing != null) {
                     currentFrame.setRotation(DirectionHelpers.rotationFromDirection(conveyorFacing));
@@ -155,6 +160,8 @@ public class GameScreen implements Screen {
                     currentFrame.draw(batch);
                     continue;
                 }
+
+
 
                 sprite_tile.setPosition(x * tile_size, y * tile_size);
                 sprite_tile.draw(batch);
@@ -167,11 +174,34 @@ public class GameScreen implements Screen {
 
                 if (Laser.class.isInstance(tile)) {
                     Direction direction = ((Laser)tile).getLaser();
+                    sprite_laser.setColor(Color.RED);
                     sprite_laser.setPosition(x * tile_size, y * tile_size);
                     sprite_laser.setRotation(DirectionHelpers.rotationFromDirection(direction));
                     sprite_laser.draw(batch);
-
                 }
+
+                // Walls
+                if(tile.hasWall(Direction.NORTH)){
+                    sprite_wall.setRotation(DirectionHelpers.rotationFromDirection(Direction.NORTH));
+                    sprite_wall.setPosition(x * tile_size, y * tile_size);
+                    sprite_wall.draw(batch);
+                }
+                if(tile.hasWall(Direction.SOUTH)){
+                    sprite_wall.setRotation(DirectionHelpers.rotationFromDirection(Direction.SOUTH));
+                    sprite_wall.setPosition(x * tile_size, y * tile_size);
+                    sprite_wall.draw(batch);
+                }
+                if(tile.hasWall(Direction.EAST)){
+                    sprite_wall.setRotation(DirectionHelpers.rotationFromDirection(Direction.EAST));
+                    sprite_wall.setPosition(x * tile_size, y * tile_size);
+                    sprite_wall.draw(batch);
+                }
+                if(tile.hasWall(Direction.WEST)){
+                    sprite_wall.setRotation(DirectionHelpers.rotationFromDirection(Direction.WEST));
+                    sprite_wall.setPosition(x * tile_size, y * tile_size);
+                    sprite_wall.draw(batch);
+                }
+
             }
         }
 
