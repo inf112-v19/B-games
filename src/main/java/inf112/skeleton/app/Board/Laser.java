@@ -32,7 +32,7 @@ public class Laser implements ILaser {
     }
 
     @Override
-    public Direction hasConveyor() {
+    public Conveyor hasConveyor() {
         return null;
     }
 

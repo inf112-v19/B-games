@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Actor.Direction;
 import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Board.Conveyor;
 import inf112.skeleton.app.Board.RotationDirection;
 import inf112.skeleton.app.Board.Tile;
 import org.junit.Before;
@@ -147,7 +148,7 @@ public class ActorTest {
     @Test
     public void northConveyorMovesActorNorth(){
         boolean[] walls = new boolean[]{false, false, false, false};
-        Tile tile = new Tile(walls, Direction.NORTH);
+        Tile tile = new Tile(walls, new Conveyor(Direction.NORTH, false));
         board.setTile(5, 5, tile);
         assertEquals(actor.getY(), 5);
         actor.tileCheck();
@@ -157,7 +158,7 @@ public class ActorTest {
     @Test
     public void southConveyorMovesActorSouth(){
         boolean[] walls = new boolean[]{false, false, false, false};
-        Tile tile = new Tile(walls, Direction.SOUTH);
+        Tile tile = new Tile(walls, new Conveyor(Direction.SOUTH, false));
         board.setTile(5, 5, tile);
         assertEquals(actor.getY(), 5);
         actor.tileCheck();
@@ -167,7 +168,7 @@ public class ActorTest {
     @Test
     public void westConveyorMovesActorWest(){
         boolean[] walls = new boolean[]{false, false, false, false};
-        Tile tile = new Tile(walls, Direction.WEST);
+        Tile tile = new Tile(walls, new Conveyor(Direction.WEST, false));
         board.setTile(5, 5, tile);
         assertEquals(actor.getX(), 5);
         actor.tileCheck();
@@ -177,7 +178,7 @@ public class ActorTest {
     @Test
     public void eastConveyorMovesActorEast(){
         boolean[] walls = new boolean[]{false, false, false, false};
-        Tile tile = new Tile(walls, Direction.EAST);
+        Tile tile = new Tile(walls, new Conveyor(Direction.EAST, false));
         board.setTile(5, 5, tile);
         assertEquals(actor.getX(), 5);
         actor.tileCheck();

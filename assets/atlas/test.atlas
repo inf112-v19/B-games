@@ -6,14 +6,14 @@ filter: Nearest,Nearest
 repeat: none
 body
   rotate: false
-  xy: 652, 429
+  xy: 522, 169
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button_down
   rotate: false
-  xy: 522, 296
+  xy: 652, 426
   size: 82, 35
   split: 9, 9, 12, 10
   orig: 82, 35
@@ -27,13 +27,6 @@ button_up
   orig: 82, 35
   offset: 0, 0
   index: -1
-conveyor
-  rotate: false
-  xy: 2, 333
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
 conveyor
   rotate: false
   xy: 2, 203
@@ -57,28 +50,42 @@ conveyor
   index: 7
 conveyor
   rotate: false
-  xy: 262, 73
+  xy: 132, 203
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 0
+  index: 8
+conveyor
+  rotate: false
+  xy: 392, 333
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
 conveyor
   rotate: false
   xy: 392, 203
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
+  index: 0
 conveyor
   rotate: false
   xy: 522, 333
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 2
+  index: 1
 conveyor
   rotate: false
   xy: 392, 73
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+conveyor
+  rotate: false
+  xy: 522, 203
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -92,28 +99,28 @@ eye
   index: -1
 hole
   rotate: false
-  xy: 262, 203
+  xy: 2, 333
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 hole_edge
   rotate: false
-  xy: 132, 73
+  xy: 262, 203
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 laser
   rotate: false
-  xy: 262, 333
+  xy: 132, 73
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 laserbeam
   rotate: false
-  xy: 606, 299
+  xy: 736, 429
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -127,21 +134,21 @@ robot
   index: -1
 tile
   rotate: false
-  xy: 392, 333
+  xy: 262, 73
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 wall
   rotate: false
-  xy: 132, 203
+  xy: 262, 333
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 wheels
   rotate: false
-  xy: 522, 262
+  xy: 652, 392
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

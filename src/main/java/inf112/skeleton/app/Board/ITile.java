@@ -29,7 +29,7 @@ public interface ITile {
      *
      * @return the direction of the conveyor belt if it has one, and null if there is none.
      */
-    Direction hasConveyor();
+    Conveyor hasConveyor();
 
     /**
      * checks if there is a cogwheel on the tile and what direction it is rotating

@@ -1,5 +1,6 @@
 package inf112.skeleton.app.Maps;
 
+import com.badlogic.gdx.utils.Json;
 import inf112.skeleton.app.Actor.Direction;
 import inf112.skeleton.app.Board.*;
 
@@ -51,7 +52,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
                     if(line.equals("type:Tile")){
                         board.setTile(j, i, new Tile(parseBoolean(bufferedReader.readLine()),
                                 parseWalls(bufferedReader.readLine()),
-                                (Direction)parseEnum(bufferedReader.readLine()),
+                                (Conveyor) parseConveyor(bufferedReader.readLine()),
                                 (RotationDirection)parseEnum(bufferedReader.readLine()),
                                 (Item)parseEnum(bufferedReader.readLine())));
                     } else if(line.equals("type:Laser")){
@@ -72,6 +73,17 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
         }
 
         return board;
+    }
+
+    private Conveyor parseConveyor(String readLine) {
+        String[] lines = readLine.split(" ");
+        if (lines[0].substring(9).startsWith("nul")) {
+            return null;
+        }
+        Direction direction = Direction.valueOf(lines[0].substring(19));
+        boolean fast = Boolean.parseBoolean(lines[1].substring(5));
+        if (direction == null) return null;
+        return new Conveyor(direction, fast);
     }
 
     //simple function to write a board to a text file

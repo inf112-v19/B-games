@@ -5,7 +5,7 @@ import inf112.skeleton.app.Actor.Direction;
 public class Tile implements ITile {
     private boolean isHole;
     private boolean[] walls;
-    private Direction conveyor;
+    private Conveyor conveyor;
     private RotationDirection cog;
     private Item item;
     private ITile linkedNorth;
@@ -23,7 +23,7 @@ public class Tile implements ITile {
         this.walls = walls;
     }
 
-    public Tile(boolean[] walls, Direction conveyor){
+    public Tile(boolean[] walls, Conveyor conveyor) {
         this.isHole = false;
         this.walls = walls;
         this.conveyor = conveyor;
@@ -35,7 +35,7 @@ public class Tile implements ITile {
         this.cog = cog;
     }
 
-    public Tile(boolean isHole, boolean[] walls, Direction conveyor, RotationDirection cog, Item item){
+    public Tile(boolean isHole, boolean[] walls, Conveyor conveyor, RotationDirection cog, Item item) {
         this.isHole = isHole;
         this.walls = walls;
         this.conveyor = conveyor;
@@ -64,7 +64,7 @@ public class Tile implements ITile {
     public void setHole(boolean hole) {isHole = hole;}
 
     @Override
-    public Direction hasConveyor() {
+    public Conveyor hasConveyor() {
         return conveyor;
     }
 
