@@ -1,7 +1,5 @@
 package inf112.skeleton.app.Actor;
 
-import inf112.skeleton.app.Actor.Direction;
-
 public class DirectionHelpers {
 
     public static float rotationFromDirection(Direction direction) {
@@ -34,7 +32,7 @@ public class DirectionHelpers {
         }
     }
 
-    public static Direction rotateClockwise(Direction direction){
+    public static Direction rotateClockwise(Direction direction) {
         switch (direction) {
             case NORTH:
                 return Direction.EAST;

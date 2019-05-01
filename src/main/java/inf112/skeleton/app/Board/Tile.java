@@ -5,7 +5,7 @@ import inf112.skeleton.app.Actor.Direction;
 public class Tile implements ITile {
     private boolean isHole;
     private boolean[] walls;
-    private Direction conveyor;
+    private Conveyor conveyor;
     private RotationDirection cog;
     private Item item;
     private ITile linkedNorth;
@@ -23,7 +23,7 @@ public class Tile implements ITile {
         this.walls = walls;
     }
 
-    public Tile(boolean[] walls, Direction conveyor){
+    public Tile(boolean[] walls, Conveyor conveyor) {
         this.isHole = false;
         this.walls = walls;
         this.conveyor = conveyor;
@@ -35,7 +35,7 @@ public class Tile implements ITile {
         this.cog = cog;
     }
 
-    public Tile(boolean isHole, boolean[] walls, Direction conveyor, RotationDirection cog, Item item){
+    public Tile(boolean isHole, boolean[] walls, Conveyor conveyor, RotationDirection cog, Item item) {
         this.isHole = isHole;
         this.walls = walls;
         this.conveyor = conveyor;
@@ -64,7 +64,7 @@ public class Tile implements ITile {
     public void setHole(boolean hole) {isHole = hole;}
 
     @Override
-    public Direction hasConveyor() {
+    public Conveyor hasConveyor() {
         return conveyor;
     }
 
@@ -81,6 +81,35 @@ public class Tile implements ITile {
     @Override
     public Item getItem(){
         return item;
+    }
+
+    @Override
+    public void setWall(Direction direction, boolean wall) {
+        switch (direction){
+            case NORTH:
+                walls[0] = wall;
+                if(wall != linkedNorth.hasWall(Direction.SOUTH)) {
+                    linkedNorth.setWall(Direction.SOUTH, wall);
+                }
+                break;
+            case EAST:
+                walls[1] = wall;
+                if(wall != linkedEast.hasWall(Direction.WEST)) {
+                    linkedEast.setWall(Direction.WEST, wall);
+                }
+                break;
+            case SOUTH:
+                walls[2] = wall;
+                if(wall != linkedSouth.hasWall(Direction.NORTH)) {
+                    linkedSouth.setWall(Direction.NORTH, wall);
+                }
+                break;
+            case WEST:
+                walls[3] = wall;
+                if(wall != linkedWest.hasWall(Direction.EAST))
+                linkedWest.setWall(Direction.EAST, wall);
+                break;
+        }
     }
 
     @Override

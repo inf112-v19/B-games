@@ -32,7 +32,7 @@ public class Laser implements ILaser {
     }
 
     @Override
-    public Direction hasConveyor() {
+    public Conveyor hasConveyor() {
         return null;
     }
 
@@ -83,6 +83,11 @@ public class Laser implements ILaser {
     @Override
     public Item getItem() {
         return null;
+    }
+
+    @Override
+    public void setWall(Direction direction, boolean wall) {
+        //Nothing, whooo
     }
 
     public String toString(){

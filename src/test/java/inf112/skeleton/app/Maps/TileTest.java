@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Maps;
 
 import inf112.skeleton.app.Actor.Direction;
 import inf112.skeleton.app.Board.*;
@@ -53,13 +53,13 @@ public class TileTest {
 
     @Test
     public void hasConveyor() {
-        Tile northTile = new Tile(walls, Direction.NORTH);
+        Tile northTile = new Tile(walls, new Conveyor(Direction.NORTH, false));
         assertEquals(northTile.hasConveyor(), Direction.NORTH);
-        Tile southTile = new Tile(walls, Direction.SOUTH);
+        Tile southTile = new Tile(walls, new Conveyor(Direction.SOUTH, false));
         assertEquals(southTile.hasConveyor(), Direction.SOUTH);
-        Tile eastTile = new Tile(walls, Direction.EAST);
+        Tile eastTile = new Tile(walls, new Conveyor(Direction.SOUTH, false));
         assertEquals(eastTile.hasConveyor(), Direction.EAST);
-        Tile westTile = new Tile(walls, Direction.WEST);
+        Tile westTile = new Tile(walls, new Conveyor(Direction.WEST, false));
         assertEquals(westTile.hasConveyor(), Direction.WEST);
     }
 
