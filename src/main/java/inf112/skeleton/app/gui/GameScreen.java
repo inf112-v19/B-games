@@ -105,7 +105,7 @@ public class GameScreen implements Screen {
         //Initiating new UI object(singleton) and passing in necessary objects.
         UI = new GameUI(atlas, players, action, board);
         //Loading in UI elements
-        UI.loadUI();
+        UI.loadUI2();
 
     }
 
@@ -268,7 +268,7 @@ public class GameScreen implements Screen {
         batch.end();
 
         //Rendering of the user interface
-        UI.renderUI();
+        UI.renderUI2();
     }
 
 

@@ -147,7 +147,6 @@ public class GameUI {
         Skin defaultSkin = new Skin(uiDefaultAtlas);
 
 
-
         //rootTable is the table where all other tables/ui goes into. rootTable size is the same as the gamescreen.
         Table rootTable = new Table();
         Table cardsRegister = new Table();
@@ -161,13 +160,13 @@ public class GameUI {
             //TextButton tb = new TextButton("MOVE_1_FORWARD", skin);
             //cardsOptions.add(tb).width(150).height(30).row();
         //}
-
+        ImageButton.ImageButtonStyle mCards = new ImageButton.ImageButtonStyle();
         for (int i = 0; i < cardsName.length; i++) {
 
-            ImageButton.ImageButtonStyle mCards = new ImageButton.ImageButtonStyle();
+            mCards = new ImageButton.ImageButtonStyle();
             mCards.up = mCardsSkin.getDrawable(cardsName[i]);
-            ImageButton ibCardRegister = new ImageButton(mCards);
-            cardsRegister.add(ibCardRegister).width(75).height(100).pad(1);
+            //ImageButton ibCardRegister = new ImageButton(mCards);
+            //cardsRegister.add(ibCardRegister).width(75).height(100).pad(1);
 
             ImageButton ibCardOption = new ImageButton(mCards);
             cardsOptions.add(ibCardOption).width(50).height(75).pad(1);
@@ -183,10 +182,13 @@ public class GameUI {
 
         SnapshotArray<com.badlogic.gdx.scenes.scene2d.Actor> yy = cardsOptions.getChildren();
 
+        ImageButton.ImageButtonStyle finalMCards = mCards;
         yy.get(0).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                cardsRegister.add(yy.get(0));
+                final ImageButton ibCardRegister = new ImageButton(finalMCards);
+                cardsRegister.add(ibCardRegister).width(75).height(100);
+
             }
         });
 
