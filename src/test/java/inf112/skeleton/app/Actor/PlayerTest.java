@@ -1,9 +1,11 @@
 package inf112.skeleton.app.Actor;
 
 import com.badlogic.gdx.graphics.Color;
+import inf112.skeleton.app.Action.Action;
 import inf112.skeleton.app.Board.Board;
 import inf112.skeleton.app.Cards.Card;
 import inf112.skeleton.app.Cards.CardStack;
+import inf112.skeleton.app.Cards.CardType;
 import org.junit.Test;
 
 
@@ -17,7 +19,7 @@ public class PlayerTest {
     private Player player;
     private Board board;
     private CardStack cardstack;
-
+    Action action;
 
     @Test
     public void initializeHand() {
@@ -449,5 +451,42 @@ public class PlayerTest {
         }
         player.confirmAction();
         assertTrue(player.getConfirmAction());
+    }
+
+    @Test
+    public void playerCollisionWithPlayerTest(){
+        CardStack cardStack = new CardStack();
+        Board board = new Board();
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 500, true)); //1
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 610, true)); //2
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 520, true)); //3
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 620, true)); //4
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 540, true)); //5
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 550, true)); //6
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 560, true)); //7
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 570, true)); //8
+        cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 680, true)); //9
+        cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 690, true)); //1
+        cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 600, true)); //2
+        cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 510, true)); //3
+        cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 630, true)); //4
+        cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 530, true)); //5
+        cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 640, true)); //6
+        cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 650, true)); //7
+        cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 560, true)); //8
+        cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 570, true)); //9
+        action = new Action(board);
+        Player player1 = new Player(5,5,Color.GREEN,board,1,1,  cardStack, false);
+        Player player2 = new Player(5,4,Color.RED,board,2,1,  cardStack,false);
+
+        ArrayList<Player> players = new ArrayList<Player>();
+        player1.drawCards();
+        player2.drawCards();
+        players.add(player1);
+        players.add(player2);
+        action.cardResolver(players);
+        assertEquals(5,player2.getY());
+        assertEquals(4,player1.getY());
+
     }
 }
