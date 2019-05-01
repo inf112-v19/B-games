@@ -125,10 +125,10 @@ public class Actor implements IActor {
             } else {
                 onConveyorCount = 0;
             }
-            move(tile.hasConveyor());
+            move(tile.hasConveyor().direction);
             //If robot has gone on 2 or more conveyors in a row, then change its direction to last conveyorbelt.
             if (onConveyorCount >= 2) {
-                direction = tile.hasConveyor();
+                direction = tile.hasConveyor().direction;
                 onConveyorCount = 0;
             }
 
