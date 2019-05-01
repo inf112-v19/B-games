@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Cards.Card;
 import inf112.skeleton.app.Cards.CardStack;
 import inf112.skeleton.app.Cards.CardType;
 import inf112.skeleton.app.Action.Action;
@@ -21,31 +22,23 @@ import inf112.skeleton.app.Actor.Player;
 import java.util.ArrayList;
 
 
+
 public class GameUI {
 
     private Stage buttonStage;
     private TextureAtlas atlas;
     private SpriteBatch uiBatch;
-    private ArrayList<Actor> players;
     private Action action;
     private Board board;
-    private Sprite ss;
-    private Array<Sprite> mCardsSprites;
-    private Player spiller;
 
-    public GameUI(TextureAtlas atlas, ArrayList<Actor> players, Action action, Board board) {
+    public GameUI(TextureAtlas atlas, Action action, Board board) {
         this.atlas = atlas;
-        this.players = players;
         this.action = action;
         this.board = board;
     }
 
-    public void loadUI() {
+    public void loadUI(Player spiller) {
         buttonStage = new Stage(new ScreenViewport());
-
-        spiller = new Player(players.get(0).getX(), players.get(0).getY(), Color.GOLD, board, 0, 1,
-                new CardStack(), false);
-
 
         //Creating a ninepatch texture for button. The magic with ninepatch is that it will scale the button after how long the string is.
         NinePatch buttonTexture = atlas.createPatch("button_up");
@@ -67,13 +60,12 @@ public class GameUI {
         }
 
 
-        //Movement will be applied to robot at index 0(red robot)
-        Actor selectedPlayer = players.get(0);
         //MOVE_1_FORWARD button
+        Player finalSpiller = spiller;
         movementButtons.get(0).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.MOVE_1_FORWARD);
+                action.playCard(finalSpiller, CardType.MOVE_1_FORWARD);
             }
         });
 
@@ -81,7 +73,7 @@ public class GameUI {
         movementButtons.get(1).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.MOVE_2_FORWARD);
+                action.playCard(finalSpiller, CardType.MOVE_2_FORWARD);
             }
         });
 
@@ -89,7 +81,7 @@ public class GameUI {
         movementButtons.get(2).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.MOVE_3_FORWARD);
+                action.playCard(finalSpiller, CardType.MOVE_3_FORWARD);
             }
         });
 
@@ -97,7 +89,7 @@ public class GameUI {
         movementButtons.get(3).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.MOVE_1_BACKWARD);
+                action.playCard(finalSpiller, CardType.MOVE_1_BACKWARD);
             }
         });
 
@@ -105,7 +97,7 @@ public class GameUI {
         movementButtons.get(4).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.ROTATE_90_LEFT);
+                action.playCard(finalSpiller, CardType.ROTATE_90_LEFT);
             }
         });
 
@@ -113,7 +105,7 @@ public class GameUI {
         movementButtons.get(5).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.ROTATE_90_RIGHT);
+                action.playCard(finalSpiller, CardType.ROTATE_90_RIGHT);
             }
         });
 
@@ -121,7 +113,7 @@ public class GameUI {
         movementButtons.get(6).addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                action.playCard(selectedPlayer, CardType.ROTATE_180);
+                action.playCard(finalSpiller, CardType.ROTATE_180);
             }
         });
 
@@ -129,25 +121,17 @@ public class GameUI {
         Gdx.input.setInputProcessor(buttonStage);
     }
 
-    public void loadUI2() {
+    public void loadUI2(Player spiller) {
         buttonStage = new Stage(new ScreenViewport());
 
+        //spiller.initializeHand();
+        spiller.drawCards();
+        spiller.initializeRegister();
+        ArrayList<Card> givenCardsOnHand = (ArrayList<Card>) spiller.getCardsOnHand();
 
         TextureAtlas uiMovementAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/Movement-Cards.atlas"));
         Skin mCardsSkin = new Skin(uiMovementAtlas);
         String[] cardsName = {"m1f", "m2f", "m3f", "m1b", "r90r", "r90l", "r180"};
-
-        //ImageButton.ImageButtonStyle mCards = new ImageButton.ImageButtonStyle();
-        //mCards.up = mCardsSkin.getDrawable("m1b");
-        //ImageButton m1f = new ImageButton(mCards);
-
-        //Create sprite out of textureAtlas
-        //ss = uiAtlas.createSprite("m1b");
-
-        //Get all sprites out of textureAtlas
-        //mCardsSprites = uiAtlas.createSprites();
-        //Batch so it is possible to draw sprites at x and y location
-        //uiBatch = new SpriteBatch();
 
         TextureAtlas uiDefaultAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/uiskin.atlas"));
         Skin defaultSkin = new Skin(uiDefaultAtlas);
@@ -162,41 +146,43 @@ public class GameUI {
         rootTable.setFillParent(true);
         rootTable.setDebug(true);
 
-        //for (int i = 0; i < 8; i++) {
-            //TextButton tb = new TextButton("MOVE_1_FORWARD", skin);
-            //cardsOptions.add(tb).width(150).height(30).row();
-        //}
-        ImageButton.ImageButtonStyle mCards = new ImageButton.ImageButtonStyle();
-        for (int i = 0; i < cardsName.length; i++) {
+        //List containing the relevant skin for each button
+        ArrayList<ImageButton.ImageButtonStyle> mCardsStyle = new ArrayList<>();
 
-            mCards = new ImageButton.ImageButtonStyle();
-            mCards.up = mCardsSkin.getDrawable(cardsName[i]);
-            //ImageButton ibCardRegister = new ImageButton(mCards);
-            //cardsRegister.add(ibCardRegister).width(75).height(100).pad(1);
+        for (int i = 0; i < givenCardsOnHand.size(); i++) {
+            System.out.println(givenCardsOnHand.get(i).getType());
+            ImageButton.ImageButtonStyle singleCard = new ImageButton.ImageButtonStyle();
+            String cardIdentifier = whichStyle(givenCardsOnHand.get(i));
+            singleCard.up = mCardsSkin.getDrawable(cardIdentifier);
+            mCardsStyle.add(singleCard);
 
-            ImageButton ibCardOption = new ImageButton(mCards);
+            ImageButton ibCardOption = new ImageButton(mCardsStyle.get(i));
             cardsOptions.add(ibCardOption).width(50).height(75).pad(1);
-            if (i != 0 && i % 2 == 0) {
+            if (i >= 1 && i % 2-1 == 0) {
                 cardsOptions.row();
             }
-
-            /*
-            TextButton tb = new TextButton("Register " + i, skin);
-            cardsRegister.add(tb).height(100).width(75);
-            */
         }
 
-        SnapshotArray<com.badlogic.gdx.scenes.scene2d.Actor> yy = cardsOptions.getChildren();
+        SnapshotArray<com.badlogic.gdx.scenes.scene2d.Actor> ImageButtonsFromTable = cardsOptions.getChildren();
 
-        ImageButton.ImageButtonStyle finalMCards = mCards;
-        yy.get(0).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                final ImageButton ibCardRegister = new ImageButton(finalMCards);
-                cardsRegister.add(ibCardRegister).width(75).height(100);
+        for (int i = 0; i < ImageButtonsFromTable.size; i++) {
+            int finalI = i;
+            ImageButtonsFromTable.get(i).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //Create a new Imagebutton to go to register and add it to the register table
+                    ImageButton ibCardRegister = new ImageButton(mCardsStyle.get(finalI));
+                    cardsRegister.add(ibCardRegister).width(75).height(100).pad(1);
 
-            }
-        });
+                    //try {
+                      //  spiller.addCardToRegister(1, 1, true);
+                    //} catch (Exception e) {
+                      //  e.printStackTrace();
+                    //}
+
+                }
+            });
+        }
 
         //cardsRegister.add(m1f).height(100).width(75);
 
@@ -205,9 +191,6 @@ public class GameUI {
             it does nothing since the size of cardsTable is the same as the button inside it.
         */
 
-        //cardsRegister.background();
-        //cardsRegister.setBackground(defaultSkin.getDrawable("default-window"));
-
         //rootTable.;
         rootTable.add(cardsOptions).expandX().left();
         rootTable.row();
@@ -215,7 +198,7 @@ public class GameUI {
 
         buttonStage.addActor(rootTable);
         Gdx.input.setInputProcessor(buttonStage);
-        //players.get(0).
+
 
 
     }
@@ -233,18 +216,36 @@ public class GameUI {
         buttonStage.draw();
 
 
+    }
+    //Converts from Card Enums to String keyword for the UI atlas
+    private String whichStyle(Card card) {
 
-        /*
-        uiBatch.begin();
-        for (int i = 0; i < mCardsSprites.size; i++) {
-            uiBatch.draw(mCardsSprites.get(i), 180*i, 50);
+        switch (card.getType()) {
+
+            case MOVE_1_FORWARD:
+                return "m1f";
+
+            case MOVE_2_FORWARD:
+                return "m2f";
+
+            case MOVE_3_FORWARD:
+                return "m3f";
+
+            case MOVE_1_BACKWARD:
+                return "m1b";
+
+            case ROTATE_180:
+                return "r180";
+
+            case ROTATE_90_LEFT:
+                return "r90l";
+
+            case ROTATE_90_RIGHT:
+                return "r90r";
+
+            default:
+                return "Invalid card";
         }
-
-        uiBatch.end();
-
-        //mCardsSprites.get(2).draw(uiBatch);
-        */
-
 
     }
 

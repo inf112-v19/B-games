@@ -8,10 +8,12 @@ import inf112.skeleton.app.Action.Action;
 import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Actor.Direction;
 import inf112.skeleton.app.Actor.DirectionHelpers;
+import inf112.skeleton.app.Actor.Player;
 import inf112.skeleton.app.Board.Board;
 import inf112.skeleton.app.Board.Conveyor;
 import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Board.Laser;
+import inf112.skeleton.app.Cards.CardStack;
 import inf112.skeleton.app.Prototyping;
 import java.util.ArrayList;
 
@@ -41,8 +43,9 @@ public class GameScreen implements Screen {
 
     // Logic
     private Board board;
-    private ArrayList<Actor> players;
+    private ArrayList<Player> players;
     private Action action;
+    private CardStack cs;
 
     // TODO Keep for eventual sprite scrolling logic
     private float actionInterval = 1;
@@ -99,15 +102,19 @@ public class GameScreen implements Screen {
         board = Prototyping.generateRandomBoard(10, 10);
         players = new ArrayList<>();
         action = new Action(board);
+
+        cs = new CardStack();
+        cs.initializeCardStack();
+        cs.randomizeCardStack();
         // X and Y here represent which tile they are on, not pixel location!
-        players.add(new Actor(5, 5, Color.RED, board, 1));
-        players.add(new Actor(5, 6, Color.BLUE, board, 2));
-        players.add(new Actor(5, 7, Color.GREEN, board, 3));
+        players.add(new Player(5, 5, Color.RED, board, 1, 1, cs, false));
+        players.add(new Player(5, 6, Color.BLUE, board, 2, 2, cs, false));
+        players.add(new Player(5, 7, Color.GREEN, board, 3, 3, cs, false));
 
         // Initiating new UI object(singleton) and passing in necessary objects.
-        UI = new GameUI(atlas, players, action, board);
+        UI = new GameUI(atlas, action, board);
         // Loading in UI elements
-        UI.loadUI();
+        UI.loadUI2(players.get(0));
     }
 
     @Override
@@ -230,7 +237,7 @@ public class GameScreen implements Screen {
         batch.end();
 
         //Rendering of the user interface
-        UI.renderUI();
+        UI.renderUI2();
     }
 
     @Override
