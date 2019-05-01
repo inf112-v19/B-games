@@ -14,8 +14,10 @@ import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Board.Board;
+import inf112.skeleton.app.Cards.CardStack;
 import inf112.skeleton.app.Cards.CardType;
 import inf112.skeleton.app.Action.Action;
+import inf112.skeleton.app.Actor.Player;
 import java.util.ArrayList;
 
 
@@ -29,7 +31,7 @@ public class GameUI {
     private Board board;
     private Sprite ss;
     private Array<Sprite> mCardsSprites;
-    final private int registerSlots = 8;
+    private Player spiller;
 
     public GameUI(TextureAtlas atlas, ArrayList<Actor> players, Action action, Board board) {
         this.atlas = atlas;
@@ -40,6 +42,10 @@ public class GameUI {
 
     public void loadUI() {
         buttonStage = new Stage(new ScreenViewport());
+
+        spiller = new Player(players.get(0).getX(), players.get(0).getY(), Color.GOLD, board, 0, 1,
+                new CardStack(), false);
+
 
         //Creating a ninepatch texture for button. The magic with ninepatch is that it will scale the button after how long the string is.
         NinePatch buttonTexture = atlas.createPatch("button_up");
@@ -209,6 +215,7 @@ public class GameUI {
 
         buttonStage.addActor(rootTable);
         Gdx.input.setInputProcessor(buttonStage);
+        //players.get(0).
 
 
     }
