@@ -156,6 +156,10 @@ public class Player extends Actor implements IPlayer {
         }
     }
 
+    public boolean getPowerdown(){
+        return powerDownRobot;
+    }
+
     public List<Card> getRegister() {
         return cardsInRegister;
     }
