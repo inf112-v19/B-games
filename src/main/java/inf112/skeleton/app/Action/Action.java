@@ -48,7 +48,7 @@ public class Action implements IAction {
             ArrayList<Player> ps = new ArrayList<>(players);
         Collections.sort(ps, Comparator.comparing((Player player) -> player.getRegister().get(phaseCounter)));
             for (Player p : ps) {
-                playCard(p, p.getRegister().get(phaseCounter).getType());
+                enquenePlayCard(p, p.getRegister().get(phaseCounter).getType());
             }
         //}
 
@@ -73,7 +73,24 @@ public class Action implements IAction {
         }*/
     }
 
+    ArrayDeque<CardType> cardQuene = new ArrayDeque<>();
+    ArrayDeque<Player> playerQuene = new ArrayDeque<>();
 
+    private void enquenePlayCard(Player player, CardType type) {
+        cardQuene.add(type);
+        playerQuene.add(player);
+
+    }
+
+    public boolean waitingCards() {
+        return !playerQuene.isEmpty();
+    }
+
+    public boolean playNextCard() {
+        if (!waitingCards()) return false;
+        playCard(playerQuene.poll(), cardQuene.poll());
+        return true;
+    }
 
     @Override
     public boolean playCard(Actor player, CardType card){

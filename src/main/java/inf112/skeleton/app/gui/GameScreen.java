@@ -293,13 +293,17 @@ public class GameScreen implements Screen {
         } else if (phase.equals("resolve")) {
             timer += deltaTime;
             if (timer > 1) {
-                timer = 0;
-                int round = action.getRound();
-                action.cardResolver(players);
-                action.updatePhase();
-                if (round != action.getRound()) {
-                    phase = "draw";
+                if (action.waitingCards()) {
+                    action.playNextCard();
+                } else {
+                    int round = action.getRound();
+                    action.cardResolver(players);
+                    action.updatePhase();
+                    if (round != action.getRound()) {
+                        phase = "draw";
+                    }
                 }
+                timer = 0;
             }
 
         }
