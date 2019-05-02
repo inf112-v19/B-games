@@ -6,14 +6,14 @@ filter: Nearest,Nearest
 repeat: none
 body
   rotate: false
-  xy: 522, 169
+  xy: 522, 324
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button_down
   rotate: false
-  xy: 652, 426
+  xy: 132, 61
   size: 82, 35
   split: 9, 9, 12, 10
   orig: 82, 35
@@ -21,7 +21,7 @@ button_down
   index: -1
 button_up
   rotate: false
-  xy: 2, 36
+  xy: 896, 451
   size: 82, 35
   split: 9, 9, 9, 13
   orig: 82, 35
@@ -29,126 +29,133 @@ button_up
   index: -1
 conveyor
   rotate: false
-  xy: 2, 203
+  xy: 246, 358
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 5
 conveyor
   rotate: false
-  xy: 132, 333
+  xy: 376, 358
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 6
 conveyor
   rotate: false
-  xy: 2, 73
+  xy: 506, 358
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 7
 conveyor
   rotate: false
-  xy: 132, 203
+  xy: 636, 358
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 8
 conveyor
   rotate: false
-  xy: 392, 333
+  xy: 132, 228
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 4
 conveyor
   rotate: false
-  xy: 392, 203
+  xy: 262, 228
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 0
 conveyor
   rotate: false
-  xy: 522, 333
+  xy: 262, 98
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
 conveyor
   rotate: false
-  xy: 392, 73
+  xy: 392, 228
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
 conveyor
   rotate: false
-  xy: 522, 203
+  xy: 392, 98
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 3
+conveyor_long
+  rotate: false
+  xy: 2, 262
+  size: 112, 224
+  orig: 112, 224
+  offset: 0, 0
+  index: -1
 eye
   rotate: false
-  xy: 86, 39
+  xy: 980, 454
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 hole
   rotate: false
-  xy: 2, 333
+  xy: 116, 358
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 hole_edge
   rotate: false
-  xy: 262, 203
+  xy: 2, 2
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 laser
   rotate: false
-  xy: 132, 73
+  xy: 2, 132
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 laserbeam
   rotate: false
-  xy: 736, 429
+  xy: 216, 64
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 robot
   rotate: false
-  xy: 2, 2
+  xy: 896, 417
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 tile
   rotate: false
-  xy: 262, 73
+  xy: 132, 98
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 wall
   rotate: false
-  xy: 262, 333
+  xy: 766, 358
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 wheels
   rotate: false
-  xy: 652, 392
+  xy: 132, 27
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

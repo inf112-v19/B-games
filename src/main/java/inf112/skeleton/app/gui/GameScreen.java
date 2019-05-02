@@ -42,9 +42,13 @@ public class GameScreen implements Screen {
     private Sprite sprite_eye;
     private Sprite sprite_beam;
 
+    private Sprite sprite_conveyor;
+    private float conveyorRegionX;
+    private float conveyorRegionY;
+
     // Animations
     float elapsedTime = 0;
-    float animSpeed = 1f;
+    float animSpeed = 100f;
     Animation<Sprite> conveyor;
 
     // Logic
@@ -90,8 +94,10 @@ public class GameScreen implements Screen {
         sprite_body = atlas.createSprite("body");
         sprite_eye = atlas.createSprite("eye");
         sprite_wheels = atlas.createSprite("wheels");
+        sprite_conveyor = atlas.createSprite("conveyor_long");
         conveyor = new Animation<>(1f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
         // Scale
+        sprite_conveyor.setSize(tile_size - 32, tile_size - 32); // render inside tile edges
         sprite_tile.setSize(tile_size, tile_size);
         sprite_laser.setSize(tile_size, tile_size);
         sprite_beam.setSize(tile_size, tile_size);
@@ -99,11 +105,15 @@ public class GameScreen implements Screen {
         sprite_wall.setSize(tile_size, tile_size);
         sprite_hole_edge.setSize(tile_size, tile_size);
         // Center rotation
+        sprite_conveyor.setOriginCenter();
         sprite_wall.setOriginCenter();
         sprite_laser.setOriginCenter();
         sprite_beam.setOriginCenter();
         // Colors
         sprite_hole_edge.setColor(Color.GOLD);
+        // cut conveyor texture in half
+        sprite_conveyor.setRegion(sprite_conveyor.getRegionX(), sprite_conveyor.getRegionY(), sprite_conveyor.getRegionWidth(), sprite_conveyor.getRegionHeight() / 2);
+        conveyorRegionY = sprite_conveyor.getRegionY();
 
         // Game initialization
         board = Prototyping.generateRandomBoard(10, 10);
@@ -144,13 +154,13 @@ public class GameScreen implements Screen {
     public void render(float deltaTime) {
         elapsedTime += deltaTime * animSpeed;
 
-        // TODO Animation test - stuttering, look into scrolling textures instead of keyframe animation
-        Animation<Sprite> conveyorAnimation = new Animation<>(0.01f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
-
-        // Get current frame of animation for the current elapsedTime
-        Sprite currentFrame = conveyorAnimation.getKeyFrame(elapsedTime, true);
-        currentFrame.setSize(tile_size, tile_size);
-        currentFrame.setOriginCenter();
+        // move through texture region and reset on repeating pattern.
+        int conveyorY = sprite_conveyor.getRegionY() + 1;//+ 0.01f;
+        if (conveyorY > conveyorRegionY + 32) {
+            conveyorY = (int) conveyorRegionY;
+        }
+        sprite_conveyor.setRegion(sprite_conveyor.getRegionX(), conveyorY, sprite_conveyor.getRegionWidth(), sprite_conveyor.getRegionHeight());
+        //sprite_conveyor.scroll(0,0.001f);
 
         // Wipe screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0);
@@ -171,13 +181,13 @@ public class GameScreen implements Screen {
                 // Conveyor
                 if (conveyor != null) {
                     if (conveyor.fast) {
-                        currentFrame.setColor(Color.RED);
+                        sprite_conveyor.setColor(Color.RED);
                     } else {
-                        currentFrame.setColor(Color.GOLD);
+                        sprite_conveyor.setColor(Color.GOLD);
                     }
-                    currentFrame.setRotation(DirectionHelpers.rotationFromDirection(conveyor.direction));
-                    currentFrame.setPosition(x * tile_size, y * tile_size);
-                    currentFrame.draw(batch);
+                    sprite_conveyor.setRotation(DirectionHelpers.rotationFromDirection(conveyor.direction));
+                    sprite_conveyor.setPosition(x * tile_size + 16, y * tile_size + 16);
+                    sprite_conveyor.draw(batch);
                     //continue;
                 }
                 if (tile.isHole()) {

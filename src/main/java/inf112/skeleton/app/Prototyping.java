@@ -16,7 +16,7 @@ public class Prototyping {
         Random r = new Random();
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                int random = r.nextInt(20);
+                int random = r.nextInt(30);
                 ITile tile;
                 switch (random) {
                     case 0:
@@ -60,8 +60,7 @@ public class Prototyping {
                         tile = new Tile(new boolean[]{false, false, false, false}, new Conveyor(Direction.EAST, true));
                         break;
                     default:
-                        int wallChance = 8; // 1 / wallchance
-                        tile = new Tile(new boolean[]{r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0});
+                        tile = new Tile(new boolean[]{false, false, false, false});
                 }
                 board.setTile(x, y, tile);
             }
@@ -80,6 +79,20 @@ public class Prototyping {
                     tile.setWall(Direction.WEST, true);
                 }
                 if (x == width - 1) {
+                    tile.setWall(Direction.EAST, true);
+                }
+
+                int wallChance = 8; // 1 / wallchance
+                if (r.nextInt(wallChance) == 0) {
+                    tile.setWall(Direction.NORTH, true);
+                }
+                if (r.nextInt(wallChance) == 0) {
+                    tile.setWall(Direction.SOUTH, true);
+                }
+                if (r.nextInt(wallChance) == 0) {
+                    tile.setWall(Direction.WEST, true);
+                }
+                if (r.nextInt(wallChance) == 0) {
                     tile.setWall(Direction.EAST, true);
                 }
             }
