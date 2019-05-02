@@ -153,7 +153,7 @@ public class GameScreen implements Screen {
         currentFrame.setOriginCenter();
 
         // Wipe screen
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
@@ -178,7 +178,7 @@ public class GameScreen implements Screen {
                     currentFrame.setRotation(DirectionHelpers.rotationFromDirection(conveyor.direction));
                     currentFrame.setPosition(x * tile_size, y * tile_size);
                     currentFrame.draw(batch);
-                    continue;
+                    //continue;
                 }
                 if (tile.isHole()) {
                     sprite_hole.setPosition(x * tile_size, y * tile_size);

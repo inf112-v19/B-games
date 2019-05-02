@@ -16,7 +16,7 @@ public class Prototyping {
         Random r = new Random();
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                int random = r.nextInt(14);
+                int random = r.nextInt(20);
                 ITile tile;
                 switch (random) {
                     case 0:
@@ -29,7 +29,7 @@ public class Prototyping {
                         tile = new Tile(new boolean[]{false, false, false, false}, new Conveyor(Direction.WEST, false));
                         break;
                     case 3:
-                        tile = new Tile(new boolean[]{false, false, false, false}, new Conveyor(Direction.EAST, true));
+                        tile = new Tile(new boolean[]{false, false, false, false}, new Conveyor(Direction.EAST, false));
                         break;
                     case 4:
                         tile = new Laser(Direction.NORTH);
@@ -47,6 +47,18 @@ public class Prototyping {
                         tile = new Tile();
                         tile.setHole(true);
                         break;
+                    case 9:
+                        tile = new Tile(new boolean[]{false, false, false, false}, new Conveyor(Direction.NORTH, true));
+                        break;
+                    case 10:
+                        tile = new Tile(new boolean[]{false, false, false, false}, new Conveyor(Direction.SOUTH, true));
+                        break;
+                    case 11:
+                        tile = new Tile(new boolean[]{false, false, false, false}, new Conveyor(Direction.WEST, true));
+                        break;
+                    case 12:
+                        tile = new Tile(new boolean[]{false, false, false, false}, new Conveyor(Direction.EAST, true));
+                        break;
                     default:
                         int wallChance = 8; // 1 / wallchance
                         tile = new Tile(new boolean[]{r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0, r.nextInt(wallChance) == 0});
@@ -57,6 +69,19 @@ public class Prototyping {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 // TODO mirror walls
+                ITile tile = board.getAt(x, y);
+                if (y == 0) {
+                    tile.setWall(Direction.SOUTH, true);
+                }
+                if (y == height - 1) {
+                    tile.setWall(Direction.NORTH, true);
+                }
+                if (x == 0) {
+                    tile.setWall(Direction.WEST, true);
+                }
+                if (x == width - 1) {
+                    tile.setWall(Direction.EAST, true);
+                }
             }
         }
 
