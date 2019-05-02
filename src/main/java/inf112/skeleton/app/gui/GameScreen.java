@@ -108,7 +108,7 @@ public class GameScreen implements Screen {
         // Game initialization
         board = Prototyping.generateRandomBoard(10, 10);
         players = new ArrayList<>();
-        action = new Action(board);
+        //action = new Action(board);
 
         cs = new CardStack();
         cs.initializeCardStack();

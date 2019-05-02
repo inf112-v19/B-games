@@ -54,13 +54,13 @@ public class TileTest {
     @Test
     public void hasConveyor() {
         Tile northTile = new Tile(walls, new Conveyor(Direction.NORTH, false));
-        assertEquals(northTile.hasConveyor(), Direction.NORTH);
+        assertEquals(northTile.hasConveyor().direction, Direction.NORTH);
         Tile southTile = new Tile(walls, new Conveyor(Direction.SOUTH, false));
-        assertEquals(southTile.hasConveyor(), Direction.SOUTH);
-        Tile eastTile = new Tile(walls, new Conveyor(Direction.SOUTH, false));
-        assertEquals(eastTile.hasConveyor(), Direction.EAST);
+        assertEquals(southTile.hasConveyor().direction, Direction.SOUTH);
+        Tile eastTile = new Tile(walls, new Conveyor(Direction.EAST, false));
+        assertEquals(eastTile.hasConveyor().direction, Direction.EAST);
         Tile westTile = new Tile(walls, new Conveyor(Direction.WEST, false));
-        assertEquals(westTile.hasConveyor(), Direction.WEST);
+        assertEquals(westTile.hasConveyor().direction, Direction.WEST);
     }
 
     @Test
