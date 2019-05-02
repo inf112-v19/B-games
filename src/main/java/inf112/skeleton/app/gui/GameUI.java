@@ -48,11 +48,13 @@ public class GameUI {
         TextureAtlas uiDefaultAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/uiskin.atlas"));
         Skin defaultSkin = new Skin(uiDefaultAtlas);
 
+        //Texture dummyTex = new Texture(uiDefaultAtlas.findRegion("default-round-large"));
+
+
         //rootTable is the table where all other tables/ui goes into. rootTable size is the same as the gamescreen.
         Table rootTable = new Table();
         Table cardsRegister = new Table();
         Table cardsOptions = new Table();
-        Table lifeTable = new Table();
 
         //Putting table size to match that of the screen.
         rootTable.setFillParent(true);
@@ -81,7 +83,12 @@ public class GameUI {
         }
         for (int i = 0; i < player.getRegister().size(); i++) {
             Card currentCard = player.getRegister().get(i);
-            if (currentCard == null) continue; // TODO Remove this when register list is fixed
+            //if (currentCard == null) continue; // TODO Remove this when register list is fixed
+            if (currentCard == null) {
+                Image dummy = new Image(defaultSkin, "default-round-large");
+                cardsRegister.add(dummy).width(75).height(100).pad(1);
+                continue;
+            }
             ImageButton btn = new ImageButton(getButton(currentCard));
             btn.addListener(new ClickListener() {
                 @Override
@@ -145,8 +152,6 @@ public class GameUI {
 
         buttonStage.addActor(rootTable);
         Gdx.input.setInputProcessor(buttonStage);
-
-
 
     }
 
