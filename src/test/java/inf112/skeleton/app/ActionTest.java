@@ -69,13 +69,13 @@ public class ActionTest {
         players.add(player2);
         players.add(player3);
         action = new Action(board, players);
-        boolean[] walls = new boolean[]{false, false, false, false};
-        ITile tile = new Tile(walls);
-        for(int i=0; i<10; i++){
-            for(int j=0; j<10; j++){
-                board.setTile(i, j, tile);
-            }
-        }
+//        boolean[] walls = new boolean[]{false, false, false, false};
+//        ITile tile = new Tile(walls);
+//        for(int i=0; i<10; i++){
+//            for(int j=0; j<10; j++){
+//                board.setTile(i, j, tile);
+//            }
+//        }
     }
 
     @Test
