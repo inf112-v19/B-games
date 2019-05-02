@@ -113,7 +113,7 @@ public class GameScreen implements Screen {
         players.add(new Player(5, 7, Color.GREEN, board, 3, 3, cs, false));
 
         // Initiating new UI object(singleton) and passing in necessary objects.
-        UI = new GameUI(atlas, action, board);
+        UI = new GameUI(atlas, action);
         // Loading in UI elements
 
         // TODO remove, playtest
@@ -254,6 +254,12 @@ public class GameScreen implements Screen {
         // runs 1 round of card selection for 3 players, then spazzes out
         if (players.get(playerTurn % 3).fiveCardsInRegister()) {
             playerTurn++;
+            if (playerTurn >= 3) {
+                playerTurn -= 3;
+                players.get(playerTurn).drawCards();
+                players.get(playerTurn).getRegister().clear();
+                players.get(playerTurn).initializeRegister();
+            }
             UI.loadUI2(players.get(playerTurn % 3));
         }
 

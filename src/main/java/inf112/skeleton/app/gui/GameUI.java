@@ -8,14 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.SnapshotArray;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Board.Board;
 import inf112.skeleton.app.Cards.Card;
-import inf112.skeleton.app.Cards.CardStack;
 import inf112.skeleton.app.Cards.CardType;
 import inf112.skeleton.app.Action.Action;
 import inf112.skeleton.app.Actor.Player;
@@ -27,14 +23,13 @@ public class GameUI {
 
     private Stage buttonStage;
     private TextureAtlas atlas;
-    private SpriteBatch uiBatch;
+    TextureAtlas uiMovementAtlas;
     private Action action;
-    private Board board;
 
-    public GameUI(TextureAtlas atlas, Action action, Board board) {
+    public GameUI(TextureAtlas atlas, Action action) {
         this.atlas = atlas;
         this.action = action;
-        this.board = board;
+        uiMovementAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/Movement-Cards.atlas"));
     }
 
     public void loadUI(Player spiller) {
@@ -121,21 +116,13 @@ public class GameUI {
         Gdx.input.setInputProcessor(buttonStage);
     }
 
-    public void loadUI2(Player spiller) {
+    /**
+     * Loads the user interface for {@code player}.
+     *
+     * @param player
+     */
+    public void loadUI2(Player player) {
         buttonStage = new Stage(new ScreenViewport());
-
-        //spiller.initializeHand();
-        //spiller.drawCards();
-        //spiller.initializeRegister();
-        ArrayList<Card> givenCardsOnHand = (ArrayList<Card>) spiller.getCardsOnHand();
-
-        TextureAtlas uiMovementAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/Movement-Cards.atlas"));
-        Skin mCardsSkin = new Skin(uiMovementAtlas);
-        String[] cardsName = {"m1f", "m2f", "m3f", "m1b", "r90r", "r90l", "r180"};
-
-        TextureAtlas uiDefaultAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/uiskin.atlas"));
-        Skin defaultSkin = new Skin(uiDefaultAtlas);
-
 
         //rootTable is the table where all other tables/ui goes into. rootTable size is the same as the gamescreen.
         Table rootTable = new Table();
@@ -147,6 +134,7 @@ public class GameUI {
         rootTable.setDebug(true);
 
         //List containing the relevant skin for each button
+        /*
         ArrayList<ImageButton.ImageButtonStyle> mCardsStyle = new ArrayList<>();
 
         for (int i = 0; i < givenCardsOnHand.size(); i++) {
@@ -156,13 +144,43 @@ public class GameUI {
             singleCard.up = mCardsSkin.getDrawable(cardIdentifier);
             mCardsStyle.add(singleCard);
 
-            ImageButton ibCardOption = new ImageButton(mCardsStyle.get(i));
+            //ImageButton ibCardOption = new ImageButton(mCardsStyle.get(i));
+            ImageButton ibCardOption = new ImageButton(getButton(givenCardsOnHand.get(i)));
             cardsOptions.add(ibCardOption).width(50).height(75).pad(1);
             if (i >= 1 && i % 2-1 == 0) {
                 cardsOptions.row();
             }
         }
 
+         */
+        ArrayList<Card> givenCardsOnHand = (ArrayList<Card>) player.getCardsOnHand();
+
+        for (int i = 0; i < givenCardsOnHand.size(); i++) {
+            Card currentCard = givenCardsOnHand.get(i);
+            ImageButton btn = new ImageButton(getButton(currentCard));
+            btn.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    player.addCardToRegister(currentCard);
+                    // Reload UI, should probably find some better way to do this
+                    dispose(); // Not sure if GC handles this or not, so dispose to be sure.
+                    loadUI2(player);
+                }
+            });
+            cardsOptions.add(btn).width(75).height(100).pad(1);
+            int rowWidth = 2;
+            if (i % rowWidth == rowWidth - 1) {
+                cardsOptions.row();
+            }
+        }
+        for (int i = 0; i < player.getRegister().size(); i++) {
+            Card currentCard = player.getRegister().get(i);
+            if (currentCard == null) continue; // TODO Remove this when register list is fixed
+            ImageButton btn = new ImageButton(getButton(currentCard));
+            cardsRegister.add(btn).width(75).height(100).pad(1);
+        }
+
+        /*
         SnapshotArray<com.badlogic.gdx.scenes.scene2d.Actor> ImageButtonsFromTable = cardsOptions.getChildren();
 
         for (int i = 0; i < ImageButtonsFromTable.size; i++) {
@@ -177,14 +195,14 @@ public class GameUI {
 
                     try {
                         // TODO
-                        spiller.addCardToRegister(new Card(CardType.MOVE_1_FORWARD, 200, true));
+                        player.addCardToRegister(new Card(CardType.MOVE_1_FORWARD, 200, true));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 }
             });
-        }
+        }*/
 
         //cardsRegister.add(m1f).height(100).width(75);
 
@@ -404,6 +422,16 @@ public class GameUI {
 
 
     }
+
+
+    private ImageButton.ImageButtonStyle getButton(Card card) {
+        ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
+        SpriteDrawable sd = new SpriteDrawable(uiMovementAtlas.createSprite(whichStyle(card)));
+        style.up = sd;
+        return style;
+    }
+
+
     //Converts from Card Enums to String keyword for the UI atlas
     private String whichStyle(Card card) {
 
