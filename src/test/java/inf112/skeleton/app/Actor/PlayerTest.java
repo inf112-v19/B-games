@@ -475,10 +475,12 @@ public class PlayerTest {
         cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 650, true)); //7
         cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 560, true)); //8
         cardStack.addCardToStack(new Card(CardType.MOVE_1_FORWARD, 570, true)); //9
-        action = new Action(board);
         Player player1 = new Player(5,5,Color.GREEN,board,1,1,  cardStack, false);
         Player player2 = new Player(5,4,Color.RED,board,2,1,  cardStack,false);
-
+        ArrayList<Actor> actors = new ArrayList<>();
+        actors.add(player1);
+        actors.add(player2);
+        Action action = new Action(board, actors);
         ArrayList<Player> players = new ArrayList<Player>();
         player1.drawCards();
         player2.drawCards();
@@ -486,7 +488,6 @@ public class PlayerTest {
         players.add(player2);
         action.cardResolver(players);
         assertEquals(5,player2.getY());
-        assertEquals(4,player1.getY());
-
+        assertEquals(6,player1.getY());
     }
 }

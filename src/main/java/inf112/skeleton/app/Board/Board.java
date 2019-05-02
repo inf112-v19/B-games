@@ -1,6 +1,7 @@
 package inf112.skeleton.app.Board;
 
 import inf112.skeleton.app.Actor.Direction;
+import inf112.skeleton.app.gui.GameScreen;
 
 public class Board implements IBoard {
     /*

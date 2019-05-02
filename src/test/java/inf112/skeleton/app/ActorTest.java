@@ -12,14 +12,18 @@ import inf112.skeleton.app.Board.Tile;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class ActorTest {
     Actor actor;
     Direction direction;
+    ArrayList<Actor> actors;
     Board board;
 
     @Before
     public void setup(){
         this.board = new Board();
+        actors = new ArrayList<Actor>();
         actor = new Actor(5, 5, Color.GREEN, board, 1);
 
     }
@@ -151,7 +155,7 @@ public class ActorTest {
         Tile tile = new Tile(walls, new Conveyor(Direction.NORTH, false));
         board.setTile(5, 5, tile);
         assertEquals(actor.getY(), 5);
-        actor.tileCheck();
+        actor.tileCheck(actors);
         assertEquals(actor.getY(), 6);
     }
 
@@ -161,7 +165,7 @@ public class ActorTest {
         Tile tile = new Tile(walls, new Conveyor(Direction.SOUTH, false));
         board.setTile(5, 5, tile);
         assertEquals(actor.getY(), 5);
-        actor.tileCheck();
+        actor.tileCheck(actors);
         assertEquals(actor.getY(), 4);
     }
 
@@ -171,7 +175,7 @@ public class ActorTest {
         Tile tile = new Tile(walls, new Conveyor(Direction.WEST, false));
         board.setTile(5, 5, tile);
         assertEquals(actor.getX(), 5);
-        actor.tileCheck();
+        actor.tileCheck(actors);
         assertEquals(actor.getX(), 4);
     }
 
@@ -181,7 +185,7 @@ public class ActorTest {
         Tile tile = new Tile(walls, new Conveyor(Direction.EAST, false));
         board.setTile(5, 5, tile);
         assertEquals(actor.getX(), 5);
-        actor.tileCheck();
+        actor.tileCheck(actors);
         assertEquals(actor.getX(), 6);
     }
 }

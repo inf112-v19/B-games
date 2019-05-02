@@ -254,7 +254,7 @@ public class GameScreen implements Screen {
             sprite_eye.setRotation(DirectionHelpers.rotationFromDirection(player.direction));
             sprite_eye.setSize(tile_size, tile_size);
             sprite_eye.draw(batch);
-            player.tileCheck();
+            //player.tileCheck(players);
         }
         batch.end();
 

@@ -6,6 +6,8 @@ import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Board.Item;
 import inf112.skeleton.app.Board.RotationDirection;
 
+import java.util.ArrayList;
+
 public class Actor implements IActor {
     private int xPos;
     private int yPos;
@@ -18,10 +20,8 @@ public class Actor implements IActor {
     private int onConveyorCount;
     private int flagsVisited = 0;
     private Board board;
-    private int dockingAssignment; //* set randomly at start of game based
-                                   // on number of players, determines
-                                   // starting position and
-                                   // priority for actions not covered by cards
+    private int dockingAssignment;
+    private boolean isDead = false;
 
 
     public Actor(int x, int y, Color color, Board board, int dockingAssignment){
@@ -104,42 +104,57 @@ public class Actor implements IActor {
 
     }
 
-    //Checks what type of tile actor is standing on and
-    //what items are in it and calls appropriate methods.
-    //Taking damage from laser beam is not yet implemented,
-    //unsure if this should be done in this method
-    public void tileCheck(){
-        ITile tile =  board.getAt(xPos, yPos);
-        Item item = tile.getItem();
-
-        if(tile.isHole()){
-            robotDestroyed();
-        }
-        if(tile.hasCog() != null){
-            rotate(tile.hasCog());
-        }
-        if(tile.hasConveyor() != null) {
-
+    /*Checks what type of tile actor is standing on and
+    what items are in it and calls appropriate methods.
+    Taking damage from laser beam is not yet implemented*/
+    public void tileCheck(ArrayList<Actor> actors){
+        if(!isDead) {
+            ITile tile = board.getAt(xPos, yPos);
+            int oldX = xPos;
+            int oldY = yPos;
+            Item item = tile.getItem();
+            if (tile.isHole()) {
+                robotDestroyed();
+            }
+            if (tile.hasCog() != null) {
+                rotate(tile.hasCog());
+            }
             if (tile.hasConveyor() != null) {
-                onConveyorCount += 1;
-            } else {
-                onConveyorCount = 0;
-            }
-            move(tile.hasConveyor().direction);
-            //If robot has gone on 2 or more conveyors in a row, then change its direction to last conveyorbelt.
-            if (onConveyorCount >= 2) {
-                direction = tile.hasConveyor().direction;
-                onConveyorCount = 0;
-            }
 
-        }
-        if(item != null){
-            if(item == Item.WRENCH){
-                repairDamage();
-                updateRestorationPoint();
+                if (tile.hasConveyor() != null) {
+                    onConveyorCount += 1;
+                } else {
+                    onConveyorCount = 0;
+                }
+                move(tile.hasConveyor().direction);
+                ITile currentTile = board.getAt(xPos, yPos);
+                for(Actor actor : actors){
+                    ITile actorPosition = board.getAt(actor.getX(), actor.getY());
+                    if(actor != this && currentTile == actorPosition){
+                        System.out.println("tilecheck i actor");
+                        if(!currentTile.hasWall(direction)) {
+                            actor.move(tile.hasConveyor().direction);
+                        }else{
+                            setX(oldX);
+                            setY(oldY);
+                        }
+                    }
+                }
+                //If robot has gone on 2 or more conveyors in a row, then change its direction to last conveyorbelt.
+                if (onConveyorCount >= 2) {
+                    direction = tile.hasConveyor().direction;
+                    onConveyorCount = 0;
+                }
+
             }
-            if(item == Item.FLAG){
-                updateRestorationPoint();
+            if (item != null) {
+                if (item == Item.WRENCH) {
+                    repairDamage();
+                    updateRestorationPoint();
+                }
+                if (item == Item.FLAG) {
+                    updateRestorationPoint();
+                }
             }
         }
     }
@@ -181,7 +196,10 @@ public class Actor implements IActor {
         if(robotLives > 0){
             restoreRobot();
         }else{
-            System.out.println("actor died"); //don't know what to do with robot when it dies yet
+            this.xPos = 1000;
+            this.yPos = 1000;
+            System.out.println(this.color + "actor died"); //don't know what to do with robot when it dies yet
+            this.isDead = true;
         }
     }
 
