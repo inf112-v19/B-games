@@ -43,14 +43,14 @@ public class Action implements IAction {
     }
 
     public void cardResolver(ArrayList<Player> players) {
-        for (int i = 0; i < 5; i++) {
-            final int temp = i;
+        //for (int i = 0; i < 5; i++) {
+        //final int temp = i;
             ArrayList<Player> ps = new ArrayList<>(players);
-            Collections.sort(ps, Comparator.comparing((Player player) -> player.getRegister().get(temp)));
+        Collections.sort(ps, Comparator.comparing((Player player) -> player.getRegister().get(phaseCounter)));
             for (Player p : ps) {
-                playCard(p, p.getRegister().get(i).getType());
+                playCard(p, p.getRegister().get(phaseCounter).getType());
             }
-        }
+        //}
 
         /*
         int lowestPriority;

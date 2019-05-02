@@ -66,6 +66,7 @@ public class GameUI {
             btn.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    if (player.fiveCardsInRegister()) return;
                     player.addCardToRegister(currentCard);
                     player.getCardsOnHand().remove(currentCard);
                     // Reload UI, should probably find some better way to do this

@@ -269,6 +269,8 @@ public class GameScreen implements Screen {
 
         // TODO local multiplayer test
         if (phase.equals("draw")) {
+            // add more cards, so we can play more fake rounds
+            cs.initializeCardStack();
             players.get(0).drawCards();
             players.get(1).drawCards();
             players.get(2).drawCards();
@@ -289,8 +291,17 @@ public class GameScreen implements Screen {
                 }
             }
         } else if (phase.equals("resolve")) {
-            action.cardResolver(players);
-            phase = "draw";
+            timer += deltaTime;
+            if (timer > 1) {
+                timer = 0;
+                int round = action.getRound();
+                action.cardResolver(players);
+                action.updatePhase();
+                if (round != action.getRound()) {
+                    phase = "draw";
+                }
+            }
+
         }
 
         //Rendering of the user interface
