@@ -9,7 +9,8 @@ import inf112.skeleton.app.Cards.Card;
 import inf112.skeleton.app.Cards.CardType;
 import inf112.skeleton.app.gui.GameScreen;
 
-import java.util.ArrayList;
+import java.util.*;
+import java.util.function.Function;
 
 /**
  * The big action class.
@@ -21,9 +22,9 @@ public class Action implements IAction {
     private int phaseCounter;
     private boolean debug = true;
     Board board;
-    ArrayList<Actor> actors;
+    ArrayList<Player> actors;
 
-    public Action(Board board, ArrayList<Actor> actors){
+    public Action(Board board, ArrayList<Player> actors) {
         this.board = board;
         this.actors = actors;
     }
@@ -42,6 +43,16 @@ public class Action implements IAction {
     }
 
     public void cardResolver(ArrayList<Player> players) {
+        for (int i = 0; i < 5; i++) {
+            final int temp = i;
+            ArrayList<Player> ps = new ArrayList<>(players);
+            Collections.sort(ps, Comparator.comparing((Player player) -> player.getRegister().get(temp)));
+            for (Player p : ps) {
+                playCard(p, p.getRegister().get(i).getType());
+            }
+        }
+
+        /*
         int lowestPriority;
         int indexToBePlayed = 0;
         ArrayList<Card> CardsToBePlayed = new ArrayList<Card>();                                    //Temporary cardlist.
@@ -59,7 +70,7 @@ public class Action implements IAction {
             }
             CardsPlayed.add(CardsToBePlayed.get(indexToBePlayed));
             playCard(players.get(indexToBePlayed), CardsToBePlayed.get(indexToBePlayed).getType());
-        }
+        }*/
     }
 
 

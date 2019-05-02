@@ -61,7 +61,7 @@ public class ActionTest {
         cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 760, true)); //8
         cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 770, true)); //9
         actor = new Actor(5, 5, Color.GREEN, board, 1);
-        ArrayList<Actor> players = new ArrayList<Actor>();
+        ArrayList<Player> players = new ArrayList<Player>();
         player1 = new Player(5,5,Color.GREEN,board,1,1,  cardStack, false);
         player2 = new Player(4,5,Color.RED,board,2,1,  cardStack,false);
         player3 = new Player(3,5,Color.BLUE,board,3, 1,  cardStack,false);

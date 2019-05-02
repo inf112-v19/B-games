@@ -57,6 +57,7 @@ public class GameScreen implements Screen {
     private Action action;
     private CardStack cs;
     private int playerTurn = 0;
+    private String phase = "draw";
 
     // TODO Keep for eventual sprite scrolling logic
     private float actionInterval = 1;
@@ -118,15 +119,16 @@ public class GameScreen implements Screen {
         // Game initialization
         board = Prototyping.generateRandomBoard(10, 10);
         players = new ArrayList<>();
-        //action = new Action(board);
+        action = new Action(board, players);
 
         cs = new CardStack();
         cs.initializeCardStack();
         cs.randomizeCardStack();
         // X and Y here represent which tile they are on, not pixel location!
+        // TODO playtest, 3 players
         players.add(new Player(5, 5, Color.RED, board, 1, 1, cs, false));
-        players.add(new Player(5, 6, Color.BLUE, board, 2, 2, cs, false));
-        players.add(new Player(5, 7, Color.GREEN, board, 3, 3, cs, false));
+        players.add(new Player(5, 6, Color.GREEN, board, 2, 2, cs, false));
+        players.add(new Player(5, 7, Color.BLUE, board, 3, 3, cs, false));
 
         // Initiating new UI object(singleton) and passing in necessary objects.
         UI = new GameUI(atlas, action);
@@ -137,9 +139,6 @@ public class GameScreen implements Screen {
         players.get(1).receiveDamage();
         players.get(1).receiveDamage();
         players.get(1).receiveDamage();
-        players.get(0).drawCards();
-        players.get(1).drawCards();
-        players.get(2).drawCards();
 
 
         UI.loadUI(players.get(0));
@@ -269,16 +268,29 @@ public class GameScreen implements Screen {
         batch.end();
 
         // TODO local multiplayer test
-        // runs 1 round of card selection for 3 players, then spazzes out
-        if (players.get(playerTurn % 3).fiveCardsInRegister()) {
-            playerTurn++;
-            if (playerTurn >= 3) {
-                playerTurn -= 3;
-                players.get(playerTurn).drawCards();
-                players.get(playerTurn).getRegister().clear();
-                players.get(playerTurn).initializeRegister();
+        if (phase.equals("draw")) {
+            players.get(0).drawCards();
+            players.get(1).drawCards();
+            players.get(2).drawCards();
+            // load ui for player 1
+            UI.loadUI(players.get(0));
+            phase = "turns";
+        } else if (phase.equals("turns")) {
+            if (players.get(playerTurn % 3).fiveCardsInRegister()) {
+                playerTurn++;
+                if (playerTurn == 3) {
+                    phase = "resolve";
+                    playerTurn = 0;
+                } else {
+                    players.get(playerTurn).drawCards();
+                    players.get(playerTurn).getRegister().clear();
+                    players.get(playerTurn).initializeRegister();
+                    UI.loadUI(players.get(playerTurn));
+                }
             }
-            UI.loadUI(players.get(playerTurn % 3));
+        } else if (phase.equals("resolve")) {
+            action.cardResolver(players);
+            phase = "draw";
         }
 
         //Rendering of the user interface

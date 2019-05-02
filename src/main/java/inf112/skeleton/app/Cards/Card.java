@@ -1,6 +1,6 @@
 package inf112.skeleton.app.Cards;
 
-public class Card implements ICard {
+public class Card implements ICard, Comparable<Card> {
 
     private CardType type;
     private int priority;
@@ -35,5 +35,10 @@ public class Card implements ICard {
     @Override
     public void setLocked() {
         unlockedStatus = false;
+    }
+
+    @Override
+    public int compareTo(Card card) {
+        return Integer.compare(priority, card.priority);
     }
 }
