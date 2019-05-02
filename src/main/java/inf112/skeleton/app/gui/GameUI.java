@@ -32,96 +32,13 @@ public class GameUI {
         uiMovementAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/Movement-Cards.atlas"));
     }
 
-    public void loadUI(Player spiller) {
-        buttonStage = new Stage(new ScreenViewport());
-
-        //Creating a ninepatch texture for button. The magic with ninepatch is that it will scale the button after how long the string is.
-        NinePatch buttonTexture = atlas.createPatch("button_up");
-        buttonTexture.setColor(Color.BLUE);
-        //Each TextButton object needs as input: an string and a TextButtonStyle object(simply styles the button).
-        TextButton.TextButtonStyle movementButtonStyle = new TextButton.TextButtonStyle();
-        movementButtonStyle.font = new BitmapFont();
-        movementButtonStyle.up = new NinePatchDrawable(buttonTexture);
-        //The ArrayList containing our buttons
-        ArrayList<TextButton> movementButtons = new ArrayList<TextButton>();
-        //An array of all cardtypes
-        CardType[] allMovementCards = CardType.values();
-        //Create as many buttons as there are cards, set their position on screen, add them to movementButton array and to stage
-        for (int i = 0; i < allMovementCards.length; i++) {
-            TextButton tb = new TextButton(allMovementCards[i].toString(), movementButtonStyle);
-            tb.setPosition(0, tb.getHeight() * i);
-            movementButtons.add(tb);
-            buttonStage.addActor(tb);
-        }
-
-
-        //MOVE_1_FORWARD button
-        Player finalSpiller = spiller;
-        movementButtons.get(0).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(finalSpiller, CardType.MOVE_1_FORWARD);
-            }
-        });
-
-        //MOVE_2_FORWARD button
-        movementButtons.get(1).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(finalSpiller, CardType.MOVE_2_FORWARD);
-            }
-        });
-
-        //MOVE_3_FORWARD button
-        movementButtons.get(2).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(finalSpiller, CardType.MOVE_3_FORWARD);
-            }
-        });
-
-        //MOVE_1_BACKWARD button
-        movementButtons.get(3).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(finalSpiller, CardType.MOVE_1_BACKWARD);
-            }
-        });
-
-        //ROTATE_90_LEFT button
-        movementButtons.get(4).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(finalSpiller, CardType.ROTATE_90_LEFT);
-            }
-        });
-
-        //ROTATE_90_RIGHT button
-        movementButtons.get(5).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(finalSpiller, CardType.ROTATE_90_RIGHT);
-            }
-        });
-
-        //ROTATE_180 button
-        movementButtons.get(6).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                action.playCard(finalSpiller, CardType.ROTATE_180);
-            }
-        });
-
-        //Make input active
-        Gdx.input.setInputProcessor(buttonStage);
-    }
 
     /**
      * Loads the user interface for {@code player}.
      *
      * @param player
      */
-    public void loadUI2(Player player) {
+    public void loadUI(Player player) {
         buttonStage = new Stage(new ScreenViewport());
 
         //rootTable is the table where all other tables/ui goes into. rootTable size is the same as the gamescreen.
@@ -133,26 +50,6 @@ public class GameUI {
         rootTable.setFillParent(true);
         rootTable.setDebug(true);
 
-        //List containing the relevant skin for each button
-        /*
-        ArrayList<ImageButton.ImageButtonStyle> mCardsStyle = new ArrayList<>();
-
-        for (int i = 0; i < givenCardsOnHand.size(); i++) {
-            System.out.println(givenCardsOnHand.get(i).getType());
-            ImageButton.ImageButtonStyle singleCard = new ImageButton.ImageButtonStyle();
-            String cardIdentifier = whichStyle(givenCardsOnHand.get(i));
-            singleCard.up = mCardsSkin.getDrawable(cardIdentifier);
-            mCardsStyle.add(singleCard);
-
-            //ImageButton ibCardOption = new ImageButton(mCardsStyle.get(i));
-            ImageButton ibCardOption = new ImageButton(getButton(givenCardsOnHand.get(i)));
-            cardsOptions.add(ibCardOption).width(50).height(75).pad(1);
-            if (i >= 1 && i % 2-1 == 0) {
-                cardsOptions.row();
-            }
-        }
-
-         */
         ArrayList<Card> givenCardsOnHand = (ArrayList<Card>) player.getCardsOnHand();
 
         for (int i = 0; i < givenCardsOnHand.size(); i++) {
@@ -165,7 +62,7 @@ public class GameUI {
                     player.getCardsOnHand().remove(currentCard);
                     // Reload UI, should probably find some better way to do this
                     dispose(); // Not sure if GC handles this or not, so dispose to be sure.
-                    loadUI2(player);
+                    loadUI(player);
                 }
             });
             cardsOptions.add(btn).width(75).height(100).pad(1);
@@ -186,37 +83,12 @@ public class GameUI {
                     player.getRegister().add(null); // ...
                     // Reload UI, should probably find some better way to do this
                     dispose(); // Not sure if GC handles this or not, so dispose to be sure.
-                    loadUI2(player);
+                    loadUI(player);
                 }
             });
             cardsRegister.add(btn).width(75).height(100).pad(1);
         }
 
-        /*
-        SnapshotArray<com.badlogic.gdx.scenes.scene2d.Actor> ImageButtonsFromTable = cardsOptions.getChildren();
-
-        for (int i = 0; i < ImageButtonsFromTable.size; i++) {
-            int finalI = i;
-            ImageButtonsFromTable.get(i).addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    //Create a new Imagebutton to go to register and add it to the register table
-                    ImageButton ibCardRegister = new ImageButton(mCardsStyle.get(finalI));
-                    cardsRegister.add(ibCardRegister).width(75).height(100).pad(1);
-
-
-                    try {
-                        // TODO
-                        player.addCardToRegister(new Card(CardType.MOVE_1_FORWARD, 200, true));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            });
-        }*/
-
-        //cardsRegister.add(m1f).height(100).width(75);
 
         /*  rootTable.center() here will change the position of the objects inside of rootTable, but not rootTable itself.
             cardsTable.left() will then put the textbuttons to the left of the size of cardsTable logical table. Right now
@@ -424,14 +296,6 @@ public class GameUI {
         //Updates and draws every actor in the stage. Actors here are the buttons.
         buttonStage.act(Gdx.graphics.getDeltaTime());
         buttonStage.draw();
-
-    }
-
-    public void renderUI2() {
-        //Updates and draws every actor in the stage. Actors here are the buttons.
-        buttonStage.act(Gdx.graphics.getDeltaTime());
-        buttonStage.draw();
-
 
     }
 
