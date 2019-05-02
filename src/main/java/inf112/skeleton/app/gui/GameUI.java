@@ -41,6 +41,10 @@ public class GameUI {
     public void loadUI(Player player) {
         buttonStage = new Stage(new ScreenViewport());
 
+        //Skin for different buttons
+        TextureAtlas uiDefaultAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/uiskin.atlas"));
+        Skin defaultSkin = new Skin(uiDefaultAtlas);
+
         //rootTable is the table where all other tables/ui goes into. rootTable size is the same as the gamescreen.
         Table rootTable = new Table();
         Table cardsRegister = new Table();
@@ -95,10 +99,30 @@ public class GameUI {
             it does nothing since the size of cardsTable is the same as the button inside it.
         */
 
+
+
         //rootTable.;
         rootTable.add(cardsOptions).expandX().left();
         rootTable.row();
         rootTable.add(cardsRegister).expandY().bottom();
+
+        //Code for Lock Register button
+        TextButton.TextButtonStyle lockRegisterStyle = new TextButton.TextButtonStyle();
+        lockRegisterStyle.up =  defaultSkin.getDrawable("default-round-large");
+        lockRegisterStyle.font = new BitmapFont();
+
+        TextButton lockRegister = new TextButton("Lock Register", lockRegisterStyle);
+        lockRegister.setColor(Color.RED);
+        lockRegister.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //if (player.fiveCardsInRegister()) {
+                    lockRegister.setColor(Color.GREEN);
+                //}
+            }
+        });
+        cardsRegister.add(lockRegister).padLeft(35).height(100);
+
 
         buttonStage.addActor(rootTable);
         Gdx.input.setInputProcessor(buttonStage);
