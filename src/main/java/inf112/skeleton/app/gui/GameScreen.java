@@ -2,8 +2,13 @@ package inf112.skeleton.app.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import inf112.skeleton.app.Action.Action;
 import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Actor.Direction;
@@ -15,6 +20,7 @@ import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Board.Laser;
 import inf112.skeleton.app.Cards.CardStack;
 import inf112.skeleton.app.Prototyping;
+
 import java.util.ArrayList;
 
 public class GameScreen implements Screen {
@@ -121,14 +127,12 @@ public class GameScreen implements Screen {
         players.get(1).receiveDamage();
         players.get(1).receiveDamage();
         players.get(1).receiveDamage();
-        players.get(1).receiveDamage();
         players.get(0).drawCards();
         players.get(1).drawCards();
         players.get(2).drawCards();
 
 
-
-        UI.loadUI2(players.get(0));
+        UI.loadUI(players.get(0));
     }
 
     @Override
@@ -166,7 +170,11 @@ public class GameScreen implements Screen {
                 sprite_tile.draw(batch);
                 // Conveyor
                 if (conveyor != null) {
-                    currentFrame.setColor(Color.GOLD);
+                    if (conveyor.fast) {
+                        currentFrame.setColor(Color.RED);
+                    } else {
+                        currentFrame.setColor(Color.GOLD);
+                    }
                     currentFrame.setRotation(DirectionHelpers.rotationFromDirection(conveyor.direction));
                     currentFrame.setPosition(x * tile_size, y * tile_size);
                     currentFrame.draw(batch);
@@ -260,11 +268,11 @@ public class GameScreen implements Screen {
                 players.get(playerTurn).getRegister().clear();
                 players.get(playerTurn).initializeRegister();
             }
-            UI.loadUI2(players.get(playerTurn % 3));
+            UI.loadUI(players.get(playerTurn % 3));
         }
 
         //Rendering of the user interface
-        UI.renderUI2();
+        UI.renderUI();
     }
 
     @Override
