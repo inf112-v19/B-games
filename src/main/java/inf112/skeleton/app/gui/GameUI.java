@@ -162,6 +162,7 @@ public class GameUI {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     player.addCardToRegister(currentCard);
+                    player.getCardsOnHand().remove(currentCard);
                     // Reload UI, should probably find some better way to do this
                     dispose(); // Not sure if GC handles this or not, so dispose to be sure.
                     loadUI2(player);
@@ -177,6 +178,17 @@ public class GameUI {
             Card currentCard = player.getRegister().get(i);
             if (currentCard == null) continue; // TODO Remove this when register list is fixed
             ImageButton btn = new ImageButton(getButton(currentCard));
+            btn.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    player.getRegister().remove(currentCard);
+                    player.getCardsOnHand().add(currentCard);
+                    player.getRegister().add(null); // ...
+                    // Reload UI, should probably find some better way to do this
+                    dispose(); // Not sure if GC handles this or not, so dispose to be sure.
+                    loadUI2(player);
+                }
+            });
             cardsRegister.add(btn).width(75).height(100).pad(1);
         }
 
