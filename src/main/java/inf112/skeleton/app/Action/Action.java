@@ -47,6 +47,7 @@ public class Action implements IAction {
         //final int temp = i;
             ArrayList<Player> ps = new ArrayList<>(players);
         Collections.sort(ps, Comparator.comparing((Player player) -> player.getRegister().get(phaseCounter)));
+        Collections.reverse(ps);
             for (Player p : ps) {
                 enquenePlayCard(p, p.getRegister().get(phaseCounter).getType());
             }
