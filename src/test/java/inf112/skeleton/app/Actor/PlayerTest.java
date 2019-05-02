@@ -481,8 +481,6 @@ public class PlayerTest {
         actors.add(player1);
         actors.add(player2);
         Action action = new Action(board, actors);
-
-
         ArrayList<Player> players = new ArrayList<Player>();
         player1.drawCards();
         player2.drawCards();

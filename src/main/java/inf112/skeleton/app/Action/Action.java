@@ -129,12 +129,10 @@ public class Action implements IAction {
             if(actor != player && newCurrent == actorPosition){
                 System.out.println("move i action");
                 if(!newCurrent.hasWall(direction)) {
-//                move(player, DirectionHelpers.reverse(player.direction));
                     actor.move(direction);
                 }else{
                     player.setX(oldX);
                     player.setY(oldY);
-//                    player.move(DirectionHelpers.reverse(direction));
                 }
             }
         }
