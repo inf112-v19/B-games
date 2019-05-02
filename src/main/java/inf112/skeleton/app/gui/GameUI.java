@@ -56,7 +56,7 @@ public class GameUI {
 
         //Putting table size to match that of the screen.
         rootTable.setFillParent(true);
-        rootTable.setDebug(true);
+        //rootTable.setDebug(true);
 
         ArrayList<Card> givenCardsOnHand = (ArrayList<Card>) player.getCardsOnHand();
 
@@ -129,10 +129,10 @@ public class GameUI {
         lockRegister.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (player.fiveCardsInRegister()) {
+                //if (player.fiveCardsInRegister()) {
                     lockRegister.setColor(Color.GREEN);
                     System.out.println(player.getHP());
-                }
+                //}
             }
         });
         cardsRegister.add(lockRegister).padLeft(35).height(100);
