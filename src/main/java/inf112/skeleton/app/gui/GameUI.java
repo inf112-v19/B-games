@@ -55,6 +55,7 @@ public class GameUI {
         Table rootTable = new Table();
         Table cardsRegister = new Table();
         Table cardsOptions = new Table();
+        Table priorityNumbers = new Table();
 
         //Putting table size to match that of the screen.
         rootTable.setFillParent(true);
@@ -81,15 +82,25 @@ public class GameUI {
                 cardsOptions.row();
             }
         }
+
+        //defining style for priority labels
+        TextButton.TextButtonStyle pButtonStyle = new TextButton.TextButtonStyle();
+        pButtonStyle.up =  defaultSkin.getDrawable("default-round-large");
+        pButtonStyle.font = new BitmapFont();
+
         for (int i = 0; i < player.getRegister().size(); i++) {
             Card currentCard = player.getRegister().get(i);
             //if (currentCard == null) continue; // TODO Remove this when register list is fixed
             if (currentCard == null) {
                 Image dummy = new Image(defaultSkin, "default-round-large");
                 cardsRegister.add(dummy).width(75).height(100).pad(1);
+                TextButton pDummy = new TextButton("", pButtonStyle);
+                priorityNumbers.add(pDummy).width(75).height(25).pad(1);
+
                 continue;
             }
             ImageButton btn = new ImageButton(getButton(currentCard));
+            TextButton priorityNumber = new TextButton(Integer.toString(currentCard.getPriority()), pButtonStyle);
             btn.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -102,6 +113,7 @@ public class GameUI {
                 }
             });
             cardsRegister.add(btn).width(75).height(100).pad(1);
+            priorityNumbers.add(priorityNumber).width(75).height(25).pad(1);
         }
 
 
@@ -114,6 +126,8 @@ public class GameUI {
         rootTable.add(cardsOptions).expandX().left();
         rootTable.row();
         rootTable.add(cardsRegister).expandY().bottom();
+        rootTable.row();
+        rootTable.add(priorityNumbers).bottom().padRight(133);
 
 
         //Code for Lock Register button
@@ -126,10 +140,10 @@ public class GameUI {
         lockRegister.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //if (player.fiveCardsInRegister()) {
+                if (player.fiveCardsInRegister()) {
                     lockRegister.setColor(Color.GREEN);
                     System.out.println(player.getHP());
-                //}
+                }
             }
         });
         cardsRegister.add(lockRegister).padLeft(35).height(100);
@@ -146,6 +160,9 @@ public class GameUI {
         heart.setHeight(50);
         heart.setWidth(50);
         heart.setPosition(HPText.getX() + 15, HPText.getY() - 17);
+
+        //Creating a visual indicator of which player is playing currently
+
 
         buttonStage.addActor(heart);
         buttonStage.addActor(HPText);
