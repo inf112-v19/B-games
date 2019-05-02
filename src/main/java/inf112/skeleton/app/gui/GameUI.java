@@ -2,13 +2,16 @@ package inf112.skeleton.app.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.Board.Board;
 import inf112.skeleton.app.Cards.Card;
@@ -49,6 +52,7 @@ public class GameUI {
         Table rootTable = new Table();
         Table cardsRegister = new Table();
         Table cardsOptions = new Table();
+        Table lifeTable = new Table();
 
         //Putting table size to match that of the screen.
         rootTable.setFillParent(true);
@@ -99,12 +103,11 @@ public class GameUI {
             it does nothing since the size of cardsTable is the same as the button inside it.
         */
 
-
-
         //rootTable.;
         rootTable.add(cardsOptions).expandX().left();
         rootTable.row();
         rootTable.add(cardsRegister).expandY().bottom();
+
 
         //Code for Lock Register button
         TextButton.TextButtonStyle lockRegisterStyle = new TextButton.TextButtonStyle();
@@ -118,11 +121,27 @@ public class GameUI {
             public void clicked(InputEvent event, float x, float y) {
                 //if (player.fiveCardsInRegister()) {
                     lockRegister.setColor(Color.GREEN);
+                    System.out.println(player.getHP());
                 //}
             }
         });
         cardsRegister.add(lockRegister).padLeft(35).height(100);
 
+        //Creating Label and its style. Contains how many lifes player has left.
+        Label.LabelStyle HPTextStyle = new Label.LabelStyle();
+        HPTextStyle.font = new BitmapFont();
+        Label HPText = new Label(String.valueOf(player.getHP()), HPTextStyle);
+        HPText.setPosition(850, 700, Align.right);
+
+        //Creating heart image, its position is based on the position of HPText
+        Texture heartImage = new Texture(Gdx.files.internal("assets/UI/hjerte.png"));
+        Image heart = new Image(heartImage);
+        heart.setHeight(50);
+        heart.setWidth(50);
+        heart.setPosition(HPText.getX() + 15, HPText.getY() - 17);
+
+        buttonStage.addActor(heart);
+        buttonStage.addActor(HPText);
 
         buttonStage.addActor(rootTable);
         Gdx.input.setInputProcessor(buttonStage);
