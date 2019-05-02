@@ -48,14 +48,11 @@ public class GameUI {
         TextureAtlas uiDefaultAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/uiskin.atlas"));
         Skin defaultSkin = new Skin(uiDefaultAtlas);
 
-        //Texture dummyTex = new Texture(uiDefaultAtlas.findRegion("default-round-large"));
-
 
         //rootTable is the table where all other tables/ui goes into. rootTable size is the same as the gamescreen.
         Table rootTable = new Table();
         Table cardsRegister = new Table();
         Table cardsOptions = new Table();
-        Table priorityNumbers = new Table();
 
         //Putting table size to match that of the screen.
         rootTable.setFillParent(true);
@@ -65,7 +62,7 @@ public class GameUI {
 
         for (int i = 0; i < givenCardsOnHand.size(); i++) {
             Card currentCard = givenCardsOnHand.get(i);
-            ImageButton btn = new ImageButton(getButton(currentCard));
+            ImageButton btn = getButton(currentCard);
             btn.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -83,24 +80,16 @@ public class GameUI {
             }
         }
 
-        //defining style for priority labels
-        TextButton.TextButtonStyle pButtonStyle = new TextButton.TextButtonStyle();
-        pButtonStyle.up =  defaultSkin.getDrawable("default-round-large");
-        pButtonStyle.font = new BitmapFont();
-
         for (int i = 0; i < player.getRegister().size(); i++) {
             Card currentCard = player.getRegister().get(i);
             //if (currentCard == null) continue; // TODO Remove this when register list is fixed
             if (currentCard == null) {
                 Image dummy = new Image(defaultSkin, "default-round-large");
                 cardsRegister.add(dummy).width(75).height(100).pad(1);
-                TextButton pDummy = new TextButton("", pButtonStyle);
-                priorityNumbers.add(pDummy).width(75).height(25).pad(1);
 
                 continue;
             }
-            ImageButton btn = new ImageButton(getButton(currentCard));
-            TextButton priorityNumber = new TextButton(Integer.toString(currentCard.getPriority()), pButtonStyle);
+            ImageButton btn = getButton(currentCard);
             btn.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -113,7 +102,6 @@ public class GameUI {
                 }
             });
             cardsRegister.add(btn).width(75).height(100).pad(1);
-            priorityNumbers.add(priorityNumber).width(75).height(25).pad(1);
         }
 
 
@@ -127,14 +115,14 @@ public class GameUI {
         rootTable.row();
         rootTable.add(cardsRegister).expandY().bottom();
         rootTable.row();
-        rootTable.add(priorityNumbers).bottom().padRight(133);
 
 
-        //Code for Lock Register button
+        //Style for the lockRegister button and who is playing button
         TextButton.TextButtonStyle lockRegisterStyle = new TextButton.TextButtonStyle();
         lockRegisterStyle.up =  defaultSkin.getDrawable("default-round-large");
         lockRegisterStyle.font = new BitmapFont();
 
+        //Code for Lock Register button
         TextButton lockRegister = new TextButton("Lock Register", lockRegisterStyle);
         lockRegister.setColor(Color.RED);
         lockRegister.addListener(new ClickListener() {
@@ -148,7 +136,7 @@ public class GameUI {
         });
         cardsRegister.add(lockRegister).padLeft(35).height(100);
 
-        //Creating Label and its style. Contains how many lifes player has left.
+        //Creating Label and its style. For HPText and isPlaying.
         Label.LabelStyle HPTextStyle = new Label.LabelStyle();
         HPTextStyle.font = new BitmapFont();
         Label HPText = new Label(String.valueOf(player.getHP()), HPTextStyle);
@@ -162,8 +150,17 @@ public class GameUI {
         heart.setPosition(HPText.getX() + 15, HPText.getY() - 17);
 
         //Creating a visual indicator of which player is playing currently
+        TextButton box = new TextButton("", lockRegisterStyle);
+        box.setColor(player.getColor());
+        box.setHeight(25);
+        box.setWidth(25);
+        box.setPosition(840, 630);
 
+        Label isPlaying = new Label("Is currently playing!" , HPTextStyle);
+        isPlaying.setPosition(box.getX() + 30, box.getY() + 4);
 
+        buttonStage.addActor(box);
+        buttonStage.addActor(isPlaying);
         buttonStage.addActor(heart);
         buttonStage.addActor(HPText);
 
@@ -365,11 +362,15 @@ public class GameUI {
     }
 
 
-    private ImageButton.ImageButtonStyle getButton(Card card) {
+    private ImageButton getButton(Card card) {
         ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
         SpriteDrawable sd = new SpriteDrawable(uiMovementAtlas.createSprite(whichStyle(card)));
         style.up = sd;
-        return style;
+        ImageButton btn = new ImageButton(style);
+        Label.LabelStyle ls = new Label.LabelStyle();
+        ls.font = new BitmapFont();
+        btn.add(new Label("P: " + card.getPriority(), ls)).padTop(78);
+        return btn;
     }
 
 
