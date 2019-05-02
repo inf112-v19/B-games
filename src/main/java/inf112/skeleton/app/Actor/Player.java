@@ -15,12 +15,18 @@ public class Player extends Actor implements IPlayer {
     private boolean powerDownRobot;
     private boolean confirmAction;
 
+    private Color color;
+
+    public Color getColor() {
+        return color;
+    }
     public Player(int x, int y, Color color, Board board,
                   int playerId, int dockingAssignment, CardStack cardStack, boolean confirmAction) {
         super(x, y, color, board, dockingAssignment);
         this.playerId = playerId;
         this.cardStack = cardStack;
         this.cardsOnHand = new ArrayList<>();
+        this.color = color;
         //initializeHand();
         this.cardsInRegister = new ArrayList<>();
         initializeRegister();
