@@ -96,7 +96,7 @@ public class GameScreen implements Screen {
         players = new ArrayList<>();
         sprite_actor = atlas.createSprite("robot");
 
-        action = new Action(board);
+        action = new Action(board, players);
         //X and Y here represent which tile they are on, not pixel location!
         players.add(new Actor(5, 5, Color.RED, board, 1));
         players.add(new Actor(5, 6, Color.BLUE, board, 2));
@@ -263,7 +263,7 @@ public class GameScreen implements Screen {
             sprite_eye.setRotation(DirectionHelpers.rotationFromDirection(player.direction));
             sprite_eye.setSize(tile_size, tile_size);
             sprite_eye.draw(batch);
-            player.tileCheck();
+            player.tileCheck(players);
         }
         batch.end();
 

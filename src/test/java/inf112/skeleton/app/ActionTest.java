@@ -26,6 +26,7 @@ public class ActionTest {
     Player player1;
     Player player2;
     Player player3;
+    ArrayList<Actor> players;
     CardStack cardStack;
 
     @Before
@@ -60,10 +61,14 @@ public class ActionTest {
         cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 760, true)); //8
         cardStack.addCardToStack(new Card(CardType.ROTATE_90_LEFT, 770, true)); //9
         actor = new Actor(5, 5, Color.GREEN, board, 1);
+        ArrayList<Actor> players = new ArrayList<Actor>();
         player1 = new Player(5,5,Color.GREEN,board,1,1,  cardStack, false);
         player2 = new Player(4,5,Color.RED,board,2,1,  cardStack,false);
         player3 = new Player(3,5,Color.BLUE,board,3, 1,  cardStack,false);
-        action = new Action(board);
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        action = new Action(board, players);
         boolean[] walls = new boolean[]{false, false, false, false};
         ITile tile = new Tile(walls);
         for(int i=0; i<10; i++){

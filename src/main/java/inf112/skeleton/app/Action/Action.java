@@ -7,6 +7,7 @@ import inf112.skeleton.app.Board.Board;
 import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Cards.Card;
 import inf112.skeleton.app.Cards.CardType;
+import inf112.skeleton.app.gui.GameScreen;
 
 import java.util.ArrayList;
 
@@ -20,9 +21,11 @@ public class Action implements IAction {
     private int phaseCounter;
     private boolean debug = true;
     Board board;
+    ArrayList<Actor> actors;
 
-    public Action(Board board){
+    public Action(Board board, ArrayList<Actor> actors){
         this.board = board;
+        this.actors = actors;
     }
 
     @Override
@@ -113,11 +116,28 @@ public class Action implements IAction {
     @Override
     public void move(Actor player, Direction direction){
         ITile current = board.getAt(player.getX(), player.getY());
+        int oldX = player.getX();
+        int oldY = player.getY();
         if(current == null) return; // TEMPORARY
         if (current.hasWall(direction)){
             return;
         }
         player.move(direction);
+        ITile newCurrent = board.getAt(player.getX(), player.getY());
+        for(Actor actor : actors){
+            ITile actorPosition = board.getAt(actor.getX(), actor.getY());
+            if(actor != player && newCurrent == actorPosition){
+                System.out.println("move i action");
+                if(!newCurrent.hasWall(direction)) {
+//                move(player, DirectionHelpers.reverse(player.direction));
+                    actor.move(direction);
+                }else{
+                    player.setX(oldX);
+                    player.setY(oldY);
+//                    player.move(DirectionHelpers.reverse(direction));
+                }
+            }
+        }
     }
 
     @Override
