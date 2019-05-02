@@ -125,8 +125,8 @@ public class GameUI {
         buttonStage = new Stage(new ScreenViewport());
 
         //spiller.initializeHand();
-        spiller.drawCards();
-        spiller.initializeRegister();
+        //spiller.drawCards();
+        //spiller.initializeRegister();
         ArrayList<Card> givenCardsOnHand = (ArrayList<Card>) spiller.getCardsOnHand();
 
         TextureAtlas uiMovementAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/Movement-Cards.atlas"));
@@ -174,11 +174,13 @@ public class GameUI {
                     ImageButton ibCardRegister = new ImageButton(mCardsStyle.get(finalI));
                     cardsRegister.add(ibCardRegister).width(75).height(100).pad(1);
 
-                    //try {
-                      //  spiller.addCardToRegister(1, 1, true);
-                    //} catch (Exception e) {
-                      //  e.printStackTrace();
-                    //}
+
+                    try {
+                        // TODO
+                        spiller.addCardToRegister(new Card(CardType.MOVE_1_FORWARD, 200, true));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                 }
             });

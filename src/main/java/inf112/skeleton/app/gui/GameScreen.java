@@ -46,6 +46,7 @@ public class GameScreen implements Screen {
     private ArrayList<Player> players;
     private Action action;
     private CardStack cs;
+    private int playerTurn = 0;
 
     // TODO Keep for eventual sprite scrolling logic
     private float actionInterval = 1;
@@ -114,6 +115,19 @@ public class GameScreen implements Screen {
         // Initiating new UI object(singleton) and passing in necessary objects.
         UI = new GameUI(atlas, action, board);
         // Loading in UI elements
+
+        // TODO remove, playtest
+        players.get(1).receiveDamage();
+        players.get(1).receiveDamage();
+        players.get(1).receiveDamage();
+        players.get(1).receiveDamage();
+        players.get(1).receiveDamage();
+        players.get(0).drawCards();
+        players.get(1).drawCards();
+        players.get(2).drawCards();
+
+
+
         UI.loadUI2(players.get(0));
     }
 
@@ -235,6 +249,13 @@ public class GameScreen implements Screen {
             player.tileCheck();
         }
         batch.end();
+
+        // TODO local multiplayer test
+        // runs 1 round of card selection for 3 players, then spazzes out
+        if (players.get(playerTurn % 3).fiveCardsInRegister()) {
+            playerTurn++;
+            UI.loadUI2(players.get(playerTurn % 3));
+        }
 
         //Rendering of the user interface
         UI.renderUI2();
