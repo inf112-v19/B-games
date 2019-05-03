@@ -124,9 +124,24 @@ public class BasicMapEditor {
                     pointer.move(Direction.EAST);
                     break;
                 case ('e'):
-                    System.out.println("r - conveyor\nf - fast conveyor\nc - cog\nh - hole\nl - laser\nw - wall");
+                    System.out.println("r - conveyor\nf - fast conveyor\nc - cog\nh - hole\nl - laser\nw - wall\nd - delete tile\ni - item");
                     input = in.next();
                     switch (input.charAt(0)){
+                        case ('i'):
+                            System.out.print("which item? flag, wrench");
+                            input = in.next();
+                            switch (input.charAt(0)){
+                                case ('f'):
+                                    pointer.getTile().setItem(Item.FLAG);
+                                    break;
+                                case ('w'):
+                                    pointer.getTile().setItem(Item.WRENCH);
+                                    break;
+                            }
+                            break;
+                        case ('d'):
+                            pointer.setTile(new Tile());
+                            break;
                         case ('r'):
                             System.out.println("Direction?");
                             input = in.next();
