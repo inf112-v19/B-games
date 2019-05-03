@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -18,6 +17,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class MenuScreen implements Screen {
 
     Stage stage;
+    Stage menu;
+    Stage playMenu;
     TextureAtlas atlas;
 
     public MenuScreen(RoboRally game) {
@@ -25,7 +26,8 @@ public class MenuScreen implements Screen {
         atlas = new TextureAtlas(Gdx.files.internal("assets/atlas/test.atlas"));
 
         // UI stage
-        stage = new Stage(new ScreenViewport());
+        menu = new Stage(new ScreenViewport());
+        playMenu = new Stage(new ScreenViewport());
 
         // Set up button style
         NinePatch patch_up = atlas.createPatch("button_up");
@@ -52,8 +54,10 @@ public class MenuScreen implements Screen {
 
         btn_play.addListener(event -> {
                     if (event instanceof ChangeListener.ChangeEvent) {
-                        stage.dispose();
-                        game.startGame();
+                        //menu.dispose();
+                        //game.startGame();
+                        stage = playMenu;
+                        Gdx.input.setInputProcessor(stage);
                         event.handle();
                     }
                     return true;
@@ -76,21 +80,50 @@ public class MenuScreen implements Screen {
                 }
         );
 
+        // region MAINMENU
         // Root table
-        Table t = new Table();
-        //t.background(new TextureRegionDrawable(new Texture(Gdx.files.internal("assets/background.png"))));
+        {
+            Table t = new Table();
+            //t.background(new TextureRegionDrawable(new Texture(Gdx.files.internal("assets/background.png"))));
 
-        //t.setDebug(true);
-        t.add(btn_play).width(150);
-        t.center();
-        t.row();
-        t.add(btn_options).width(150).padTop(20);
-        t.row();
-        t.add(btn_exit).width(150).padTop(200);
-        t.setFillParent(true);
+            //t.setDebug(true);
+            t.add(btn_play).width(150);
+            t.center();
+            t.row();
+            t.add(btn_options).width(150).padTop(20);
+            t.row();
+            t.add(btn_exit).width(150).padTop(200);
+            t.setFillParent(true);
+            menu.addActor(t);
+        }
+        // endregion
 
-        stage.addActor(t);
-
+        // Root table
+        {
+            Table t = new Table();
+            //t.background(new TextureRegionDrawable(new Texture(Gdx.files.internal("assets/background.png"))));
+            TextButton btn_start = new TextButton("START", style);
+            btn_start.getLabel().setFontScale(2);
+            btn_start.addListener(event -> {
+                        if (event instanceof ChangeListener.ChangeEvent) {
+                            stage.dispose();
+                            game.startGame();
+                            event.handle();
+                        }
+                        return true;
+                    }
+            );
+            //t.setDebug(true);
+            t.add(btn_start).width(150);
+            t.center();
+            t.row();
+            t.add().width(150).padTop(20);
+            t.row();
+            t.add().width(150).padTop(200);
+            t.setFillParent(true);
+            playMenu.addActor(t);
+        }
+        stage = menu;
         // Activate inputs
         Gdx.input.setInputProcessor(stage);
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(new Pixmap(Gdx.files.internal("assets/cursor.png")), 0,0));

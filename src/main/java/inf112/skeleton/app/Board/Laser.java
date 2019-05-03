@@ -7,19 +7,12 @@ public class Laser extends Tile implements ILaser {
 
     public Laser(Direction laserDirection){
         this.laserDirection = laserDirection;
+        setWall(laserDirection, true);
     }
 
     @Override
     public Direction getLaser() {
         return laserDirection;
-    }
-
-    @Override
-    public boolean hasWall(Direction direction) {
-        if(direction == laserDirection){
-            return true;
-        }
-        return super.hasWall(direction);
     }
 
     @Override

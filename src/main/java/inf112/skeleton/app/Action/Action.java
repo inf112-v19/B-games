@@ -45,12 +45,12 @@ public class Action implements IAction {
     public void cardResolver(ArrayList<Player> players) {
         //for (int i = 0; i < 5; i++) {
         //final int temp = i;
-            ArrayList<Player> ps = new ArrayList<>(players);
+        ArrayList<Player> ps = new ArrayList<>(players);
         Collections.sort(ps, Comparator.comparing((Player player) -> player.getRegister().get(phaseCounter)));
         Collections.reverse(ps);
-            for (Player p : ps) {
-                enquenePlayCard(p, p.getRegister().get(phaseCounter).getType());
-            }
+        for (Player p : ps) {
+            enquenePlayCard(p, p.getRegister().get(phaseCounter).getType());
+        }
         //}
 
         /*
