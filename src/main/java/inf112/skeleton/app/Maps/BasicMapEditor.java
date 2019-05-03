@@ -124,7 +124,7 @@ public class BasicMapEditor {
                     pointer.move(Direction.EAST);
                     break;
                 case ('e'):
-                    System.out.println("r - conveyor\nc - cog\nh - hole\nl - laser\nw - wall");
+                    System.out.println("r - conveyor\nf - fast conveyor\nc - cog\nh - hole\nl - laser\nw - wall");
                     input = in.next();
                     switch (input.charAt(0)){
                         case ('r'):
@@ -142,6 +142,24 @@ public class BasicMapEditor {
                                     break;
                                 case ('w'):
                                     pointer.getTile().setConveyor(new Conveyor(Direction.WEST,false));
+                                    break;
+                            }
+                            break;
+                        case ('f'):
+                            System.out.println("Direction?");
+                            input = in.next();
+                            switch (input.charAt(0)){
+                                case ('n'):
+                                    pointer.getTile().setConveyor(new Conveyor(Direction.NORTH, true));
+                                    break;
+                                case ('e'):
+                                    pointer.getTile().setConveyor(new Conveyor(Direction.EAST, true));
+                                    break;
+                                case ('s'):
+                                    pointer.getTile().setConveyor(new Conveyor(Direction.SOUTH, true));
+                                    break;
+                                case ('w'):
+                                    pointer.getTile().setConveyor(new Conveyor(Direction.WEST,true));
                                     break;
                             }
                             break;

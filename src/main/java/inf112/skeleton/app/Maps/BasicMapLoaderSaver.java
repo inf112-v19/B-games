@@ -46,17 +46,17 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
             of tile to have with relevant information.
             And then is reads a new type
              */
-            for(int i = 0; i < height; i++){
-                for(int j = 0; j < width; j++){
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
                     line = bufferedReader.readLine();
                     if(line.equals("type:Tile")){
-                        board.setTile(j, i, new Tile(parseBoolean(bufferedReader.readLine()),
+                        board.setTile(x, y, new Tile(parseBoolean(bufferedReader.readLine()),
                                 parseWalls(bufferedReader.readLine()),
-                                (Conveyor) parseConveyor(bufferedReader.readLine()),
+                                parseConveyor(bufferedReader.readLine()),
                                 (RotationDirection)parseEnum(bufferedReader.readLine()),
                                 (Item)parseEnum(bufferedReader.readLine())));
                     } else if(line.equals("type:Laser")){
-                        board.setTile(j, i, new Laser((Direction)parseEnum(bufferedReader.readLine())));
+                        board.setTile(x, y, new Laser((Direction) parseEnum(bufferedReader.readLine())));
                     }
                 }
             }
@@ -101,10 +101,10 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
 
             bufferedWriter.write(width + "\n" + height + "\n"); //the first two lines is writes are the width and height of the board
             //loop for Y coordinates
-            for (int i = 0; i < height; i++){
+            for (int x = 0; x < width; x++) {
                 //loop for X coordinates
-                for (int j = 0; j <width; j++){
-                    bufferedWriter.write(map.getAt(j, i).toString());
+                for (int y = 0; y < height; y++) {
+                    bufferedWriter.write(map.getAt(x, y).toString());
                 }
             }
 
