@@ -1,8 +1,8 @@
 package inf112.skeleton.app.Maps;
 
 import inf112.skeleton.app.Actor.Direction;
-import inf112.skeleton.app.Board.Board;
-import inf112.skeleton.app.Board.IBoard;
+import inf112.skeleton.app.Board.*;
+import org.lwjgl.Sys;
 
 import javax.swing.*;
 import java.io.File;
@@ -69,6 +69,7 @@ public class BasicMapEditor {
 
     private static IBoard edit(IBoard map, Scanner in){
         boolean edit = true;
+        String input;
         MapPointer pointer = new MapPointer(map);
         //map editing loop
         while (edit){
@@ -82,7 +83,103 @@ public class BasicMapEditor {
                 }
                 System.out.print("\n");
             }
-            edit = false;
+            System.out.println("WAST - move, e - edit, g - get, q - exit");
+            input = in.next();
+            switch (input.charAt(0)){
+                case ('q'):
+                    edit = false;
+                    break;
+                case ('g'):
+                    System.out.println(pointer.getTile().toString());
+                    break;
+                case ('w'):
+                    pointer.move(Direction.NORTH);
+                    break;
+                case ('a'):
+                    pointer.move(Direction.WEST);
+                    break;
+                case ('s'):
+                    pointer.move(Direction.SOUTH);
+                    break;
+                case ('d'):
+                    pointer.move(Direction.EAST);
+                    break;
+                case ('e'):
+                    System.out.println("r - conveyor\nc - cog\nh - hole\nl - laser\nw - wall");
+                    input = in.next();
+                    switch (input.charAt(0)){
+                        case ('r'):
+                            System.out.println("Direction?");
+                            input = in.next();
+                            switch (input.charAt(0)){
+                                case ('n'):
+                                    pointer.getTile().setConveyor(new Conveyor(Direction.NORTH, false));
+                                    break;
+                                case ('e'):
+                                    pointer.getTile().setConveyor(new Conveyor(Direction.EAST, false));
+                                    break;
+                                case ('s'):
+                                    pointer.getTile().setConveyor(new Conveyor(Direction.SOUTH, false));
+                                    break;
+                                case ('w'):
+                                    pointer.getTile().setConveyor(new Conveyor(Direction.WEST,false));
+                                    break;
+                            }
+                            break;
+                        case ('c'):
+                            System.out.println("Direction? clockwise, counterclockwise");
+                            input = in.next();
+                            switch (input.substring(0, 2)){
+                                case ("cl"):
+                                    pointer.getTile().setCogwheel(RotationDirection.CLOCKWISE);
+                                    break;
+                                case ("co"):
+                                    pointer.getTile().setCogwheel(RotationDirection.COUNTERCLOCKWISE);
+                                    break;
+                            }
+                            break;
+                        case ('h'):
+                            pointer.getTile().setHole(true);
+                            break;
+                        case ('l'):
+                            System.out.println("Direction?");
+                            input = in.next();
+                            switch (input.charAt(0)){
+                                case ('n'):
+                                    pointer.setTile(new Laser(Direction.NORTH));
+                                    break;
+                                case ('e'):
+                                    pointer.setTile(new Laser(Direction.EAST));
+                                    break;
+                                case ('s'):
+                                    pointer.setTile(new Laser(Direction.SOUTH));
+                                    break;
+                                case ('w'):
+                                    pointer.setTile(new Laser(Direction.WEST));
+                                    break;
+                            }
+                            break;
+                        case ('w'):
+                            System.out.println("Direction?");
+                            input = in.next();
+                            switch (input.charAt(0)){
+                                case ('n'):
+                                    pointer.getTile().setWall(Direction.NORTH, true);
+                                    break;
+                                case ('e'):
+                                    pointer.getTile().setWall(Direction.EAST, true);
+                                    break;
+                                case ('s'):
+                                    pointer.getTile().setWall(Direction.SOUTH, true);
+                                    break;
+                                case ('w'):
+                                    pointer.getTile().setWall(Direction.WEST, true);
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+            }
         }
         return null;
     }
