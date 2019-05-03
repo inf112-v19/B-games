@@ -17,7 +17,10 @@ hva ville dere justert? hva er det viktigste dere har lært?
 
 **Deloppgave 1**
 
-    .
+    Vi burde tenkt mer på hvordan klassene skulle kommet til sammen som en helhet. 
+    Det burdet vært me fokus på at alle/en eller flere hadde oversikt over kodebasen.
+    Burde har bedre forståelse for reglene for spillet, prøve ut hvordan det ville
+    fungert på brettspillet før en begynne å implementere i prosjektet.
 
 
 # Deloppgave 2: krav 
@@ -54,7 +57,7 @@ sette sammen ulike brett til større spillﬂate
 scoringssystem: huske hvor mange spill du har vunnet, evt hva de ulike plasseringene du har hatt er 
 mer avansert scoringssystem: antall trekk for å nå ﬂagg? Kanskje ha en spillmodus som er på noen få typer brett med fastsatte ﬂagg der poenget er å komme seg fortest mulig frem? 
 ﬂere rutetyper på brettet (feks teleporter, skubbe-dingser som fyrer av på ulike faser) 
-lage egne brett '
+lage egne brett
 generere brett 
 lagre spill underveis slik at det går an å avslutte og sette igang spill igjen senere 
 spille over Internet, og ikke bare LAN 
@@ -66,7 +69,11 @@ Alle robotene kan ha et option-kort by default. Eller en tradeoff der man må ta
 
 **Deloppgave 2**
 
-    .
+    Krav som er oppfylt:
+    - Det skal være hull på brettet 
+    - fungerende samlebånd på brettet som ﬂytter robotene 
+    - power down
+    - generere brett
 
 # Deloppgave 3: kode 
 Som en del av denne leveransen skal dere legge ved en liste (og kort beskrivelse?) over kjente feil og svakheter i produktet.
@@ -79,7 +86,22 @@ gjør justeringer som feks å ta vekk ubetydelige klasser, skriv noen linjer om 
 
 **Deloppgave 3**
 
-    .
+        Bugs:
+            - 5 tester for Player feiler.
+            
+        
+        Info om hvordan prosjektet bygger, testes og kjøres:
+            - Programming language: Java
+            - Software Development Kit(SDK): Java Development Kit 1.8
+            - Source Encoding: UTF-8
+            - Game Development Framework: libGDX 1.9.9 
+            -  Test for game logic: JUnit 4.11
+            - Test for game graphic: not yet defined
+            - Project Management Tool: Maven Project Object Model 4.0.0
+            - Source Folder: src/main/java 
+            - Test Source Folder: src/test/java 
+            - Resource Folder: assets
+            - Excluded Folder: target
     
 
 # Deloppgave 4: Presentasjon
