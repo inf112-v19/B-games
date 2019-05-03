@@ -200,6 +200,6 @@ public class BasicMapEditor {
                     break;
             }
         }
-        return null;
+        return map;
     }
 }
