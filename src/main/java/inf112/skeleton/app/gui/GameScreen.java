@@ -1,7 +1,6 @@
 package inf112.skeleton.app.gui;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -29,7 +28,8 @@ public class GameScreen implements Screen {
 
     // Rendering
     OrthographicCamera camera;
-    private int tile_size = 256;
+    private int tile_size = 128;
+    private int conveyor_padding = 8;
     TextureAtlas atlas;
     SpriteBatch batch;
     private Sprite sprite_tile;
@@ -66,17 +66,29 @@ public class GameScreen implements Screen {
 
     //UI
     private GameUI UI;
+    private float scrollSpeed = 0.1f;
+    private float translateSpeed = 40f;
 
     public GameScreen(RoboRally game) {
         this.game = game;
         atlas = Assets.getTextureAtlas();
 
+        InputProcessor ip = new InputAdapter() {
+            @Override
+            public boolean scrolled(int amount) {
+                camera.zoom += amount * 0.1f;
+                camera.update();
+                return super.scrolled(amount);
+            }
+        };
+        Gdx.input.setInputProcessor(ip);
+
         // Viewport settings
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 3000, 3000 * (h / w));
-        camera.zoom = 1.5f;
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.zoom = 1f;
         /** yDown sets where Y-axis starts. true being bottom of screen, while false is at top of screen**/
         //camera.translate(5,5);
 
@@ -98,7 +110,7 @@ public class GameScreen implements Screen {
         sprite_conveyor = atlas.createSprite("conveyor_long");
         conveyor = new Animation<>(1f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
         // Scale
-        sprite_conveyor.setSize(tile_size - 32, tile_size - 32); // render inside tile edges
+        sprite_conveyor.setSize(tile_size - conveyor_padding * 2, tile_size - conveyor_padding * 2); // render inside tile edges
         sprite_tile.setSize(tile_size, tile_size);
         sprite_laser.setSize(tile_size, tile_size);
         sprite_beam.setSize(tile_size, tile_size);
@@ -131,7 +143,7 @@ public class GameScreen implements Screen {
         players.add(new Player(5, 7, Color.BLUE, board, 3, 3, cs, false));
 
         // Initiating new UI object(singleton) and passing in necessary objects.
-        UI = new GameUI(atlas, action);
+        UI = new GameUI(atlas, action, this);
         // Loading in UI elements
 
         // TODO remove, playtest
@@ -185,7 +197,7 @@ public class GameScreen implements Screen {
                         sprite_conveyor.setColor(Color.GOLD);
                     }
                     sprite_conveyor.setRotation(DirectionHelpers.rotationFromDirection(conveyor.direction));
-                    sprite_conveyor.setPosition(x * tile_size + 16, y * tile_size + 16);
+                    sprite_conveyor.setPosition(x * tile_size + conveyor_padding, y * tile_size + conveyor_padding);
                     sprite_conveyor.draw(batch);
                     //continue;
                 }
@@ -294,7 +306,8 @@ public class GameScreen implements Screen {
             timer += deltaTime;
             if (timer > 1) {
                 if (action.waitingCards()) {
-                    action.playNextCard();
+                    Player movingPlayer = action.playNextCard();
+                    System.out.println();
                 } else {
                     int round = action.getRound();
                     action.cardResolver(players);
@@ -314,12 +327,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        //TODO: FIX width adjustments zooms
-        camera.viewportWidth = 3000;
-        camera.viewportHeight = 3000 * height / width;
+        camera.viewportWidth = Gdx.graphics.getWidth();
+        camera.viewportHeight = Gdx.graphics.getHeight();
         camera.update();
-
-        //UI.resizeUI(width, height);
     }
 
     @Override
@@ -340,5 +350,14 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    public void zoom(int scrollAmount) {
+        camera.zoom += scrollAmount * scrollSpeed;
+    }
+
+    public void translate(float x, float y) {
+        camera.translate(x * translateSpeed, y * translateSpeed);
+        //camera.update();
     }
 }

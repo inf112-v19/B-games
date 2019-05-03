@@ -1,9 +1,12 @@
 package inf112.skeleton.app.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -18,6 +21,9 @@ import inf112.skeleton.app.Cards.Card;
 import inf112.skeleton.app.Cards.CardType;
 import inf112.skeleton.app.Action.Action;
 import inf112.skeleton.app.Actor.Player;
+import javafx.scene.input.KeyCode;
+import org.lwjgl.Sys;
+
 import java.util.ArrayList;
 
 
@@ -27,9 +33,11 @@ public class GameUI {
     private Stage buttonStage;
     private TextureAtlas atlas;
     TextureAtlas uiMovementAtlas;
+    private GameScreen gameScreen;
     private Action action;
 
-    public GameUI(TextureAtlas atlas, Action action) {
+    public GameUI(TextureAtlas atlas, Action action, GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
         this.atlas = atlas;
         this.action = action;
         uiMovementAtlas = new TextureAtlas(Gdx.files.internal("assets/UI/Movement-Cards.atlas"));
@@ -167,6 +175,35 @@ public class GameUI {
 
         buttonStage.addActor(rootTable);
         Gdx.input.setInputProcessor(buttonStage);
+        buttonStage.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                if (event instanceof InputEvent) {
+                    InputEvent ie = (InputEvent) event;
+                    if (ie.getType() == InputEvent.Type.scrolled) {
+                        gameScreen.zoom(ie.getScrollAmount());
+                    } else if (ie.getType() == InputEvent.Type.keyDown) {
+                        switch (ie.getKeyCode()) {
+                            case Input.Keys.W:
+                                gameScreen.translate(0, 1);
+                                break;
+                            case Input.Keys.S:
+                                gameScreen.translate(0, -1);
+                                break;
+                            case Input.Keys.A:
+                                gameScreen.translate(-1, 0);
+                                break;
+                            case Input.Keys.D:
+                                gameScreen.translate(1, 0);
+                                break;
+                            default:
+                                //System.out.println(ie.getCharacter());
+                        }
+                    }
+                }
+                return true;
+            }
+        });
 
     }
 

@@ -87,10 +87,11 @@ public class Action implements IAction {
         return !playerQuene.isEmpty();
     }
 
-    public boolean playNextCard() {
-        if (!waitingCards()) return false;
-        playCard(playerQuene.poll(), cardQuene.poll());
-        return true;
+    public Player playNextCard() {
+        if (!waitingCards()) return null;
+        Player player = playerQuene.poll();
+        playCard(player, cardQuene.poll());
+        return player;
     }
 
     @Override
