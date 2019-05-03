@@ -13,10 +13,7 @@ import inf112.skeleton.app.Actor.Actor;
 import inf112.skeleton.app.Actor.Direction;
 import inf112.skeleton.app.Actor.DirectionHelpers;
 import inf112.skeleton.app.Actor.Player;
-import inf112.skeleton.app.Board.Board;
-import inf112.skeleton.app.Board.Conveyor;
-import inf112.skeleton.app.Board.ITile;
-import inf112.skeleton.app.Board.Laser;
+import inf112.skeleton.app.Board.*;
 import inf112.skeleton.app.Cards.CardStack;
 import inf112.skeleton.app.Maps.BasicMapLoaderSaver;
 import inf112.skeleton.app.Maps.IMapLoaderSaver;
@@ -56,6 +53,7 @@ public class GameScreen implements Screen {
     float elapsedTime = 0;
     float animSpeed = 100f;
     Animation<Sprite> conveyor;
+    float cog_rotation = 0;
 
     // Logic
     private Board board;
@@ -138,6 +136,7 @@ public class GameScreen implements Screen {
         sprite_wall.setOriginCenter();
         sprite_laser.setOriginCenter();
         sprite_beam.setOriginCenter();
+        sprite_cog.setOriginCenter();
         // Colors
         sprite_hole_edge.setColor(Color.GOLD);
         sprite_conveyor.setColor(Color.GOLD);
@@ -186,7 +185,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float deltaTime) {
         elapsedTime += deltaTime * animSpeed;
-
+        cog_rotation += deltaTime * 15;
         // move through texture region and reset on repeating pattern.
         int conveyorY = sprite_conveyor.getRegionY() + 1;//+ 0.01f;
         if (conveyorY > conveyorRegionY + 32) {
@@ -236,7 +235,13 @@ public class GameScreen implements Screen {
                     sprite_hole_edge.draw(batch);
                 }
                 if (tile.hasCog() != null) {
+                    RotationDirection r = tile.hasCog();
                     sprite_cog.setPosition(x * tile_size, y * tile_size);
+                    if (r == RotationDirection.CLOCKWISE) {
+                        sprite_cog.setRotation(cog_rotation);
+                    } else {
+                        sprite_cog.setRotation(-cog_rotation);
+                    }
                     sprite_cog.draw(batch);
                 }
 
