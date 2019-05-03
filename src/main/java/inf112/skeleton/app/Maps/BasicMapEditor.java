@@ -128,7 +128,7 @@ public class BasicMapEditor {
                     input = in.next();
                     switch (input.charAt(0)){
                         case ('i'):
-                            System.out.print("which item? flag, wrench");
+                            System.out.print("which item? flag, wrench\n");
                             input = in.next();
                             switch (input.charAt(0)){
                                 case ('f'):
