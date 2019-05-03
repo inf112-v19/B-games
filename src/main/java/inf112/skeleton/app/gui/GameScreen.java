@@ -18,6 +18,8 @@ import inf112.skeleton.app.Board.Conveyor;
 import inf112.skeleton.app.Board.ITile;
 import inf112.skeleton.app.Board.Laser;
 import inf112.skeleton.app.Cards.CardStack;
+import inf112.skeleton.app.Maps.BasicMapLoaderSaver;
+import inf112.skeleton.app.Maps.IMapLoaderSaver;
 import inf112.skeleton.app.Prototyping;
 
 import java.util.ArrayList;
@@ -58,6 +60,7 @@ public class GameScreen implements Screen {
     private CardStack cs;
     private int playerTurn = 0;
     private String phase = "draw";
+    private IMapLoaderSaver loaderSaver = new BasicMapLoaderSaver();
 
     // TODO Keep for eventual sprite scrolling logic
     private float actionInterval = 1;
@@ -129,7 +132,8 @@ public class GameScreen implements Screen {
         conveyorRegionY = sprite_conveyor.getRegionY();
 
         // Game initialization
-        board = Prototyping.generateRandomBoard(10, 10);
+        //board = Prototyping.generateRandomBoard(10, 10);
+        board = loaderSaver.load("maps/Risky.txt");
         players = new ArrayList<>();
         action = new Action(board, players);
 

@@ -52,7 +52,7 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
                     if(line.equals("type:Tile")){
                         board.setTile(j, i, new Tile(parseBoolean(bufferedReader.readLine()),
                                 parseWalls(bufferedReader.readLine()),
-                                (Conveyor) parseConveyor(bufferedReader.readLine()),
+                                parseConveyor(bufferedReader.readLine()),
                                 (RotationDirection)parseEnum(bufferedReader.readLine()),
                                 (Item)parseEnum(bufferedReader.readLine())));
                     } else if(line.equals("type:Laser")){

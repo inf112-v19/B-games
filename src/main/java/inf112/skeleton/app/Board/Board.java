@@ -78,22 +78,22 @@ public class Board implements IBoard {
         if (x > 0) {
             tile.setLinked(Direction.WEST, tiles[x][y].getLinked(Direction.WEST));
             tile.getLinked(Direction.WEST).setLinked(Direction.EAST, tile);
-            tile.setWall(Direction.WEST, tile.getLinked(Direction.WEST).hasWall(Direction.EAST));
+            tile.getLinked(Direction.WEST).setWall(Direction.EAST, tile.hasWall(Direction.WEST));
         }
         if (x < width - 1) {
             tile.setLinked(Direction.EAST, tiles[x][y].getLinked(Direction.EAST));
             tile.getLinked(Direction.EAST).setLinked(Direction.WEST, tile);
-            tile.setWall(Direction.EAST, tile.getLinked(Direction.EAST).hasWall(Direction.WEST));
+            tile.getLinked(Direction.EAST).setWall(Direction.WEST, tile.hasWall(Direction.EAST));
         }
         if (y > 0) {
             tile.setLinked(Direction.SOUTH, tiles[x][y].getLinked(Direction.SOUTH));
             tile.getLinked(Direction.SOUTH).setLinked(Direction.NORTH, tile);
-            tile.setWall(Direction.SOUTH, tile.getLinked(Direction.SOUTH).hasWall(Direction.NORTH));
+            tile.getLinked(Direction.SOUTH).setWall(Direction.NORTH, tile.hasWall(Direction.SOUTH));
         }
         if (y < height - 1) {
             tile.setLinked(Direction.NORTH, tiles[x][y].getLinked(Direction.NORTH));
             tile.getLinked(Direction.NORTH).setLinked(Direction.SOUTH, tile);
-            tile.setWall(Direction.NORTH, tile.getLinked(Direction.NORTH).hasWall(Direction.SOUTH));
+            tile.getLinked(Direction.NORTH).setWall(Direction.SOUTH, tile.hasWall(Direction.NORTH));
         }
 
         tiles[x][y] = tile;
