@@ -14,8 +14,8 @@ public class Prototyping {
     public static Board generateRandomBoard(int width, int height) {
         Board board = new Board(width, height);
         Random r = new Random();
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
                 int random = r.nextInt(30);
                 ITile tile;
                 switch (random) {
@@ -65,8 +65,8 @@ public class Prototyping {
                 board.setTile(x, y, tile);
             }
         }
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
                 // TODO mirror walls
                 ITile tile = board.getAt(x, y);
                 if (y == 0) {
@@ -97,6 +97,17 @@ public class Prototyping {
                 }
             }
         }
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                ITile tile = board.getAt(x, y);
+                if (tile instanceof Laser) {
+                    tile.setWall(((Laser) tile).getLaser(), true);
+                }
+            }
+        }
+
+
+
 
         return board;
     }

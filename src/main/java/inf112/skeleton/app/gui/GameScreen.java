@@ -141,6 +141,7 @@ public class GameScreen implements Screen {
         players.add(new Player(5, 5, Color.RED, board, 1, 1, cs, false));
         players.add(new Player(5, 6, Color.GREEN, board, 2, 2, cs, false));
         players.add(new Player(5, 7, Color.BLUE, board, 3, 3, cs, false));
+        players.add(new Player(5, 7, Color.YELLOW, board, 3, 3, cs, false));
 
         // Initiating new UI object(singleton) and passing in necessary objects.
         UI = new GameUI(atlas, action, this);
@@ -290,9 +291,9 @@ public class GameScreen implements Screen {
             UI.loadUI(players.get(0));
             phase = "turns";
         } else if (phase.equals("turns")) {
-            if (players.get(playerTurn % 3).fiveCardsInRegister()) {
+            if (players.get(playerTurn % players.size()).fiveCardsInRegister()) {
                 playerTurn++;
-                if (playerTurn == 3) {
+                if (playerTurn == players.size()) {
                     phase = "resolve";
                     playerTurn = 0;
                 } else {
@@ -314,6 +315,9 @@ public class GameScreen implements Screen {
                     action.updatePhase();
                     if (round != action.getRound()) {
                         phase = "draw";
+                    }
+                    for (Player player : players) {
+                        player.tileCheck(new ArrayList<Actor>(players));
                     }
                 }
                 timer = 0;

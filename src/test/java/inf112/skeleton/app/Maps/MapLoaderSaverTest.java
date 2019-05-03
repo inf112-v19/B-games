@@ -45,10 +45,10 @@ public class MapLoaderSaverTest {
         loaderSaver.save(board2, "maps/map.txt");
         board1 = loaderSaver.load("maps/map.txt");
 
-        for(int i = 0; i < board1.getHeight(); i++){
-            for(int j = 0; j < board1.getWidth(); j++){
-                testTile1 = board1.getAt(j, i);
-                testTile2 = board2.getAt(j, i);
+        for (int x = 0; x < board1.getWidth(); x++) {
+            for (int y = 0; y < board1.getHeight(); y++) {
+                testTile1 = board1.getAt(x, y);
+                testTile2 = board2.getAt(x, y);
                 assertEquals(testTile1.hasConveyor(), testTile2.hasConveyor());
                 assertEquals(testTile1.hasWall(Direction.NORTH), testTile2.hasWall(Direction.NORTH));
                 assertEquals(testTile1.hasCog(), testTile2.hasCog());
