@@ -170,8 +170,42 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
         rest of the turn. In cases of card priority, the target robot moves immediately after your robot.
     - Extra Memory: You recieve one extra Program card each turn. (You still discard all unused 
         Program cards when you're done programming your registers.)
-    
-    
+    - Flywheel: After all players are done programming their registers each turn, you may put one of 
+        your remaining Program cards face down onto this card. You can add that Program card to those 
+        dealt to you on any subsequent turn. You can have only one card on Flywheel at a time.
+    Power-Down Shield: As long as your robot is powered down, each register phase can prevent up to 
+        1 Damage to it from each of the four directions.
+    Brakes: Whenever you execute a Move 1, you may move your robot 0 spaces instead of 1. Priority is 
+        that of the Move 1.
+    Abort Switch: Once each turn, you may replace one of the Program cards you reveal with the top 
+        card from the deck. If you do, you must replace the Program cards for all your remaining registers 
+        the same way that turn.
+    Circuit Breaker: If you have 3 or more Damage tokens on your Program Sheet at the end of your turn, 
+        your robot will begin the next turn powered down.
+    Rear-Firing Laser: Your robot has a rear-firing laser in addition to its main laser. This laser follows 
+        all the same rules as the main laser.
+    Tractor Beam: Whenever you could fire main laser at a robot that isn't in a adjacent space, you may 
+        instead fire the Tractor Beam. This pulls the target robot 1 space toward your robot.
+    Ramming Gear: Whenever your robot pushes or bumps into another robot that robot recives 1 Damage token.
+    Conditional Program: After you program your registers each turn, you may put one of the Program 
+        cards left in your hand face down onto tgis Option instead of discarding it. 
+        Later that turn, you can substitute that card for one you had programmed in any 
+        register, discarding the original card. Annonuce the change before anyone reveals 
+        Program cards for that register. If you put a card on this Option and dont use it, 
+        discard it at the end of the turn.
+    Fourth Gear: Whenever you execute a Move 3, you may move your robot 4 spaces instead of 3. 
+        Priority is that of the Move 3.
+    Dual Processor: When programming your registers, you may put both a Move card (Move 1, 
+        Move 2, Move 3, or Back Up) and a Rotate card (Rotate Left, Rotate Right, or U-Turn) 
+        in the same register. If you do, during that phase your robot will move 1 space 
+        less than the Move card says to move and then execute the Rotate card. If the 
+        Rotate card is a U-Turn, move 2 spaces less than the Move card says if possible.
+    Mechanical Arm: Your robot can tuch a flag or repair site from 1 space away (diagonally 
+        or orthogonally), as long as there isn't a wall between it and the flag or repair site.
+    Scrambler: Whenever you could fire your main laser at a robot, you may instead fire the 
+        Scrambler. This replaces the target robot's next programmed card with the top 
+        Program card from the deck. You can't use this Option on the fifth register phase.
+
 
 **Runde:**
 
