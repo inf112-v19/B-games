@@ -238,9 +238,9 @@ public class GameScreen implements Screen {
                     RotationDirection r = tile.hasCog();
                     sprite_cog.setPosition(x * tile_size, y * tile_size);
                     if (r == RotationDirection.CLOCKWISE) {
-                        sprite_cog.setRotation(cog_rotation);
-                    } else {
                         sprite_cog.setRotation(-cog_rotation);
+                    } else {
+                        sprite_cog.setRotation(cog_rotation);
                     }
                     sprite_cog.draw(batch);
                 }
