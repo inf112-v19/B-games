@@ -81,11 +81,9 @@ public class MenuScreen implements Screen {
         );
 
         // region MAINMENU
-        // Root table
         {
+            // Root table
             Table t = new Table();
-            //t.background(new TextureRegionDrawable(new Texture(Gdx.files.internal("assets/background.png"))));
-
             //t.setDebug(true);
             t.add(btn_play).width(150);
             t.center();
@@ -98,10 +96,9 @@ public class MenuScreen implements Screen {
         }
         // endregion
 
-        // Root table
+        // region PLAYMENU
         {
             Table t = new Table();
-            //t.background(new TextureRegionDrawable(new Texture(Gdx.files.internal("assets/background.png"))));
             TextButton btn_start = new TextButton("START", style);
             btn_start.getLabel().setFontScale(2);
             btn_start.addListener(event -> {
@@ -123,6 +120,7 @@ public class MenuScreen implements Screen {
             t.setFillParent(true);
             playMenu.addActor(t);
         }
+        // endregion
         stage = menu;
         // Activate inputs
         Gdx.input.setInputProcessor(stage);
@@ -136,7 +134,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float v) {
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(Gdx.graphics.getDeltaTime());

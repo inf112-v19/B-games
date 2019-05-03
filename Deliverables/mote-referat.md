@@ -108,3 +108,7 @@ Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isa
 Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson
 - Gjennomgang av bugs
 - Diskusjon om hvordan å få klassene til å passe sammen i en helhet
+
+**Møte 27.03.2019 (16:00)**
+Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson, Robert Frydenlund
+- Prosjektretroperspektiv/Oblig 5
