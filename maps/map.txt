@@ -1,9 +1,265 @@
-5
-5
+10
+10
+type:Laser
+laserDirection:SOUTH
+type:Laser
+laserDirection:NORTH
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:true West:false
+conveyor:direction:WEST fast:false
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:true West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:true
+conveyor:direction:SOUTH fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:true West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:false
+conveyor:direction:WEST fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:false South:false West:false
+conveyor:null
+cog:null
+item:null
 type:Tile
 isHole:false
 walls:North:false East:false South:false West:false
 conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:false West:false
+conveyor:direction:EAST fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:false
+conveyor:direction:EAST fast:false
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:false
+conveyor:direction:NORTH fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:false West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:false
+conveyor:direction:WEST fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:false
+conveyor:direction:EAST fast:false
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:true South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:true
+conveyor:direction:WEST fast:true
+cog:null
+item:null
+type:Tile
+isHole:true
+walls:North:false East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:true South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:true
+walls:North:false East:false South:false West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:true South:false West:false
+conveyor:direction:EAST fast:false
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:false
+conveyor:direction:NORTH fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:true West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:false West:true
+conveyor:direction:WEST fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:false
+conveyor:direction:NORTH fast:false
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:false
+conveyor:direction:SOUTH fast:true
 cog:null
 item:null
 type:Tile
@@ -24,10 +280,84 @@ walls:North:false East:false South:false West:false
 conveyor:null
 cog:null
 item:null
+type:Laser
+laserDirection:EAST
+type:Tile
+isHole:false
+walls:North:false East:true South:false West:false
+conveyor:direction:WEST fast:false
+cog:null
+item:null
+type:Laser
+laserDirection:NORTH
+type:Tile
+isHole:false
+walls:North:true East:false South:false West:false
+conveyor:direction:WEST fast:false
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:false South:false West:false
+conveyor:null
+cog:null
+item:null
 type:Tile
 isHole:false
 walls:North:false East:false South:false West:false
 conveyor:null
+cog:null
+item:null
+type:Laser
+laserDirection:EAST
+type:Tile
+isHole:true
+walls:North:false East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:false West:false
+conveyor:direction:NORTH fast:false
+cog:null
+item:null
+type:Laser
+laserDirection:WEST
+type:Tile
+isHole:false
+walls:North:false East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:true South:false West:false
+conveyor:direction:SOUTH fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:true
+conveyor:direction:NORTH fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:false
+conveyor:direction:SOUTH fast:false
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:true West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:false South:false West:true
+conveyor:direction:WEST fast:true
 cog:null
 item:null
 type:Tile
@@ -44,7 +374,65 @@ cog:null
 item:null
 type:Tile
 isHole:false
+walls:North:true East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Laser
+laserDirection:EAST
+type:Laser
+laserDirection:EAST
+type:Tile
+isHole:false
+walls:North:false East:true South:false West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:true South:false West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:false South:false West:true
+conveyor:direction:NORTH fast:false
+cog:null
+item:null
+type:Tile
+isHole:true
+walls:North:false East:true South:true West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:false South:false West:true
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:false
 walls:North:false East:false South:false West:false
+conveyor:direction:NORTH fast:false
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:true South:true West:false
+conveyor:direction:WEST fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:false East:false South:true West:true
 conveyor:null
 cog:null
 item:null
@@ -54,99 +442,109 @@ walls:North:false East:false South:false West:false
 conveyor:null
 cog:null
 item:null
+type:Laser
+laserDirection:EAST
 type:Tile
 isHole:false
-walls:North:false East:false South:false West:false
+walls:North:true East:true South:false West:true
 conveyor:null
 cog:null
 item:null
 type:Tile
 isHole:false
-walls:North:false East:false South:false West:false
+walls:North:false East:false South:true West:true
+conveyor:direction:SOUTH fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:false South:true West:false
 conveyor:null
 cog:null
 item:null
 type:Tile
 isHole:false
-walls:North:false East:false South:false West:false
+walls:North:true East:true South:false West:false
 conveyor:null
 cog:null
 item:null
 type:Tile
 isHole:false
-walls:North:false East:false South:false West:false
+walls:North:false East:true South:true West:true
 conveyor:null
 cog:null
 item:null
 type:Tile
 isHole:false
-walls:North:false East:false South:false West:false
+walls:North:true East:false South:false West:true
 conveyor:null
 cog:null
 item:null
 type:Tile
 isHole:false
-walls:North:false East:false South:false West:false
+walls:North:false East:true South:false West:false
+conveyor:direction:WEST fast:true
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:false South:false West:true
 conveyor:null
 cog:null
 item:null
 type:Tile
 isHole:false
-walls:North:false East:false South:false West:false
+walls:North:false East:true South:false West:false
+conveyor:direction:WEST fast:false
+cog:null
+item:null
+type:Laser
+laserDirection:WEST
+type:Laser
+laserDirection:EAST
+type:Tile
+isHole:false
+walls:North:true East:true South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Laser
+laserDirection:SOUTH
+type:Tile
+isHole:false
+walls:North:true East:false South:true West:false
+conveyor:direction:EAST fast:false
+cog:null
+item:null
+type:Tile
+isHole:false
+walls:North:true East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Tile
+isHole:true
+walls:North:true East:false South:true West:false
 conveyor:null
 cog:null
 item:null
 type:Tile
 isHole:false
-walls:North:false East:false South:false West:false
+walls:North:true East:false South:false West:false
+conveyor:null
+cog:null
+item:null
+type:Laser
+laserDirection:NORTH
+type:Tile
+isHole:false
+walls:North:true East:false South:false West:false
 conveyor:null
 cog:null
 item:null
 type:Tile
 isHole:false
-walls:North:false East:false South:false West:false
-conveyor:null
-cog:null
-item:null
-type:Tile
-isHole:false
-walls:North:false East:false South:false West:false
-conveyor:null
-cog:null
-item:null
-type:Tile
-isHole:false
-walls:North:false East:false South:false West:false
-conveyor:null
-cog:null
-item:null
-type:Tile
-isHole:false
-walls:North:false East:false South:false West:false
-conveyor:null
-cog:null
-item:null
-type:Tile
-isHole:false
-walls:North:false East:false South:false West:false
-conveyor:null
-cog:null
-item:null
-type:Tile
-isHole:false
-walls:North:false East:false South:false West:false
-conveyor:null
-cog:null
-item:null
-type:Tile
-isHole:false
-walls:North:false East:false South:false West:false
-conveyor:null
-cog:null
-item:null
-type:Tile
-isHole:false
-walls:North:false East:false South:false West:false
+walls:North:true East:true South:false West:false
 conveyor:null
 cog:null
 item:null

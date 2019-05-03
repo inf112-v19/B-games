@@ -536,7 +536,7 @@ cog:null
 item:null
 type:Tile
 isHole:false
-walls:North:true East:false South:false West:true
+walls:North:false East:false South:false West:true
 conveyor:direction:SOUTH fast:false
 cog:null
 item:null
@@ -608,7 +608,7 @@ cog:null
 item:null
 type:Tile
 isHole:false
-walls:North:false East:false South:true West:false
+walls:North:false East:false South:false West:false
 conveyor:direction:SOUTH fast:false
 cog:null
 item:null
@@ -805,7 +805,7 @@ conveyor:direction:SOUTH fast:false
 cog:null
 item:null
 type:Laser
-laserDirection:SOUTH
+laserDirection:NORTH
 type:Tile
 isHole:false
 walls:North:false East:false South:false West:false
