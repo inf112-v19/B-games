@@ -43,9 +43,13 @@ public class GameScreen implements Screen {
     private Sprite sprite_wheels;
     private Sprite sprite_eye;
     private Sprite sprite_beam;
+    private Sprite sprite_cog;
+    private Sprite sprite_flag;
+    private Sprite sprite_wrench;
 
     private Sprite sprite_conveyor;
-    private float conveyorRegionX;
+    private Sprite sprite_conveyor_fast;
+    private float conveyor_fastRegionY;
     private float conveyorRegionY;
 
     // Animations
@@ -111,25 +115,38 @@ public class GameScreen implements Screen {
         sprite_eye = atlas.createSprite("eye");
         sprite_wheels = atlas.createSprite("wheels");
         sprite_conveyor = atlas.createSprite("conveyor_long");
+        sprite_conveyor_fast = atlas.createSprite("conveyor_long");
+        sprite_cog = atlas.createSprite("flag"); // TODO need a cogwheel sprite
+        sprite_flag = atlas.createSprite("flag");
+        sprite_wrench = atlas.createSprite("flag"); // TODO need wrench sprite
         conveyor = new Animation<>(1f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
         // Scale
         sprite_conveyor.setSize(tile_size - conveyor_padding * 2, tile_size - conveyor_padding * 2); // render inside tile edges
+        sprite_conveyor_fast.setSize(tile_size - conveyor_padding * 2, tile_size - conveyor_padding * 2); // render inside tile edges
         sprite_tile.setSize(tile_size, tile_size);
         sprite_laser.setSize(tile_size, tile_size);
         sprite_beam.setSize(tile_size, tile_size);
         sprite_hole.setSize(tile_size, tile_size);
         sprite_wall.setSize(tile_size, tile_size);
         sprite_hole_edge.setSize(tile_size, tile_size);
+        sprite_cog.setSize(tile_size, tile_size);
+        sprite_flag.setSize(tile_size, tile_size);
+        sprite_wrench.setSize(tile_size, tile_size);
         // Center rotation
         sprite_conveyor.setOriginCenter();
+        sprite_conveyor_fast.setOriginCenter();
         sprite_wall.setOriginCenter();
         sprite_laser.setOriginCenter();
         sprite_beam.setOriginCenter();
         // Colors
         sprite_hole_edge.setColor(Color.GOLD);
+        sprite_conveyor.setColor(Color.GOLD);
+        sprite_conveyor_fast.setColor(Color.RED);
         // cut conveyor texture in half
         sprite_conveyor.setRegion(sprite_conveyor.getRegionX(), sprite_conveyor.getRegionY(), sprite_conveyor.getRegionWidth(), sprite_conveyor.getRegionHeight() / 2);
+        sprite_conveyor_fast.setRegion(sprite_conveyor_fast.getRegionX(), sprite_conveyor_fast.getRegionY(), sprite_conveyor_fast.getRegionWidth(), sprite_conveyor_fast.getRegionHeight() / 2);
         conveyorRegionY = sprite_conveyor.getRegionY();
+        conveyor_fastRegionY = sprite_conveyor_fast.getRegionY();
 
         // Game initialization
         //board = Prototyping.generateRandomBoard(10, 10);
@@ -175,7 +192,12 @@ public class GameScreen implements Screen {
         if (conveyorY > conveyorRegionY + 32) {
             conveyorY = (int) conveyorRegionY;
         }
+        int conveyor_fast_y = sprite_conveyor_fast.getRegionY() + 2;//+ 0.01f;
+        if (conveyor_fast_y > conveyor_fastRegionY + 32) {
+            conveyor_fast_y = (int) conveyor_fastRegionY;
+        }
         sprite_conveyor.setRegion(sprite_conveyor.getRegionX(), conveyorY, sprite_conveyor.getRegionWidth(), sprite_conveyor.getRegionHeight());
+        sprite_conveyor_fast.setRegion(sprite_conveyor_fast.getRegionX(), conveyor_fast_y, sprite_conveyor_fast.getRegionWidth(), sprite_conveyor_fast.getRegionHeight());
         //sprite_conveyor.scroll(0,0.001f);
 
         // Wipe screen
@@ -196,14 +218,15 @@ public class GameScreen implements Screen {
                 sprite_tile.draw(batch);
                 // Conveyor
                 if (conveyor != null) {
+                    Sprite currentConveyor;
                     if (conveyor.fast) {
-                        sprite_conveyor.setColor(Color.RED);
+                        currentConveyor = sprite_conveyor_fast;
                     } else {
-                        sprite_conveyor.setColor(Color.GOLD);
+                        currentConveyor = sprite_conveyor;
                     }
-                    sprite_conveyor.setRotation(DirectionHelpers.rotationFromDirection(conveyor.direction));
-                    sprite_conveyor.setPosition(x * tile_size + conveyor_padding, y * tile_size + conveyor_padding);
-                    sprite_conveyor.draw(batch);
+                    currentConveyor.setRotation(DirectionHelpers.rotationFromDirection(conveyor.direction));
+                    currentConveyor.setPosition(x * tile_size + conveyor_padding, y * tile_size + conveyor_padding);
+                    currentConveyor.draw(batch);
                     //continue;
                 }
                 if (tile.isHole()) {
@@ -211,6 +234,10 @@ public class GameScreen implements Screen {
                     sprite_hole.draw(batch);
                     sprite_hole_edge.setPosition(x * tile_size, y * tile_size);
                     sprite_hole_edge.draw(batch);
+                }
+                if (tile.hasCog() != null) {
+                    sprite_cog.setPosition(x * tile_size, y * tile_size);
+                    sprite_cog.draw(batch);
                 }
 
                 if (Laser.class.isInstance(tile)) {
