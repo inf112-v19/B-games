@@ -116,7 +116,7 @@ public class GameScreen implements Screen {
         sprite_conveyor_fast = atlas.createSprite("conveyor_long");
         sprite_cog = atlas.createSprite("flag"); // TODO need a cogwheel sprite
         sprite_flag = atlas.createSprite("flag");
-        sprite_wrench = atlas.createSprite("flag"); // TODO need wrench sprite
+        sprite_wrench = atlas.createSprite("wrench");
         conveyor = new Animation<>(1f, atlas.createSprites("conveyor"), Animation.PlayMode.LOOP);
         // Scale
         sprite_conveyor.setSize(tile_size - conveyor_padding * 2, tile_size - conveyor_padding * 2); // render inside tile edges
@@ -141,6 +141,7 @@ public class GameScreen implements Screen {
         sprite_hole_edge.setColor(Color.GOLD);
         sprite_conveyor.setColor(Color.GOLD);
         sprite_conveyor_fast.setColor(Color.RED);
+        sprite_flag.setColor(Color.GOLD);
         // cut conveyor texture in half
         sprite_conveyor.setRegion(sprite_conveyor.getRegionX(), sprite_conveyor.getRegionY(), sprite_conveyor.getRegionWidth(), sprite_conveyor.getRegionHeight() / 2);
         sprite_conveyor_fast.setRegion(sprite_conveyor_fast.getRegionX(), sprite_conveyor_fast.getRegionY(), sprite_conveyor_fast.getRegionWidth(), sprite_conveyor_fast.getRegionHeight() / 2);
@@ -243,6 +244,17 @@ public class GameScreen implements Screen {
                         sprite_cog.setRotation(cog_rotation);
                     }
                     sprite_cog.draw(batch);
+                }
+                if (tile.getItem() != null) {
+                    switch (tile.getItem()) {
+                        case FLAG:
+                            sprite_flag.setPosition(x * tile_size, y * tile_size);
+                            sprite_flag.draw(batch);
+                            break;
+                        case WRENCH:
+                            sprite_wrench.setPosition(x * tile_size, y * tile_size);
+                            sprite_wrench.draw(batch);
+                    }
                 }
 
                 if (Laser.class.isInstance(tile)) {
