@@ -98,3 +98,13 @@ Oppmøte: Bernhard Hjelen, Isak Steingrimsson
 Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Ørjan Tangen
 - Arbeid videre med prosjektet
 - Boardet er invertert Ben tar det opp med Robert
+
+**Gruppetime 23.04.2019 14:15 - 16:00**
+Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson
+- Arbeid videre med prosjektet
+- Snakk om hva som gjenstår for de forskjellige klassene
+
+**Gruppetime 30.04.2019 14:15 - 16:00**
+Oppmøte: Benjamin Byrkjeland, Jonas Opsahl, Bernhard Hjelen, Ørjan Tangen, Isak Steingrimsson
+- Gjennomgang av bugs
+- Diskusjon om hvordan å få klassene til å passe sammen i en helhet

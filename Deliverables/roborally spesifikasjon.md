@@ -38,9 +38,15 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
       runde. Oppdaterer også gjenopprettingspunkt
 	- Flagg blir registert av robotene dersom de befinner seg på de i riktig rekkefølge. 	   
       Oppdaterer også gjenopprettingspunkt
-    - (ny) Hull, roboter mister ett liv dersom de faller i et hull på brettet
-    - (ny) Spiller(e) (player 1?) skal ha mulighet til å plassere flagg selv på brettet
-    - (ny) Flere brett skal kunne settes sammen til et større brett
+    - Hull, roboter mister ett liv dersom de faller i et hull på brettet
+    - (Optional) Spiller(e) (player 1?) skal ha mulighet til å plassere flagg selv på brettet
+    - (Optional) Flere brett skal kunne settes sammen til et større brett
+    - (Optional) ﬂere rutetyper på brettet (feks teleporter, skubbe-dingser som fyrer av på 
+        ulike faser) 
+    - (Optional) lage egne brett
+    - (Optional) generere brett
+    - (Optional) lagre spill underveis slik at det går an å avslutte og sette igang spill 
+        igjen senere
 
 **Robot:**
 	
@@ -59,18 +65,37 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- Er i stand til å flytte på andre roboter som er i veien når den beveger seg
 	- Fyrer av laser (1 skade) mot nærmeste robot dersom det er en robot i skuddlinjen. Kan ikke 	   
       se/skyte gjennom vegger og kun nærmeste robot blir skadet
-	- Tas ut av spill dersom den mister alle liv 
+	- Game Over dersom roboten mister alle liv
+	- (Optional) ﬁrst-player-view av når roboten beveger seg (evt zoomet inn slik at det blir mer 
+	  “video-følelse” av det hele)
+	- (Optional) “replay” av viktige øyeblikk som å vandre i døden/vinne spillet osv.
+	- (Optional) enklere variant av replay: vise hvor roboten var og hvordan den endte opp slik den 
+	    er etter alle fasene er over (evt vise dette for alle spillere på brettet)
+	- (Optional) gi roboter litt mer “personlighet”, slik at alle roboter har pros/cons som gjør 
+	    at det betyr litt mer hvilken du velger i spillet 
+	- (Optional) Alle robotene kan ha et option-kort by default. Eller en tradeoff der man må ta vekk 
+	    noe for at optionskortet skal virke? Feks: random bevegelseskort kan ikke deles ut, som 
+	    feks snu mot høyre eller move 3? Her er det mange muligheter til å variere. 
+	    Dersom dere velger denne må dere gjøre godt arbeid for å sikre spillmekanikken og at 
+	    det blir rettferdig uavhengig av hvilken robot man velger. Dere kan også velge å lage 
+	    egne stats (positive eller negative) på robotene uavhengig av options-kortene. 
 
 **Spiller:**
 
 	- Valgmulighet til å starte med 4 liv istedenfor 3 dersom det er 5 eller flere spillere
 	- Oversikt over liv, skade, register, kort
-	- Mulighet til å slå av strømmen til roboten
+	- Mulighet til å slå av strømmen til roboten(Power Down)
 	- Mulighet til å velge kort som skal legges i register
 	- Mulighet til å bekrefte valget av kort i register eller å slå av strømmen til sin robot
 	- (oversikt over hvilke flagg roboten har vært igjennom i riktig rekkefølge så langt)
-	- (ny) Multiplayer over LAN eller Internet 
-	- (ny) Mulighet til å spille mot AI styrte roboter, evt roboter som er random med tanke på handlinger
+	- Multiplayer over LAN eller Internet 
+	- Mulighet til å spille mot AI styrte roboter, evt roboter som er random med tanke på handlinger
+	- Feilhåndtering derson en spiller blir disconnected fra spillet
+	- (Optional) scoringssystem: huske hvor mange spill du har vunnet, evt hva de ulike plasseringene 
+	    du har hatt er
+	- (Optional) mer avansert scoringssystem: antall trekk for å nå ﬂagg? Kanskje ha en spillmodus som er 
+	    på noen få typer brett med fastsatte ﬂagg der poenget er å komme seg fortest mulig frem?
+	- (Optional) spille over Internet, og ikke bare LAN
 
 **Programkort:**
 
@@ -96,27 +121,56 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
       kort automatisk lagt inn i det låste registeret
 	- Samles inn ved slutten av en runde, kort i låste registre blir ikke samlet inn
 
-**(Ny) Options kort:**
+**(Optional) Options kort:** 
     
     - Trekker ett optionskort dersom du står på et reperasjonspunkt ved slutten av en runde 
     - Settes i spill automatisk fra det blir trukket og er synlig til andre spillere
     - Gir en bonus til robotene
     - Prioritet på optionskort bestemmes utifra docking assignment
     - Kan ofre et optionskort til å blokkere 1 skade, valget må taes da skaden blir påført
-    - En robot som blir ødelagt enten ved å miste all HP eller å falle i et hull mister sitt optionskort
-    - Optionskort som er blitt brukt og blitt enten ofret eller mistet legges ikke tilbake til i kortstokk
+    - En robot som blir ødelagt enten ved å miste all HP eller å falle i et hull mister sitt 
+        optionskort
+    - Optionskort som er blitt brukt og blitt enten ofret eller mistet legges ikke tilbake til 
+        i kortstokk
+    
     Optionskort:
-    - Superior Archive: "When reentering play after being destroyed, your robot does not recieve the normal
-    2 damage tokens"
-    - Reverse Gear: "Whenever you execute a Back Up, you may move your robot back 2 spaces instead of 1.
-    Priority is that of the Back Up"
-    - Pressor Beam: "Whenever you could fire your main laser at a robot, you may instead fire the Pressor
-    Beam. This moves the target robot 1 space away from your robot."
+    - Superior Archive: "When reentering play after being destroyed, your robot does not recieve 
+        the normal 2 damage tokens"
+    - Reverse Gear: "Whenever you execute a Back Up, you may move your robot back 2 spaces instead 
+        of 1. Priority is that of the Back Up"
+    - Pressor Beam: "Whenever you could fire your main laser at a robot, you may instead fire the 
+        Pressor Beam. This moves the target robot 1 space away from your robot."
     - Crab Legs: "When programming your registers, you may put a Move 1 card in the
-    same register as a Rotate Left or Rotate Right card. If you do, during that register
-    your robot will move 1 space to the left or right, respectively, without rotating. Priority
-    is that of the Move 1."
-    - 
+        same register as a Rotate Left or Rotate Right card. If you do, during that register
+        your robot will move 1 space to the left or right, respectively, without rotating. Priority
+        is that of the Move 1."
+    - Double-Barreled Laser: Whenever your robot fires its main laser, it fires two shots instead of one. 
+        You may use this Option with Fire Control and/or High-Power Laser.
+    - Ablative Coat: Ablative Coat absorbs the next 3 Damage your robot recieves. 
+        Put those Damage tokens onto this card instead of onto your Program Sheet. 
+        Discard this card and the tokens when you put the third one on.
+    - High-Power Laser: Your robot's main laser can shoot through one wall or robot to get to a 
+        target robot. If you shoot through a robot, that robot also recieves full damage. You 
+        may use this Option with Fire Control and/or Double-Barreled Laser.
+    - Recompile: Once each turn, you may discard the hand of Program cards dealt to you and draw a 
+        new hand from the deack. Your robot recieves 1 Damage token.
+    - Fire Control: Whenever your robot hits another robot with its main laser, instead of doing 
+        damage you may choose one of the target robot's registers and lock it or choose one of that 
+        player's Options and destroy it. (The player can't discard an Option to avoid this effect.)
+    - Gyroscopic Stabilizer: Before players reveal the cards in their first registers each turn, 
+        state whether this Option is active. When it is, your robot isn't rotated by gears or 
+        rotating conveyor belts for that entire turn.
+    Mini Howitzer: Whenever you could fire your main laser at a robot, you may fire the Mini Howitzer 
+        instead. This pushes the target robot 1 space away from your robot, and the target 
+        robot recieves 1 Damage token. (Robots can't be pushed through walls.) You may use 
+        this Option five times. Put a Damage token on this card each tmie you use it and 
+        discard this card and the tokens when you put the fifth one on.
+    - Radio Control: Whenever you could fire your main laser at a robot, you may instead fire the 
+        Radio Control beam. This causes the target robot to execute your robot's program for the 
+        rest of the turn. In cases of card priority, the target robot moves immediately after your robot.
+    - Extra Memory: You recieve one extra Program card each turn. (You still discard all unused 
+        Program cards when you're done programming your registers.)
+    
     
 
 **Runde:**
@@ -129,7 +183,8 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 	- Hendlesesforløpet for slutten av en runde er reparere skade, slå av strømmen på 	  
       roboter og samle inn kort. Prioritet for handlinger som ikke bestemmes av 	 	  
       programkort bestemmes av startposisjon
-    - (klarifikasjon) For register så skal det være fullt før en runde kan starte
+    - For register så skal det være fullt før en runde kan starte
+    
 
 
 **Fase:**
@@ -154,3 +209,5 @@ En runde består av 5 faser hvor hver fase tilsvarer en bevegelse beskrevet på 
 - Oppdatert dokumentasjon (kode og prosjekt)
 - Rydde opp i mappestruktur
 - Fjerne klasser som ikke er i bruk
+
+# Fjerde iterasjon:
