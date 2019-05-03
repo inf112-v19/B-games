@@ -5,7 +5,7 @@ isHole:false
 walls:North:false East:false South:false West:false
 conveyor:null
 cog:null
-item:null
+item:WRENCH
 type:Tile
 isHole:false
 walls:North:false East:false South:false West:false
@@ -347,7 +347,7 @@ isHole:false
 walls:North:false East:false South:false West:false
 conveyor:null
 cog:null
-item:null
+item:FLAG
 type:Tile
 isHole:false
 walls:North:false East:false South:false West:false
@@ -515,7 +515,7 @@ isHole:false
 walls:North:false East:false South:false West:false
 conveyor:null
 cog:null
-item:null
+item:FLAG
 type:Tile
 isHole:false
 walls:North:false East:false South:false West:false
@@ -551,7 +551,7 @@ isHole:false
 walls:North:false East:false South:true West:true
 conveyor:null
 cog:null
-item:null
+item:WRENCH
 type:Tile
 isHole:false
 walls:North:false East:false South:false West:false
@@ -767,7 +767,7 @@ isHole:false
 walls:North:false East:false South:false West:false
 conveyor:null
 cog:null
-item:null
+item:FLAG
 type:Tile
 isHole:false
 walls:North:false East:true South:false West:false
@@ -859,4 +859,4 @@ isHole:false
 walls:North:false East:false South:false West:false
 conveyor:null
 cog:null
-item:null
+item:WRENCH
