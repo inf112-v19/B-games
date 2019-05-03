@@ -1,31 +1,27 @@
 package inf112.skeleton.app.gui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import inf112.skeleton.app.Board.Board;
-import inf112.skeleton.app.Cards.Card;
-import inf112.skeleton.app.Cards.CardType;
 import inf112.skeleton.app.Action.Action;
 import inf112.skeleton.app.Actor.Player;
-import javafx.scene.input.KeyCode;
-import org.lwjgl.Sys;
+import inf112.skeleton.app.Cards.Card;
+import inf112.skeleton.app.Cards.CardType;
 
 import java.util.ArrayList;
-
 
 
 public class GameUI {
@@ -128,7 +124,7 @@ public class GameUI {
 
         //Style for the lockRegister button and who is playing button
         TextButton.TextButtonStyle lockRegisterStyle = new TextButton.TextButtonStyle();
-        lockRegisterStyle.up =  defaultSkin.getDrawable("default-round-large");
+        lockRegisterStyle.up = defaultSkin.getDrawable("default-round-large");
         lockRegisterStyle.font = new BitmapFont();
 
         //Code for Lock Register button
@@ -138,8 +134,8 @@ public class GameUI {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //if (player.fiveCardsInRegister()) {
-                    lockRegister.setColor(Color.GREEN);
-                    System.out.println(player.getHP());
+                lockRegister.setColor(Color.GREEN);
+                System.out.println(player.getHP());
                 //}
             }
         });
@@ -165,7 +161,7 @@ public class GameUI {
         box.setWidth(25);
         box.setPosition(840, 630);
 
-        Label isPlaying = new Label("Is currently playing!" , HPTextStyle);
+        Label isPlaying = new Label("Is currently playing!", HPTextStyle);
         isPlaying.setPosition(box.getX() + 30, box.getY() + 4);
 
         buttonStage.addActor(box);
@@ -183,22 +179,9 @@ public class GameUI {
                     if (ie.getType() == InputEvent.Type.scrolled) {
                         gameScreen.zoom(ie.getScrollAmount());
                     } else if (ie.getType() == InputEvent.Type.keyDown) {
-                        switch (ie.getKeyCode()) {
-                            case Input.Keys.W:
-                                gameScreen.translate(0, 1);
-                                break;
-                            case Input.Keys.S:
-                                gameScreen.translate(0, -1);
-                                break;
-                            case Input.Keys.A:
-                                gameScreen.translate(-1, 0);
-                                break;
-                            case Input.Keys.D:
-                                gameScreen.translate(1, 0);
-                                break;
-                            default:
-                                //System.out.println(ie.getCharacter());
-                        }
+                        gameScreen.keyDown(ie.getKeyCode());
+                    } else if (ie.getType() == InputEvent.Type.keyUp) {
+                        gameScreen.keyUp(ie.getKeyCode());
                     }
                 }
                 return true;
@@ -228,34 +211,32 @@ public class GameUI {
 
         //Create graphical buttons for registers
         for (int i = 0; i < 5; i++) {
-            String registerName = "Register " + (i+1) + "\n";
+            String registerName = "Register " + (i + 1) + "\n";
             TextButton register = null;
-            if(spiller.getRegister().get(i) == null) {
+            if (spiller.getRegister().get(i) == null) {
                 register = new TextButton(registerName + "Empty", movementButtonStyle);
-            }
-            else {
+            } else {
                 register = new TextButton(registerName + "\n" +
                         spiller.getRegister().get(i).getType().name() + "\n" +
                         spiller.getRegister().get(i).getPriority() + "\n" +
                         spiller.getRegister().get(i).getPriority(), movementButtonStyle);
             }
-            register.setPosition(0, 630 - (90*i));
+            register.setPosition(0, 630 - (90 * i));
             registerButtons.add(register);
             buttonStage.addActor(register);
         }
         //Create graphical buttons for cards in hand
         for (int i = 0; i < 9; i++) {
-            String cardName = "Card " + (i+1);
+            String cardName = "Card " + (i + 1);
             TextButton card = null;
-            if(spiller.getCardsOnHand().get(i) == null) {
-                card  = new TextButton(cardName + "Empty", movementButtonStyle);
-            }
-            else {
+            if (spiller.getCardsOnHand().get(i) == null) {
+                card = new TextButton(cardName + "Empty", movementButtonStyle);
+            } else {
                 card = new TextButton(cardName + "\nType: " +
                         spiller.getCardsOnHand().get(i).getType().name() + "\nPriority: " +
                         spiller.getCardsOnHand().get(i).getPriority(), movementButtonStyle);
             }
-            card.setPosition(800, 650 - (80*i));
+            card.setPosition(800, 650 - (80 * i));
             cardButtons.add(card);
             buttonStage.addActor(card);
         }
@@ -371,10 +352,9 @@ public class GameUI {
         powerDown.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(spiller.getPowerdown()) {
+                if (spiller.getPowerdown()) {
                     spiller.setPowerDown(false);
-                }
-                else{
+                } else {
                     spiller.setPowerDown(true);
                 }
             }
@@ -453,9 +433,6 @@ public class GameUI {
     public void dispose() {
         buttonStage.dispose();
     }
-
-
-
 
 
 }

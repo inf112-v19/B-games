@@ -67,7 +67,7 @@ public class GameScreen implements Screen {
     //UI
     private GameUI UI;
     private float scrollSpeed = 0.1f;
-    private float translateSpeed = 40f;
+    private float translateSpeed = 100f;
 
     public GameScreen(RoboRally game) {
         this.game = game;
@@ -321,6 +321,8 @@ public class GameScreen implements Screen {
 
         }
 
+        // Update camera
+        updateCamera(deltaTime);
         //Rendering of the user interface
         UI.renderUI();
     }
@@ -352,12 +354,47 @@ public class GameScreen implements Screen {
 
     }
 
+    //region CAMERA MOVEMENT
+    // java cant cast boolean to int, so we use int instead to simplify
+    // 0 - false, 1 - true
+    int wDown = 0;
+    int sDown = 0;
+    int aDown = 0;
+    int dDown = 0;
+
+    public void keyDown(int keyCode) {
+        setKey(keyCode, 1);
+    }
+
+    public void keyUp(int keyCode) {
+        setKey(keyCode, 0);
+    }
+
+    private void setKey(int keyCode, int down) {
+        switch (keyCode) {
+            case Input.Keys.W:
+                wDown = down;
+                break;
+            case Input.Keys.S:
+                sDown = down;
+                break;
+            case Input.Keys.A:
+                aDown = down;
+                break;
+            case Input.Keys.D:
+                dDown = down;
+                break;
+        }
+    }
+
+    private void updateCamera(float deltaTime) {
+        float deltaX = (dDown - aDown) * deltaTime * translateSpeed;
+        float deltaY = (wDown - sDown) * deltaTime * translateSpeed;
+        camera.translate(deltaX, deltaY);
+    }
+
     public void zoom(int scrollAmount) {
         camera.zoom += scrollAmount * scrollSpeed;
     }
-
-    public void translate(float x, float y) {
-        camera.translate(x * translateSpeed, y * translateSpeed);
-        //camera.update();
-    }
+    //endregion
 }
