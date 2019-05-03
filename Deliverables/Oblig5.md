@@ -18,10 +18,16 @@ hva ville dere justert? hva er det viktigste dere har lært?
 **Deloppgave 1**
 
     Vi burde tenkt mer på hvordan klassene skulle kommet til sammen som en helhet. 
-    Det burdet vært me fokus på at alle/en eller flere hadde oversikt over kodebasen.
+    Manglet en lead-designer som hadde oversikt over hvordan ting burde sette sammen.
+    En som kunne lager retningslinjer som de andre skulle følge når de lage klassene sine.
     Burde har bedre forståelse for reglene for spillet, prøve ut hvordan det ville
     fungert på brettspillet før en begynne å implementere i prosjektet.
-
+    Budre brukt tiles-klassen som allerede eksisterer i Libgdx. Gruppen burde bli
+    enig om mål som skal oppnås, tydligere hva som mangler og hva som må på plass.
+    Projectboardet ble mindre brukt mot slutten av prosjektet, da det ble mer
+    fokus om å bli ferdig. En lead designer kunne bedre tydligjøre issues som måtte gjøres.
+    Burde hatt flere møter fysisk. Bruk av branches har fungert bra.
+    
 
 # Deloppgave 2: krav 
 Leveransen kommer til å vurderes på kompletthet av implementerte krav, 
@@ -88,9 +94,9 @@ gjør justeringer som feks å ta vekk ubetydelige klasser, skriv noen linjer om 
 
         Bugs:
             - 5 tester for Player feiler.
-            
+            - Feil output i cardHandleTestThreePlayers()
         
-        Info om hvordan prosjektet bygger, testes og kjøres:
+        Hvordan prosjektet bygger, testes og kjøres:
             - Programming language: Java
             - Software Development Kit(SDK): Java Development Kit 1.8
             - Source Encoding: UTF-8
