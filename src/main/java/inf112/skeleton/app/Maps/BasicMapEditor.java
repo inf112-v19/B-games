@@ -77,6 +77,25 @@ public class BasicMapEditor {
                 for(int x = 0; x < map.getWidth(); x++){
                     if(pointer.getX() == x && pointer.getY() == y){
                         System.out.print("[X]");
+                    } else if(map.getAt(x, y).isHole()) {
+                        System.out.print("[O]");
+                    } else if(map.getAt(x, y).hasConveyor() != null){
+                        switch (map.getAt(x, y).hasConveyor().direction){
+                            case NORTH:
+                                System.out.print("[^]");
+                                break;
+                            case EAST:
+                                System.out.print("[>]");
+                                break;
+                            case WEST:
+                                System.out.print("[<]");
+                                break;
+                            case SOUTH:
+                                System.out.print("[7]");
+                                break;
+                        }
+                    } else if(map.getAt(x, y).hasCog()!= null){
+                        System.out.print("[ø]");
                     } else {
                         System.out.print("[ ]");
                     }
