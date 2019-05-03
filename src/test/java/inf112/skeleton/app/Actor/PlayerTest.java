@@ -481,9 +481,12 @@ public class PlayerTest {
         players.add(player1);
         players.add(player2);
         Action action = new Action(board, players);
-        //ArrayList<Player> players = new ArrayList<Player>();
-        player1.drawCards();
-        player2.drawCards();
+        for(int i = 0; i < 9; i++){
+            player1.addCardToRegister(cardStack.getCardFromStack());
+        }
+        for(int i = 0; i < 9; i++){
+            player2.addCardToRegister(cardStack.getCardFromStack());
+        }
         players.add(player1);
         players.add(player2);
         action.cardResolver(players);

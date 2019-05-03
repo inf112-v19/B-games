@@ -78,7 +78,7 @@ public class Player extends Actor implements IPlayer {
     public void addCardToRegister(Card card) {
         // TODO R: hacky way to add cards
         //cardsOnHand.remove(card);
-        System.out.println(card);
+        System.out.println(card.getType());
         cardsInRegister.remove(0);
         cardsInRegister.add(card);
     }

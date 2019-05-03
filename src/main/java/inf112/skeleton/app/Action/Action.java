@@ -89,15 +89,15 @@ public class Action implements IAction {
 
     public Player playNextCard() {
         if (!waitingCards()) return null;
-        Player player = playerQuene.poll();
-        playCard(player, cardQuene.poll());
+            Player player = playerQuene.poll();
+            playCard(player, cardQuene.poll());
         return player;
     }
 
     @Override
     public boolean playCard(Actor player, CardType card){
         if(debug) {
-            System.out.println(String.format("%s - %s", player.getColor(), card.name()));
+           System.out.println(String.format("%s - %s", player.getColor(), card.name()));
         }
 
         switch (card) {
