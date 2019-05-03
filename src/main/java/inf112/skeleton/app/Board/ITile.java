@@ -84,6 +84,13 @@ public interface ITile {
      */
     void setWall(Direction direction, boolean wall);
 
+    /**
+     * simple version of setConveyor that doesn't distinguish between fast and slow conveyors
+     *
+     * @param direction the direction of the conveyor
+     */
+    void setConveyor(Direction direction);
+
     void setConveyor(Conveyor conveyor);
 
     void setCogwheel(RotationDirection direction);

@@ -113,6 +113,11 @@ public class Tile implements ITile {
     }
 
     @Override
+    public void setConveyor(Direction direction) {
+        this.conveyor = new Conveyor(direction, false);
+    }
+
+    @Override
     public void setConveyor(Conveyor conveyor) {
         this.conveyor = conveyor;
     }
