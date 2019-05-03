@@ -83,4 +83,8 @@ public interface ITile {
      * @param wall use true to create a wall, and false to remove a wall.
      */
     void setWall(Direction direction, boolean wall);
+
+    void setConveyor(Conveyor conveyor);
+
+    void setCogwheel(RotationDirection direction);
 }

@@ -113,6 +113,16 @@ public class Tile implements ITile {
     }
 
     @Override
+    public void setConveyor(Conveyor conveyor) {
+        this.conveyor = conveyor;
+    }
+
+    @Override
+    public void setCogwheel(RotationDirection direction) {
+        cog = direction;
+    }
+
+    @Override
     public void setLinked(Direction direction, ITile tile) {
         switch (direction){
             case NORTH:
