@@ -46,8 +46,8 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
             of tile to have with relevant information.
             And then is reads a new type
              */
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
                     line = bufferedReader.readLine();
                     if(line.equals("type:Tile")){
                         board.setTile(x, y, new Tile(parseBoolean(bufferedReader.readLine()),
@@ -101,9 +101,9 @@ public class BasicMapLoaderSaver implements IMapLoaderSaver {
 
             bufferedWriter.write(width + "\n" + height + "\n"); //the first two lines is writes are the width and height of the board
             //loop for Y coordinates
-            for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
                 //loop for X coordinates
-                for (int y = 0; y < height; y++) {
+                    for (int x = 0; x < width; x++) {
                     bufferedWriter.write(map.getAt(x, y).toString());
                 }
             }
